@@ -1,0 +1,40 @@
+\section{Introduction} 
+\label{sec:introduction} 
+Many systems of time-dependent differential equations can be separated into multiple parts that differ in their stiffness. For such systems, using implicit-explicit (IMEX) time-marching methods \cite{pareschi2000implicit} is of paramount importance to guarantee stability and accuracy in many applications.
+
+At the same time, high-order time-marching methods are sought for their efficiency and to match with the spatial discretization order in time-dependent partial differential equations (PDEs). Explicit high-order ADER and deferred correction (DeC) methods, due to their automatic construction, emerge as suitable alternatives to the traditional Runge-Kutta (RK) methods and have been extensively explored in various studies.
+The explicit DeC method, introduced by Dutt et al. \cite{dutt2000dec} and then reinterpreted by Abgrall \cite{abgrall2017dec}, is an explicit, arbitrarily high-order method for ODEs. Further extensions of DeC, including implicit, semi-implicit and modified Patankar versions, are available in the literature \cite{christlieb2010integral,minion2003dec,offner2019arbitrary,abgrall2022relaxation,layton2004conservative,speck2015multi}. 
+The ADER method was originally developed for hyperbolic systems exploiting the Cauchy-Kovalevskaya theorem \cite{ADERHistorical2, ADERHistorical1,titarev2002ader}, then reinterpreted  as a space-time discontinuous Galerkin (DG) method, which is solved through a fixed-point iteration procedure \cite{ADERModern,zbMATH07627644,dumbser2007FVStiff,boscheri2014direct,micalizzi2023efficient,veiga2023improving,Han_Veiga_2021}.
+
+%In this work, we describe and analyze the implicit and IMEX version of ADER and DeC, both as ODE solvers and in the context of advection--diffusion or advection--dispersion PDEs. The description follows previous studies \cite{Han_Veiga_2021, minion2003dec, abgrall2018asymptotic}, where an IMEX description of DeC and ADER was already provided, but we extend the analysis to all possible methods, using different quadrature points and order of accuracy. Moreover, we study their IMEX stability in the spirit of \cite{Hundsdorfer,liotta2000central, minion2003dec}, noting large differences across the methods, from bounded stability areas to A-stable ones. This is in contrast with the behavior of the explicit versions.
+
+\PO{
+
+In this research, we present an detailed investigation of both implicit and IMEX versions of ADER and DeC, investigating their efficacy as solvers for ordinary differential equations (ODEs) and in the context of linear  advection-diffusion or advection-dispersion partial differential equations (PDEs).
+
+Building upon prior work \cite{Han_Veiga_2021, minion2003dec, abgrall2018asymptotic, dumbser2007FVStiff}, which has explored IMEX descriptions of DeC and ADER, we expand our analysis to encompass the most used methods, employing varying quadrature points and levels of accuracy. Additionally, we explore their IMEX stability following the approach of previous studies \cite{Hundsdorfer,liotta2000central, minion2003dec}, uncovering notable discrepancies among them, ranging from bounded stability regions to A-stable ones. This diverges significantly from the behavior observed in explicit versions \cite{Han_Veiga_2021}.
+}
+
+\PO{ Extending our investigation to the PDE case and inspired by  \cite{TanChenShu_ImEx_Stability}, 
+%For the PDE case, inspired by \cite{TanChenShu_ImEx_Stability}, 
+we conduct a von Neumann analysis for the presented IMEX time discretizations, paired with finite difference spatial discretizations of corresponding accuracy levels.}
+We \DT{find that} the stability regions are bounded by CFL-type conditions as well as simple conditions on $\Delta t$ for the advection--diffusion case. 
+%\PO{Emphasize this significant point: The CFL-type bounds remain invariant regardless of the spatial discretization method applied.}
+% that do not involve the spatial discretization. 
+ 
+% For the advection--dispersion, the analysis gives less clear results and only in few cases some conditions only dependent on spatial discretization. 
+%All these findings are in agreement with the ODE stability regions found above.
+\PO{
+The analysis of advection-dispersion presents less definitive outcomes, with only a few cases indicating conditions solely influenced by spatial discretization. However, these findings align with the stability regions observed \DT{in the ODE case.}}
+
+%The paper is organized as follows. 
+%In Section~\ref{sec:dec} and \ref{sec:ader}, we introduce the implicit and IMEX DeC and ADER methods, respectively, and we embed them into the RK framework. 
+%We also provide some theoretical stability results for the pure implicit ADER method. In Section~\ref{sec:convergence}, we prove the high order accuracy of the implicit and IMEX ADER and DeC methods. In Section~\ref{sec: stability_analysis_ODE}, we describe their stability regions. In Sections~\ref{sec: advection_diffusion} and \ref{sec:PDE_adv_disp}, we extend the stability analysis to the PDE case by applying our IMEX methods to advection-diffusion and advection-dispersion equations.
+%In Section~\ref{sec:numerics}, we perform few numerical examples to validate the stability and convergence analysis, and in Section~\ref{sec:conclusion} we draw some conclusions.
+
+\PO{
+The structure of the paper is as follows. In Sections~\ref{sec:dec} and \ref{sec:ader}, we introduce the implicit and IMEX DeC and ADER methods, respectively, and incorporate them into the RK framework. Additionally, we present theoretical stability results for the pure implicit ADER method.
+In Section~\ref{sec:convergence}, we establish the high order accuracy of both the implicit and IMEX ADER and DeC methods. Following this, in Section~\ref{sec: stability_analysis_ODE}, we delineate their stability regions.
+Next, in Sections~\ref{sec: advection_diffusion} and \ref{sec:PDE_adv_disp} we extend the stability analysis to the PDE scenario by applying our IMEX methods to advection-diffusion and advection-dispersion equations.
+In Section~\ref{sec:numerics}, we finally present several numerical examples aimed at validating the stability and convergence analyses, while in Section~\ref{sec:conclusion} we summarize the conclusions drawn from our deep analysis. 
+}

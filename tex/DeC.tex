@@ -1,0 +1,278 @@
+%In this section, we present the DeC in its explicit, implicit and IMEX versions using the notation of \cite{Han_Veiga_2021}. 
+\PO{In this section, we present the DeC in its explicit, implicit, and IMEX versions using the notation introduced in \cite{Han_Veiga_2021}.}
+Consider the system of ODEs
+\begin{equation}\label{eq:scalarODE}
+	\bc'(t)-F(\bc)=0,
+\end{equation}
+with $\bc:[0,T]\to \R^I$.
+Given a time interval $[t_n, t_{n+1}]$ with length $\Delta t$, we subdivide  
+it into $M$ subintervals  $\lbrace [t_m^{m-1},t_n^{m}]\rbrace_{m=1}^M$,
+where $t_n^{0} = t_n$ and $t_n^{M} = t_{n+1}$. DeC methods are one step methods, hence we want to obtain $\bc_{n+1} \approx \bc(t_{n+1})$ from $\bc_{n} \approx \bc(t_{n})$.
+We mimic for every 
+subinterval $[t_n^0, t_n^m]$ the Picard--Lindel\"of theorem.
+We drop the dependency on the timestep $n$ for subtimesteps $t_n^{m}$ 
+and associated substates $\bc_n^{m}$, such that 
+\begin{equation*}
+	t_n=t_n^{0}=t^0, \ t_n^1=t^1, \ t_n^{2}=t^2, \hdots, \ t_n^{M}=t^M=t_{n+1}.
+\end{equation*}
+
+Then, we introduce the $\L^2$ operator, which represents an implicit high order discretization of ODE obtained integrating \eqref{eq:scalarODE} in each subinterval $[t^0,t^m]$ and applying a quadrature formula, 
+\begin{equation}\label{eq:L2}
+	\L^2(\bc^0, \dots, \bc^M) :=
+	\begin{cases}
+		\bc^M-\bc_n - \Delta t\sum_{r=0}^M \theta_r^M F(\bc^r)\\
+		\vdots\\
+		\bc^0-\bc_n - \Delta t\sum_{r=0}^M \theta_r^0 F(\bc^r)
+	\end{cases}.
+\end{equation}
+We obtain this operator by applying to $\left(F(\bc^0), \hdots, F(\bc^M)\right)$ an interpolation polynomial of degree $M$.
+The term $\theta_r^m := \frac{1}{\Delta t}\int_{t_n}^{t_n^{m}} \phi_r(s) ds$ denotes the weights, which can be obtained with Lagrange polynomials $\lbrace \phi_r \rbrace_{r=0}^M$ in the subnodes $\lbrace t^m \rbrace_{m=0}^M$, 
+where $\phi_r(t^{m})=\delta_{r,m}$ and $\sum_{r=0}^M \phi_r(s) \equiv 1$ for any $s\in [0,1]$. 
+We notice that $\L^2=0$ with $\bc_{n+1}=\sum_{r=0}^M\phi_r(t_{n+1})\bc^{r}$ is a collocation method and, when using Gauss--Lobatto nodes, it coincides with Lobatto IIIA schemes~\cite{veiga2023improving}.
+
+\subsection{Explicit DeC}
+To obtain an explicit versions of the DeC, we introduce $\L^1$, an explicit first order approximation of the $\L^2$ operator following \cite{abgrall2017dec, offner2023approximation}:
+\begin{equation}\label{eq:L1}
+\L^1(\bc^0, \dots, \bc^M) :=
+\begin{cases}
+\bc^M-\bc_n -  \Delta t\beta^M F(\bc_n) \\
+\vdots\\
+\bc^0- \bc_n -  \Delta t \beta^0 F(\bc_n)
+\end{cases},
+\end{equation}
+with coefficients $\beta^m:= \frac{t_n^m-t_n}{\Delta t}$.
+To simplify the notation, we introduce the vector of states for the variable $\bc$ at all subtimesteps
+\begin{align}\label{eq:definition_bbc}
+&\bbc :=  (\bc^0, \dots, \bc ^M) \in \R^{M\times I}, \text{ such that }\\
+&\L^1(\bbc) := \L^1(\bc^0, \dots, \bc^M) \text{ and } \L^2(\bbc) := \L^2(\bc^0, \dots, \bc^M) .
+\end{align}
+Now, the DeC algorithm uses a combination of the $\L^1$ and $\L^2$ operators to recursively approximate $\bbc^*$, the high order accurate numerical solution of
+the $\L^2(\bbc^*)=0$ scheme. We denote by $Y$ the order of accuracy of the solution $\bbc^*$. 
+%This depends on the chosen nodes \cite{torlo2022} and we have $Y=M+1$ for equispaced nodes, and $Y=2M$ for Gauss--Lobatto ones. 
+%To describe the procedure, for each variable we have to refer to both 
+%the $m$-th subnode and the $k$-th iteration of the DeC algorithm by $\bc^{m,(k)} \in \R^I$.
+\PO{This is contingent upon the nodes selected \cite{torlo2022}, where we have $Y=M+1$ for equispaced nodes and $Y=2M$ for Gauss-Lobatto nodes.
+In detailing the process, for each variable, we need to reference both the $m$-th subnode and the $k$-th iteration of the DeC algorithm, denoted by $\bc^{m,(k)} \in \R^I$.}
+Finally, the DeC method can be written as
+\begin{equation}\label{DeC_method}
+\begin{split}
+&\text{\textbf{DeC Algorithm}}\\
+&\bc^{m,(0)}:=\bc_n,\quad m=1,\dots, M,\\
+&\L^1(\bbc^{(k)})=\L^1(\bbc^{(k-1)})-\L^2(\bbc^{(k-1)}), \quad \text{ for }k=1,\dots,K.
+\end{split}
+\end{equation}
+%The DeC method achieves order of accuracy $\min(K,Y)$, incrementing its accuracy by one at each iteration \cite{abgrall2017dec}. Hence, it is optimal to choose $K= Y$.
+%Notice that the explicit operator $\L^1$ is the only one to solve, while $\L^2$ is only evaluated in the already computed predictions $\bbc^{(k-1)}$.
+\PO{The DeC method attains an order of accuracy $\min(K,Y)$, enhancing its accuracy by one with each iteration \cite{abgrall2017dec}. Therefore, selecting $K= Y$ is optimal.
+It's important to note that only the explicit operator $\L^1$ needs to be solved, while $\L^2$ is solely evaluated using the previously computed predictions $\bbc^{(k-1)}$.}
+\begin{remark}[Variations of DeC]
+	The presented DeC algorithm is just one of a whole family of DeC methods. For example, instead of considering integrations on $[t^0,t^m]$ in the $m$'th equation, we could switch to the smaller intervals $[t^{m-1},t^m]$ like in \cite{minion2003dec,dutt2000dec,torlo2022}, changing the $m$'th line of the operators to
+	\begin{align*}
+	\mathcal{L}^{1,m}(\bc^0, \dots, \bc^M) &=
+	\bc^m-\bc^{m-1} - \Delta t \gamma^m  F(\bc^{m-1}),\\
+	\mathcal{L}^{2,m}(\bc^0, \dots, \bc^M) &=
+	\bc^m-\bc^{m-1} - \Delta t\sum_{r=0}^M \delta_r^m F(\bc^r),
+	\end{align*} 
+	with $\gamma^m:= \frac{t_n^m-t_n^{m-1}}{\Delta t}$ and $\delta_r^m=\frac{1}{\Delta t}\int_{t_n^{m-1}}^{t_n^{m}}\phi_r(s)ds$. 
+	The iteration process \eqref{DeC_method} with these $\mathcal{L}^1$ and $\mathcal{L}^2$ operators does not change. Due to the smaller steps, this method is also referred to as the sDeC algorithm. One downside of the sDeC algorithm is the necessity of $\bc^{m-1,(k)}$ to calculate $\bc^{m,(k)}$, which does not allow to use parallel computation on the different subnodes, which is possible for the DeC with larger subintervals presented above.\\
+	\PO{In addition, we note that instead of using explicit Euler steps inside the $\mathcal{L}^1$ operators, other explicit RK methods can be applied inside the $\mathcal{L}^1$ operator \cite{tang2013high, christlieb2010integral}. Here, additional problems may rise. For a detailed overview of the different variations of DeC, we refer to the nice overview article \cite{dec_overview} and the references therein. }
+	\end{remark}
+\subsection{Implicit and IMEX DeC}
+In this section, we will construct the implicit and IMEX DeC methods using the presented framework. Consider the ODE \eqref{eq:scalarODE}, where $F(\bc)$ is a stiff term. 
+We proceed by taking an implicit version of the $\mathcal{L}^1$ operator, which corresponds to implicit Euler steps at each subinterval, for brevity, we will just describe the $m$'th equation for $m=0,\dots,M$
+\begin{equation}\label{eq:ImL1}
+\mathcal{L}^{1,m}(\bc^0, \dots, \bc^M) :=
+\bc^m-\bc^0 - \beta^m \Delta t F(\bc^m)
+\end{equation}
+and assembling the implicit DeC method as in \eqref{DeC_method}.\\
+If we have a problem, whose right-hand side can be separated into the sum of a stiff term $S(\bc)$ and a non-stiff term $G(\bc)$, i.e.
+\begin{equation}\label{eq:IMEXODE}
+\partial_t\bc=S(\bc)+G(\bc),
+\end{equation} 
+we create an implicit-explicit DeC (IMEX DeC) method, by adding up the implicit and explicit treatments of the $\mathcal{L}^1$ operator, obtaining for $m=0,\dots,M$
+\begin{equation}
+\mathcal{L}^{1,m}(\bc^0, \dots, \bc^M) :=
+\bc^m-\bc^0 - \beta^m \Delta t S(\bc^m)- \beta^m \Delta t G(\bc^0),
+\end{equation}
+which we can substitute into the known correction procedure \eqref{DeC_method}.
+In case of nonlinear stiff terms $S$, a further linearization of $S$ could be introduced in the definition of $\L^1$ \cite{Han_Veiga_2021}.
+
+\subsection{Implicit and IMEX DeC as RK}
+%% 
+%\todo{I think this reference \cite{christlieb2010integral} is not appropriate here, as we do not talk about such methods (DeC where L1 itself is a RK)}
+In this section, we rewrite the DeC methods presented above into RK methods to study their stability, as done in \cite{torlo2022}. 
+The DeC has the advantage that one does not need to specify the coefficients for every order of accuracy as usually necessary in classical RK methods, see for example \cite[Remark 4.3]{abgrall2018asymptotic}.
+This is done automatically, through the quadrature weights $\Theta$ and $\beta$, which fully determine the coefficients of the corresponding Butcher Tableau. 
+Let us consider our version of DeC and rewrite it in a Runge--Kutta method with $Z$ stages defined by its Butcher tableau
+\begin{equation}
+	\begin{cases}
+		\bu^{(s)} = \bc^n +\Delta t \sum_{i=1}^{Z} A_i^s G(\bu^{(i)}),\quad s=1,\dots, Z,\\
+		\bc^{n+1} = \bc^n +\Delta t \sum_{i=1}^Z b_i  G(\bu^{(i)}),
+	\end{cases} \qquad \begin{array}{c | c}
+	c& \mat{A}
+	\\ \hline
+	& b
+	\end{array}.
+\end{equation}
+%\begin{equation*}
+%\label{eq:butcher}
+%\begin{array}{c | c}
+%c& A
+%\\ \hline
+%& b
+%\end{array}.
+%\end{equation*}
+%The details of rewriting the DeC as RK can be found in \cite{torlo2022,abgrall2022relaxation}, we highlight here the final form to compare it with the implicit  and IMEX version\footnote
+
+\PO{The process of rewriting DeC as Runge-Kutta schemes is elaborated in detail in \cite{torlo2022,abgrall2022relaxation}. Here, we emphasize the final form for comparison with the implicit and IMEX versions\footnote{\PO{Note that the re-interpretation of DeC as a RK scheme is not new and it was applied in various contexts, e.g. \cite{zbMATH06856490}.}}.}
+We introduce $\vec{\beta}  = \lbrace \beta^i \rbrace_{i=0}^M$ as the vector of the $\L^1 $ operator coefficients, and we define the matrix $\mat{\theta} = \lbrace \theta_{r}^m \rbrace_{m=0,\dots,M; r = 0,\dots,M}$.% into $\mat{\theta} = (\vec{\theta}_0|\mat{\tilde{\theta}}),$ where $\vec{\theta}_0=(\theta_0^1, \dots, \theta_0^M)^T$ and $\mat{\tilde{\theta}} \in \mathbb R^{M\times M}$ is the remaining part of $\mat{\theta}$, as the initial subtimenode is never updated, see \eqref{DeC_method}. 
+Finally, we introduce the vector $\vec{\theta}^M = (\theta^M_0, \dots, \theta^M_M)$ for the final update.
+%
+%Here, $A$ is block diagonal after the first column which includes the explicit Euler steps 
+%from the $y^0$ to $y^i$, i.e. the $\beta^i$ coefficients with $\beta^0=0$. This results out of the first iteration, using the properties 
+%\begin{equation}\label{eq:sumoverthetaeqbeta}
+%\sum_{r=0}^{M}\phi_r(s)=1, \quad	\bc^{m,(0)}=\bc^0, \ \ m=0,\hdots ,M.
+%\end{equation}
+%Next, the $\theta_r^m$ are written 
+%in a matrix form where the superscript $m$ describes the rows and $r$ the columns. We 
+%have $\mat{\theta}=(\theta_r^m)$ and we split the matrix using $\mat{\theta}=(\vec{\theta}_0|\mat{\tilde{\theta}})$ ,
+%where $\vec{\theta}_0=(\theta_0^1, \theta_0^2, \cdots, \theta_0^M)^T$ represents the first  column vector and
+%$\mat{\tilde{\theta}}$ the remaining matrix. The first column of the Butcher tableau then includes   $\vec{\theta}_0$ 
+%repeatedly to the number of corrections steps minus one before the final step is reached.  
+%The remaining matrix 
+%is written on the right side of it. But in each correction step it is shifted to the right depending on the used number of 
+%subinterval. The open positions are filled with zeros until the last correction.
+%Here, the correction does not affect the intermediate  values and has to
+%be evaluated only at the last one. This means that it defines $b$ in the Butcher tableau  
+%and $A$ is not affected anymore. We obtain $b_1= \theta_0^M$ and all 
+%of the following $b_i$ values are zero with respect to the blocks of $A$. In connection,
+%we include the vector  $ \vec{\theta}^{M} =(\theta_1^M, \dots, \theta_M^M )$.
+The Butcher tableau for an arbitrary DeC approach is given by
+\begin{equation}\label{eq:DeC_RK}
+\begin{aligned}
+\begin{array}{c|ccccccc}
+	0 &  &&&&&&\\
+\vec{\beta} & \vec{\beta} &  &   & & & & \\
+\vec{\beta}  & \vec{0} &   \mat{{\theta}} & & & & & \\
+\vdots &  \vec{0}& \mat{0}  &\mat{{\theta}}   && & & \\
+\vdots & \vec{0} &  \mat{0}   &   \mat{0}  & \mat{{\theta}}  &  &  & \\
+\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots& &  \\
+\vec{\beta} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  &  \mat{{\theta}} \\
+\hline
+&  0 & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{\theta}^{M} 
+\end{array}.
+\end{aligned}
+\end{equation}
+Let us notice that the first iteration is derived by a simplification that can be obtained noticing that $\sum_{r=0}^M \theta^m_r = \beta^m$, thanks to the properties
+\begin{equation}\label{eq:sumoverthetaeqbeta}
+\sum_{r=0}^{M}\phi_r(s)=1, \quad	\bc^{m,(0)}=\bc^0, \ \ 
+m=0,\hdots ,M.
+\end{equation}
+Moreover, since we have chosen $t^0_n=t_n$, there are several trivial stages where the corresponding lines of $A$ is composed only of 0s.  These lines can be simplified as in \cite{Han_Veiga_2021,torlo2022}.
+\begin{remark}[Number of stages]
+	To obtain order $p$, we require $Y\stackrel{!}{=}K\stackrel{!}{=}p$, which means $M=p-1$ subtimesteps for equispaced nodes and $M=\lfloor \frac{p}{2}\rfloor$ for Gauss--Lobatto nodes, and $K=p$ corrections. 
+	%Summing up all the stages, ignoring the final iteration where only the last subtimenode is relevant, we obtain $Z=M(K-1)+1$ stages that are $Z=(p-1)^2+1$ stages for equispaced and $Z=\lfloor \frac{p}{2}\rfloor(p-1)+1$ for Gauss--Lobatto nodes \cite{veiga2023improving}.
+	\PO{In total, considering all nontrivial stages and excluding the final iteration where only the last sub-time node is pertinent, we arrive at $Z=M(K-1)+1$ stages, which equates to $Z=(p-1)^2+1$ stages for equispaced nodes and $Z=\lfloor \frac{p}{2}\rfloor(p-1)+1$ for Gauss-Lobatto nodes \cite{veiga2023improving}.}
+\end{remark}
+For the implicit case, the DeC iteration process for every $m=0,\dots,M$ and every iteration $k=1,\dots , K$ reads
+\begin{equation}\label{eq_help}
+\begin{aligned}
+&\mathcal{L}^{1,m}(\vec{\bc}^{(k)})=\mathcal{L}^{1,m}(\vec{\bc}^{(k-1)})-\mathcal{L}^{2,m}(\vec{\bc}^{(k-1)})\\
+\Leftrightarrow  \quad &
+%\begin{cases} \bc^{M,(k)}=\bc^0+\Delta t \left[\left(\sum_{r=0}^{M-1}\Theta_r^MF(\bc^{r,(k-1)})\right)+\left(\Theta_M^M-\beta^M\right)F(\bc^{M,(k-1)})+\beta^MF(\bc^{M,(k)}) \right]\\
+%\vdots\\
+\bc^{m,(k)}=\bc_n+\Delta t \left[\left(\sum\limits_{r=0, \,r\neq m}%{\substack{r=0, \\ r\neq m}}
+^{M}\theta_r^mF(\bc^{r,(k-1)})\right)
++\left(\theta_m^m-\beta^m\right)F(\bc^{m,(k-1)})+\beta^mF(\bc^{m,(k)})\right].
+%-\beta^m F(\bc^{m,(k-1)})+\beta^mF(\bc^{m,(k)}) \right].
+%\vdots\\
+%\bc^{1,(k)}=\bc^0+\Delta t \left[\left(\sum_{r=1}^{M}\Theta_r^1F(\bc^{r,(k-1)})\right)+\left(\Theta_1^1-\beta^1\right)F(\bc^{1,(k-1)})+\beta^1F(\bc^{1,(k)}) \right].
+%\end{cases}
+\end{aligned}
+\end{equation}
+From \eqref{eq_help}, we derive the blocks of the RK matrix $\mat{A}$, keeping in mind that for the first iteration $k=1$ many terms  simplify \PO{due to \eqref{eq:sumoverthetaeqbeta}. We obtain} 
+\begin{equation*}
+\bc^{m,(1)}=
+\bc^0+\Delta t \beta^mF(\bc^{m,(1)}).
+\end{equation*}
+%\\
+The final update is  given by $\bc^{n+1}:=\bc^{M,(K)}$.
+%To calculate the $K$th correction, which delivers $\bc^{n+1}$, we just need the $M$th equation 
+%\begin{equation*}
+%\bc^{M,(K)}=\bc^0+\Delta t \left[\left(\sum_{r=0}^{M-1}\Theta_r^M F(\bc^{r,(K-1)})\right) +\left(\Theta_M^M-\beta^M\right) F(\bc^{M,(K-1)})+\beta^MF(\bc^{M,(K)}) \right].
+%\end{equation*}
+%To finally receive the vector of coefficients $b$ and thereby a fitting, full Butcher tableau, we need to add a fake step by using the last equation
+%\begin{align*}
+%\bc^{n+1}:&=\bc^0+\Delta t \left[\left(\sum_{r=0}^{M-1}\Theta_r^M F(\bc^{r,(K-1)})\right) +\left(\Theta_M^M-\beta^M\right) F(\bc^{M,(K-1)})+\beta^MF(\bc^{M,(K)}) \right]\\
+%&=\bc^{M,(K)},
+%\end{align*}
+This leads to the following RK Butcher tableau
+\begin{align}\label{eq:ImDeC_RK_ButcherTableu}
+\begin{array}{c|ccccccccc}
+0 & 0 &   & &  & & &  & \\
+\vec{\beta} & \vec{0} & \mat{B}  &   & & & & &  \\
+\vec{\beta}  & \vec{0} &   \mat{{\theta}}-\mat{B} &\mat{B} & & & & &\\
+\vdots & \vec{0} & \mat{0}  &\mat{{\theta}}-\mat{B} &\mat{B}& & & &\\
+\vdots & \vec{0} &  \mat{0}   &   \mat{0}  & \mat{{\theta}}-\mat{B} &\mat{B}  &  & &\\
+\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots& \ddots & & \\
+\vec{\beta} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  &  \mat{{\theta}}-\mat{B} &\mat{B} & \\
+1&  0 & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{{\theta}}^M-\vec{B}^M &\beta^M \\
+\hline
+&  0 & \vec{0}^T    & \hdots  &   &   \hdots &\vec{0}^T &   \vec{{\theta}}^M-\vec{B}^M &\beta^M
+\end{array},
+\end{align}
+with $B_{mr}= \delta_{mr} \beta^m$ for $m,r=0,\dots, M$ and $\delta_{mr}$ the Kronecker delta.
+We notice that the ImDeC method is diagonally implicit and that the last stage coincide with the final update which makes the method stiffly accurate \cite[Proposition 3.8]{wanner1996solving}.\\
+\PO{Next, we  describe the IMEX DeC in the notation of an IMEX RK scheme, i.e.,}
+\begin{equation}
+\begin{cases}
+\bu^{(s)} = \bc^n +\Delta t \sum_{i=1}^s A_i^s S(\bu^{(i)})+\Delta t \sum_{i=1}^{s-1} \hat{A}_i^s G(\bu^{(i)}),\quad s=1,\dots, Z,\\
+\bc^{n+1} = \bc^n +\Delta t \sum_{i=1}^Z b_i S(\bu^{(i)})+\Delta t \sum_{i=1}^{Z} \hat{b}_i G(\bu^{(i)}),
+\end{cases}
+\end{equation}
+where the matrices  $\mat{A},\mat{\hat{A}}$ and vectors $b,\hat{b}$  are provided in two Butcher tableaux
+\begin{equation}\label{eq:IMEX_Butcher}
+\begin{array}{c|c}
+c & \mat{A}\\\hline
+& b
+\end{array}, \qquad
+\begin{array}{c|c}
+c & \mat{\hat{A}}\\\hline
+& \hat{b}
+\end{array}
+\end{equation}
+and directly correspond to the simpler implicit and explicit cases presented, with an extra stage in the explicit case to match the implicit description. \PO{Therefore, we obtain the following Butcher tableaux}
+\begin{equation}\label{eq:IMEX_DeC_RK}
+\footnotesize
+\begin{aligned}
+\begin{array}{c|ccccccccc}
+0 & 0 &   & &  & & &  & \\
+\vec{\beta} & \vec{0} & \mat{B}  &   & & & & &  \\
+\vec{\beta}  & \vec{0} &   \mat{{\theta}}-\mat{B} &\mat{B} & & & & &\\
+\vdots & \vec{0} & \mat{0}  &\mat{{\theta}}-\mat{B} &\mat{B}& & & &\\
+\vdots & \vec{0} &  \mat{0}   &   \mat{0}  & \mat{{\theta}}-\mat{B} &\mat{B}  &  & &\\
+\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots& \ddots & & \\
+\vec{\beta} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  &  \mat{{\theta}}-\mat{B} &\mat{B} & \\
+1&  0 & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{{\theta}}^M-\vec{B}^M &\beta^M \\
+\hline
+&  0& \vec{0}^T    & \hdots  &   &   \hdots &\vec{0}^T &   \vec{{\theta}}^M-\vec{B}^M &\beta^M
+\end{array},
+\quad
+\begin{array}{c|ccccccccc}
+0 & 0 &   & &  & & &  & \\
+\vec{\beta} & \vec{\beta} &  &   & & & & &  \\
+\vec{\beta}  & \vec{0} &   \mat{{\theta}} & & & & & &\\
+\vdots & \vec{0} & \mat{0}  &\mat{{\theta}}   && & & &\\
+\vdots & \vec{0} &  \mat{0}   &   \mat{0}  & \mat{{\theta}}  &  &  & &\\
+\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots& & & \\
+\vec{\beta} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  &  \mat{{\theta}} & \\
+1&  0 & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{\theta}_r^{M}& 0 \\
+\hline
+&  0 & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{\theta}_r^{M} & 0
+\end{array}.
+\end{aligned}
+\end{equation}
+\begin{remark}[Runge-Kutta for sDeC]
+	Using the same properties and techniques, we can construct Butcher tableaux respectively for the sDeC, ImsDeC and IMEX sDeC. Their construction in the explicit case is performed in \cite{torlo2022} and we proceed similarly for the implicit and IMEX cases.
+\end{remark}
+Also in the implicit and IMEX cases, several trivial stages can be simplified in the Butcher tableaux \cite{torlo2022}.

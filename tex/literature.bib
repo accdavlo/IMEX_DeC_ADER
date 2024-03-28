@@ -1,0 +1,2174 @@
+%%% Code %%%
+
+@misc{grant2014cvx,
+  title={{CVX}: Matlab software for disciplined convex programming}, 
+  note={Version 2.2},
+  author={Grant, Michael and Boyd, Stephen},
+  year={2014}
+}
+
+@misc{glaubitz2021github,
+  author={Glaubitz, Jan},
+  title = {{SBP} operators for non-polynomial approximation spaces in {MATLAB}},
+  version = {v1.0},
+  year = {2021},
+  url = {https://github.com/jglaubitz/weakRBF},
+  doi = {10.5281/zenodo.4310328}
+}
+
+
+%%% Non-polynomial approximation spaces for PDEs %%% 
+
+@book{christofi1996study, 
+  title={The study of building blocks for essentially non-oscillatory {(ENO)} schemes},
+  author={Christofi, Stavros N}, 
+  year={1996},
+  publisher={Brown University}
+}
+
+@article{iske1996structure,
+  title={On the structure of function spaces in optimal recovery of point functionals for {ENO}-schemes by radial basis functions},
+  author={Iske, Armin and Sonar, Thomas},
+  journal={Numerische Mathematik},
+  volume={74},
+  number={2},
+  pages={177--201},
+  year={1996},
+  publisher={Springer}
+}
+
+@article{kadalbajoo2003exponentially,
+  title={Exponentially fitted spline in compression for the numerical solution of singular perturbation problems},
+  author={Kadalbajoo, MK and Patidar, KC},
+  journal={Computers \& Mathematics with Applications},
+  volume={46},
+  number={5-6},
+  pages={751--767},
+  year={2003},
+  publisher={Elsevier}
+}
+
+@article{reddy2004exponentially,
+  title={An exponentially fitted finite difference method for singular perturbation problems},
+  author={Reddy, YN and Chakravarthy, P Pramod},
+  journal={Applied Mathematics and Computation},
+  volume={154},
+  number={1},
+  pages={83--101},
+  year={2004},
+  publisher={Elsevier}
+}
+
+@article{cockburn2004locally,
+  title={Locally divergence-free discontinuous {G}alerkin methods for the {M}axwell equations},
+  author={Cockburn, Bernardo and Li, Fengyan and Shu, Chi-Wang},
+  journal={Journal of Computational Physics},
+  volume={194},
+  number={2},
+  pages={588--610},
+  year={2004},
+  publisher={Elsevier}
+}
+
+@article{li2005locally,
+  title={Locally divergence-free discontinuous {G}alerkin methods for {MHD} equations},
+  author={Li, Fengyan and Shu, Chi-Wang},
+  journal={Journal of Scientific Computing},
+  volume={22},
+  number={1},
+  pages={413--442},
+  year={2005},
+  publisher={Springer}
+}
+
+@article{yuan2006discontinuous,
+  title={Discontinuous {G}alerkin method based on non-polynomial approximation spaces},
+  author={Yuan, Ling and Shu, Chi-Wang},
+  journal={Journal of Computational Physics},
+  volume={218},
+  number={1},
+  pages={295--323},
+  year={2006},
+  publisher={Elsevier}
+} 
+
+@article{kalashnikova2009discontinuous,
+  title={A discontinuous enrichment method for the finite element solution of high {P\'e}clet advection--diffusion problems},
+  author={Kalashnikova, Irina and Farhat, Charbel and Tezaur, Radek},
+  journal={Finite Elements in Analysis and Design},
+  volume={45},
+  number={4},
+  pages={238--250},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@article{zhu2013weno,
+  title={{WENO} schemes and their application as limiters for {RKDG} methods based on trigonometric approximation spaces},
+  author={Zhu, Jun and Qiu, Jianxian},
+  journal={Journal of Scientific Computing},
+  volume={55},
+  number={3},
+  pages={606--644},
+  year={2013},
+  publisher={Springer}
+} 
+
+@article{yang2016short,
+  title={A short note on the error estimates of {Y}uan--{S}hu discontinuous {G}alerkin method based on non-polynomial approximation spaces},
+  author={Yang, Hyoseon and Yoon, Jungho},
+  journal={Journal of Computational Physics},
+  volume={320},
+  pages={33--39},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@article{ha2018sixth,
+  title={A Sixth-Order Weighted Essentially Non-oscillatory Schemes Based on Exponential Polynomials for {H}amilton--{J}acobi Equations},
+  author={Ha, Youngsoo and Kim, Chang Ho and Yang, Hyoseon and Yoon, Jungho},
+  journal={Journal of Scientific Computing},
+  volume={75},
+  number={3},
+  pages={1675--1700},
+  year={2018},
+  publisher={Springer}
+}
+
+@article{hesthaven2019entropy,
+  title={Entropy stable essentially nonoscillatory methods based on {RBF} reconstruction},
+  author={Hesthaven, Jan S and M{\"o}nkeberg, Fabian},
+  journal={ESAIM: Mathematical Modelling and Numerical Analysis},
+  volume={53},
+  number={3},
+  pages={925--958},
+  year={2019},
+  publisher={EDP Sciences}
+}
+
+@article{ha2021improving,
+  title={Improving accuracy of the fifth-order {WENO} scheme by using the exponential approximation space},
+  author={Ha, Youngsoo and Kim, Chang Ho and Yang, Hyoseon and Yoon, Jungho},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={59},
+  number={1},
+  pages={143--172},
+  year={2021},
+  publisher={SIAM}
+}
+
+
+%%% Radial Basis Functions - General reviews %%% 
+
+@article{buhmann2000radial,
+  title={Radial basis functions},
+  author={Buhmann, Martin D},
+  journal={Acta Numerica},
+  volume={9},
+  pages={1--38},
+  year={2000},
+  publisher={Cambridge University Press}
+}
+
+@book{buhmann2003radial,
+  title={Radial Basis Functions: Theory and Implementations},
+  author={Buhmann, Martin D},
+  volume={12},
+  year={2003},
+  publisher={Cambridge University Press}
+}
+
+@book{wendland2004scattered,
+  title={Scattered Data Approximation},
+  author={Wendland, Holger},
+  volume={17},
+  year={2004},
+  publisher={Cambridge University Press}
+}
+
+@book{fasshauer2007meshfree,
+  title={Meshfree Approximation Methods with MATLAB},
+  author={Fasshauer, Gregory E},
+  volume={6},
+  year={2007},
+  publisher={World Scientific}
+}
+
+@book{fornberg2015primer,
+  title={A Primer on Radial Basis Functions With Applications to the Geosciences},
+  author={Fornberg, Bengt and Flyer, Natasha},
+  year={2015},
+  publisher={SIAM}
+}
+
+
+%%% Radial Basis Function Methods for PDEs %%% 
+
+@article{kansa1990multiquadrics,
+  title={Multiquadrics—A scattered data approximation scheme with applications to computational fluid-dynamics—II {S}olutions to parabolic, hyperbolic and elliptic partial differential equations},
+  author={Kansa, Edward J},
+  journal={Computers \& Mathematics with Applications},
+  volume={19},
+  number={8-9},
+  pages={147--161},
+  year={1990},
+  publisher={Elsevier}
+}
+
+@inproceedings{fasshauer1996solving,
+  title={Solving partial differential equations by collocation with radial basis functions},
+  author={Fasshauer, Gregory E},
+  booktitle={Proceedings of Chamonix},
+  volume={1997},
+  pages={1--8},
+  year={1996},
+  organization={Vanderbilt University Press Nashville, TN}
+}
+
+@article{hon1998efficient,
+  title={An efficient numerical scheme for {B}urgers' equation},
+  author={Hon, YC and Mao, XZ},
+  journal={Applied Mathematics and Computation},
+  volume={95},
+  number={1},
+  pages={37--50},
+  year={1998},
+  publisher={Citeseer}
+}
+
+@article{kansa2000circumventing,
+  title={Circumventing the ill-conditioning problem with multiquadric radial basis functions: {A}pplications to elliptic partial differential equations},
+  author={Kansa, EJ and Hon, YC},
+  journal={Computers and Mathematics with Applications},
+  volume={39},
+  number={7-8},
+  pages={123--138},
+  year={2000},
+  publisher={Citeseer}
+}
+
+@article{larsson2003numerical,
+  title={A numerical study of some radial basis function based solution methods for elliptic {PDE}s},
+  author={Larsson, Elisabeth and Fornberg, Bengt},
+  journal={Computers \& Mathematics with Applications},
+  volume={46},
+  number={5-6},
+  pages={891--902},
+  year={2003},
+  publisher={Elsevier}
+}
+
+@article{shu2007integrated,
+  title={Integrated radial basis functions-based differential quadrature method and its performance},
+  author={Shu, C and Wu, YL},
+  journal={International Journal for Numerical Methods in Fluids},
+  volume={53},
+  number={6},
+  pages={969--984},
+  year={2007},
+  publisher={Wiley Online Library}
+}
+
+@article{fornberg2015solving,
+  title={Solving {PDE}s with radial basis functions},
+  author={Fornberg, Bengt and Flyer, Natasha},
+  journal={Acta Numerica},
+  volume={24},
+  pages={215--258},
+  year={2015},
+  publisher={Cambridge University Press}
+}
+
+@article{flyer2016enhancing,
+  title={Enhancing finite differences with radial basis functions: experiments on the {N}avier--{S}tokes equations},
+  author={Flyer, Natasha and Barnett, Gregory A and Wicker, Louis J},
+  journal={Journal of Computational Physics},
+  volume={316},
+  pages={39--62},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@incollection{iske2020ten,
+  title={Ten good reasons for using polyharmonic spline reconstruction in particle fluid flow simulations},
+  author={Iske, Armin},
+  booktitle={Continuum Mechanics, Applied Mathematics and Scientific Computing: Godunov's Legacy},
+  pages={193--199},
+  year={2020},
+  publisher={Springer}
+}
+
+@article{glaubitz2021stabilizing,
+  title={Stabilizing radial basis function methods for conservation laws using weakly enforced boundary conditions},
+  author={Glaubitz, Jan and Gelb, Anne},
+  journal={Journal of Scientific Computing},
+  volume={87},
+  number={2},
+  pages={1--29},
+  year={2021},
+  publisher={Springer}
+}
+
+@article{glaubitz2021towards,
+  title={Towards stable radial basis function methods for linear advection problems},
+  author={Glaubitz, Jan and Le Meledo, Elise and {\"O}ffner, Philipp},
+  journal={Computers \& Mathematics with Applications},
+  volume={85},
+  pages={84--97},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@article{tominec2021least,
+  title={A least squares radial basis function finite difference method with improved stability properties},
+  author={Tominec, Igor and Larsson, Elisabeth and Heryudono, Alfa},
+  journal={SIAM Journal on Scientific Computing},
+  volume={43},
+  number={2},
+  pages={A1441--A1471},
+  year={2021},
+  publisher={SIAM}
+}
+
+
+%%% Rational function approximation %%% 
+
+@article{nakatsukasa2018aaa,
+  title={The {AAA} algorithm for rational approximation},
+  author={Nakatsukasa, Yuji and S{\`e}te, Olivier and Trefethen, Lloyd N},
+  journal={SIAM Journal on Scientific Computing},
+  volume={40},
+  number={3},
+  pages={A1494--A1522},
+  year={2018},
+  publisher={SIAM}
+}
+
+@article{gopal2019new,
+  title={New {L}aplace and {H}elmholtz solvers},
+  author={Gopal, Abinand and Trefethen, Lloyd N},
+  journal={Proceedings of the National Academy of Sciences},
+  pages={201904139},
+  year={2019},
+  publisher={National Acad Sciences}
+}
+
+@article{gopal2019solving,
+  title={Solving {L}aplace problems with corner singularities via rational functions},
+  author={Gopal, Abinand and Trefethen, Lloyd N},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={57},
+  number={5},
+  pages={2074--2094},
+  year={2019},
+  publisher={SIAM}
+}
+
+
+%%% Least squares approximations %%% 
+
+@article{cohen2013stability,
+  title={On the stability and accuracy of least squares approximations},
+  author={Cohen, Albert and Davenport, Mark A and Leviatan, Dany},
+  journal={Foundations of Computational Mathematics},
+  volume={13},
+  number={5},
+  pages={819--834},
+  year={2013},
+  publisher={Springer}
+}
+
+@article{cohen2017optimal,
+  title={Optimal weighted least-squares methods},
+  author={Cohen, Albert and Migliorati, Giovanni},
+  journal={The SMAI Journal of Computational Mathematics},
+  volume={3},
+  pages={181--203},
+  year={2017}
+}
+
+@article{guo2020constructing,
+  title={Constructing least-squares polynomial approximations},
+  author={Guo, Ling and Narayan, Akil and Zhou, Tao},
+  journal={SIAM Review},
+  volume={62},
+  number={2},
+  pages={483--508},
+  year={2020},
+  publisher={SIAM}
+}
+
+
+%%% Summation-by-Parts Operators %%% 
+
+@article{richtmyer1994difference,
+  title={Difference methods for initial-value problems},
+  author={Richtmyer, Robert D and Morton, Keith W},
+  journal={Malabar},
+  year={1994}
+}
+
+@incollection{kreiss1974finite,
+  title={Finite element and finite difference methods for hyperbolic partial differential equations},
+  author={Kreiss, H-O and Scherer, Godela},
+  booktitle={Mathematical Aspects of Finite Elements in Partial Differential Equations},
+  pages={195--212},
+  year={1974},
+  publisher={Elsevier}
+}
+
+@misc{kreiss1977existence,
+  title={On the existence of energy estimates for difference approximations for hyperbolic systems},
+  author={Kreiss, Heinz-Otto and Scherer, Godela},
+  year={1977}, 
+  publisher={Department of Scientific Computing, Uppsala University},
+  note={Technical report}
+}
+
+@phdthesis{scherer1977energy,
+  title={On energy estimates for difference approximations to hyperbolic partial differential equations},
+  author={Scherer, Godela},
+  year={1977},
+  school={Uppsala University}
+}
+
+@article{strand1994summation,
+  title={Summation by parts for finite difference approximations for d/dx},
+  author={Strand, Bo},
+  journal={Journal of Computational Physics},
+  volume={110},
+  number={1},
+  pages={47--67},
+  year={1994},
+  publisher={Elsevier}
+}
+
+@article{nordstrom2001finite,
+  title={Finite volume approximations and strict stability for hyperbolic problems},
+  author={Nordstr{\"o}m, Jan and Bj{\"o}rck, Martin},
+  journal={Applied Numerical Mathematics},
+  volume={38},
+  number={3},
+  pages={237--255},
+  year={2001},
+  publisher={Elsevier}
+}
+
+@article{kitson2003skew,
+  title={Skew-adjoint finite difference methods on nonuniform grids},
+  author={Kitson, Adrian and McLachlan, Robert I and Robidoux, Nicolas},
+  journal={New Zealand J. Math},
+  volume={32},
+  number={2},
+  pages={139--159},
+  year={2003},
+  publisher={Citeseer}
+}
+
+@article{nordstrom2003finite,
+  title={Finite volume methods, unstructured meshes and strict stability for hyperbolic problems},
+  author={Nordstr{\"o}m, Jan and Forsberg, Karl and Adamsson, Carl and Eliasson, Peter},
+  journal={Applied Numerical Mathematics},
+  volume={45},
+  number={4},
+  pages={453--473},
+  year={2003},
+  publisher={Elsevier}
+}
+
+@article{svard2004coordinate,
+  title={On coordinate transformations for summation-by-parts operators},
+  author={Sv{\"a}rd, Magnus},
+  journal={Journal of Scientific Computing},
+  volume={20},
+  number={1},
+  pages={29--42},
+  year={2004},
+  publisher={Springer}
+}
+@article{mattsson2004summation,
+  title={Summation by parts operators for finite difference approximations of second derivatives},
+  author={Mattsson, Ken and Nordstr{\"o}m, Jan},
+  journal={Journal of Computational Physics},
+  volume={199},
+  number={2},
+  pages={503--540},
+  year={2004},
+  publisher={Elsevier}
+}
+
+@article{honein2004higher,
+  title={Higher entropy conservation and numerical stability of compressible turbulence simulations},
+  author={Honein, Albert E and Moin, Parviz},
+  journal={Journal of Computational Physics},
+  volume={201},
+  number={2},
+  pages={531--545},
+  year={2004},
+  publisher={Elsevier}
+}
+
+@article{nordstrom2006conservative,
+  title={Conservative finite difference formulations, variable coefficients, energy estimates and artificial dissipation},
+  author={Nordstr{\"o}m, Jan},
+  journal={Journal of Scientific Computing},
+  volume={29},
+  number={3},
+  pages={375--404},
+  year={2006},
+  publisher={Springer}
+}
+
+@article{jameson2008construction,
+  title={The construction of discretely conservative finite volume schemes that also globally conserve energy or entropy},
+  author={Jameson, Antony},
+  journal={Journal of Scientific Computing},
+  volume={34},
+  number={2},
+  pages={152--187},
+  year={2008},
+  publisher={Springer}
+}
+
+@article{yamaleev2009systematic,
+  title={A systematic methodology for constructing high-order energy stable {WENO} schemes},
+  author={Yamaleev, Nail K and Carpenter, Mark H},
+  journal={Journal of Computational Physics},
+  volume={228},
+  number={11},
+  pages={4248--4272},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@article{fisher2011boundary,
+  title={Boundary closures for fourth-order energy stable weighted essentially non-oscillatory finite-difference schemes},
+  author={Fisher, Travis C and Carpenter, Mark H and Yamaleev, Nail K and Frankel, Steven H},
+  journal={Journal of Computational Physics},
+  volume={230},
+  number={10},
+  pages={3727--3752},
+  year={2011},
+  publisher={Elsevier}
+}
+
+@article{kwan2012conservative,
+  title={A conservative mesh-free scheme and generalized framework for conservation laws},
+  author={Kwan-yu Chiu, Edmond and Wang, Qiqi and Hu, Rui and Jameson, Antony},
+  journal={SIAM Journal on Scientific Computing},
+  volume={34},
+  number={6},
+  pages={A2896--A2916},
+  year={2012},
+  publisher={SIAM}
+}
+
+@article{fisher2013discretely,
+  title={Discretely conservative finite-difference formulations for nonlinear conservation laws in split form: {T}heory and boundary conditions},
+  author={Fisher, Travis C and Carpenter, Mark H and Nordstr{\"o}m, Jan and Yamaleev, Nail K and Swanson, Charles},
+  journal={Journal of Computational Physics},
+  volume={234},
+  pages={353--375},
+  year={2013},
+  publisher={Elsevier}
+}
+
+@article{gassner2013skew,
+  title={A skew-symmetric discontinuous {G}alerkin spectral element discretization and its relation to {SBP-SAT} finite difference methods},
+  author={Gassner, Gregor J},
+  journal={SIAM Journal on Scientific Computing},
+  volume={35},
+  number={3},
+  pages={A1233--A1253},
+  year={2013},
+  publisher={SIAM}
+}
+
+@techreport{fisher2013high,
+  title={High-Order Entropy Stable Finite Difference Schemes for Nonlinear Conservation Laws: {F}inite Domains},
+  author={Fisher, Travis C and Carpenter, Mark H },
+  institution= {NASA},
+  year={2013},
+  type={Technical Report},
+  number={NASA/TM-2013-217971},
+  address={NASA Langley Research Center, Hampton, VA 23681-2199, United States}
+}
+
+@article{fisher2013high_2,
+  title={High-order entropy stable finite difference schemes for nonlinear conservation laws: Finite domains},
+  author={Fisher, Travis C and Carpenter, Mark H},
+  journal={Journal of Computational Physics},
+  volume={252},
+  pages={518--557},
+  year={2013},
+  publisher={Elsevier}
+} 
+
+@article{nordstrom2013summation,
+  title={Summation-by-parts in time},
+  author={Nordstr{\"o}m, Jan and Lundquist, Tomas},
+  journal={Journal of Computational Physics},
+  volume={251},
+  pages={487--499},
+  year={2013},
+  publisher={Elsevier}
+} 
+
+@article{hicken2013summation,
+  title={Summation-by-parts operators and high-order quadrature},
+  author={Hicken, Jason E and Zingg, David W},
+  journal={Journal of Computational and Applied Mathematics},
+  volume={237},
+  number={1},
+  pages={111--125},
+  year={2013},
+  publisher={Elsevier}
+}
+
+@article{lundquist2014sbp,
+  title={The {SBP-SAT} technique for initial value problems},
+  author={Lundquist, Tomas and Nordstr{\"o}m, Jan},
+  journal={Journal of Computational Physics},
+  volume={270},
+  pages={86--104},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{svard2014review,
+  title={Review of summation-by-parts schemes for initial--boundary-value problems},
+  author={Sv{\"a}rd, Magnus and Nordstr{\"o}m, Jan},
+  journal={Journal of Computational Physics},
+  volume={268},
+  pages={17--38},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{fernandez2014review,
+  title={Review of summation-by-parts operators with simultaneous approximation terms for the numerical solution of partial differential equations},
+  author={Fern{\'a}ndez, David C Del Rey and Hicken, Jason E and Zingg, David W},
+  journal={Computers \& Fluids},
+  volume={95},
+  pages={171--196},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{fernandez2014generalized,
+  title={A generalized framework for nodal first derivative summation-by-parts operators},
+  author={Fern{\'a}ndez, David C Del Rey and Boom, Pieter D and Zingg, David W},
+  journal={Journal of Computational Physics},
+  volume={266},
+  pages={214--239},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{mattsson2014diagonal,
+  title={Diagonal-norm summation by parts operators for finite difference approximations of third and fourth derivatives},
+  author={Mattsson, Ken},
+  journal={Journal of Computational Physics},
+  volume={274},
+  pages={432--454},
+  year={2014},
+  publisher={Elsevier}
+} 
+
+@article{carpenter2014entropy,
+  title={Entropy stable spectral collocation schemes for the {N}avier--{S}tokes equations: {D}iscontinuous interfaces},
+  author={Carpenter, Mark H and Fisher, Travis C and Nielsen, Eric J and Frankel, Steven H},
+  journal={SIAM Journal on Scientific Computing},
+  volume={36},
+  number={5},
+  pages={B835--B867},
+  year={2014},
+  publisher={SIAM}
+}
+
+@article{boom2015high,
+  title={High-order implicit time-marching methods based on generalized summation-by-parts operators},
+  author={Boom, Pieter D and Zingg, David W},
+  journal={SIAM Journal on Scientific Computing},
+  volume={37},
+  number={6},
+  pages={A2682--A2709},
+  year={2015},
+  publisher={SIAM}
+}
+
+@article{gassner2016split,
+  title={Split form nodal discontinuous {G}alerkin schemes with summation-by-parts property for the compressible {E}uler equations},
+  author={Gassner, Gregor J and Winters, Andrew R and Kopriva, David A},
+  journal={Journal of Computational Physics},
+  volume={327},
+  pages={39--66},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@article{ranocha2016summation,
+  title={Summation-by-parts operators for correction procedure via reconstruction},
+  author={Ranocha, Hendrik and {\"O}ffner, Philipp and Sonar, Thomas},
+  journal={Journal of Computational Physics},
+  volume={311},
+  pages={299--328},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@misc{aalund2016provably,
+  title={A provably stable, non-iterative domain decomposition technique for the advection-diffusion equation},
+  author={{\AA}lund, Oskar and Nordstr{\"o}m, Jan},
+  year={2016}, 
+  note={Technical report}, 
+  publisher={Link{\"o}ping University Electronic Press}
+}
+
+@incollection{carpenter2016entropy,
+  title={Entropy stable summation-by-parts formulations for compressible computational fluid dynamics},
+  author={Carpenter, MH and Fisher, TC and Nielsen, EJ and Parsani, Matteo and Sv{\"a}rd, M and Yamaleev, N},
+  booktitle={Handbook of Numerical Analysis},
+  volume={17},
+  pages={495--524},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@article{hicken2016multidimensional,
+  title={Multidimensional summation-by-parts operators: general theory and application to simplex elements},
+  author={Hicken, Jason E and Del Rey Fern{\'a}ndez, David C and Zingg, David W},
+  journal={SIAM Journal on Scientific Computing},
+  volume={38},
+  number={4},
+  pages={A1935--A1958},
+  year={2016},
+  publisher={SIAM}
+}
+
+@article{wintermeyer2017entropy,
+  title={An entropy stable nodal discontinuous {G}alerkin method for the two dimensional shallow water equations on unstructured curvilinear meshes with discontinuous bathymetry},
+  author={Wintermeyer, Niklas and Winters, Andrew R and Gassner, Gregor J and Kopriva, David A},
+  journal={Journal of Computational Physics},
+  volume={340},
+  pages={200--242},
+  year={2017},
+  publisher={Elsevier}
+}
+
+@article{nordstrom2017conservation,
+  title={On conservation and stability properties for summation-by-parts schemes},
+  author={Nordstr{\"o}m, Jan and Ruggiu, Andrea A},
+  journal={Journal of Computational Physics},
+  volume={344},
+  pages={451--464},
+  year={2017},
+  publisher={Elsevier}
+}
+
+@article{chen2017entropy,
+  title={Entropy stable high order discontinuous {G}alerkin methods with suitable quadrature rules for hyperbolic conservation laws},
+  author={Chen, Tianheng and Shu, Chi-Wang},
+  journal={Journal of Computational Physics},
+  volume={345},
+  pages={427--461},
+  year={2017},
+  publisher={Elsevier}
+} 
+
+@article{ranocha2017extended,
+  title={Extended skew-symmetric form for summation-by-parts operators and varying {J}acobians},
+  author={Ranocha, Hendrik and {\"O}ffner, Philipp and Sonar, Thomas},
+  journal={Journal of Computational Physics},
+  volume={342},
+  pages={13--28},
+  year={2017},
+  publisher={Elsevier}
+}
+
+@article{mattsson2017diagonal,
+  title={Diagonal-norm upwind {SBP} operators},
+  author={Mattsson, Ken},
+  journal={Journal of Computational Physics},
+  volume={335},
+  pages={283--310},
+  year={2017},
+  publisher={Elsevier}
+}
+
+@article{o2017energy,
+  title={Energy stable and high-order-accurate finite difference methods on staggered grids},
+  author={O'Reilly, Ossian and Lundquist, Tomas and Dunham, Eric M and Nordstr{\"o}m, Jan},
+  journal={Journal of Computational Physics},
+  volume={346},
+  pages={572--589},
+  year={2017},
+  publisher={Elsevier}
+}
+
+@article{offner2018stability,
+  title={Stability of correction procedure via reconstruction with summation-by-parts operators for {B}urgers' equation using a polynomial chaos approach},
+  author={{\"O}ffner, Philipp and Glaubitz, Jan and Ranocha, Hendrik},
+  journal={ESAIM: Mathematical Modelling and Numerical Analysis},
+  volume={52},
+  number={6},
+  pages={2215--2245},
+  year={2018},
+  publisher={EDP Sciences}
+}
+
+@article{chan2018discretely,
+  title={On discretely entropy conservative and entropy stable discontinuous {G}alerkin methods},
+  author={Chan, Jesse},
+  journal={Journal of Computational Physics},
+  volume={362},
+  pages={346--374},
+  year={2018},
+  publisher={Elsevier}
+} 
+
+@article{crean2018entropy,
+  title={Entropy-stable summation-by-parts discretization of the {E}uler equations on general curved elements},
+  author={Crean, Jared and Hicken, Jason E and Fern{\'a}ndez, David C Del Rey and Zingg, David W and Carpenter, Mark H},
+  journal={Journal of Computational Physics},
+  volume={356},
+  pages={410--438},
+  year={2018},
+  publisher={Elsevier}
+}
+
+@article{linders2018order,
+  title={On the order of accuracy of finite difference operators on diagonal norm based summation-by-parts form},
+  author={Linders, Viktor and Lundquist, Tomas and Nordstr\"om, Jan},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={56},
+  number={2},
+  pages={1048--1063},
+  year={2018},
+  publisher={SIAM}
+}
+
+@article{ranocha2018comparison,
+  title={Comparison of some entropy conservative numerical fluxes for the {E}uler equations},
+  author={Ranocha, Hendrik},
+  journal={Journal of Scientific Computing},
+  volume={76},
+  number={1},
+  pages={216--242},
+  year={2018},
+  publisher={Springer}
+}
+
+
+@article{chan2019skew,
+  title={Skew-symmetric entropy stable modal discontinuous {G}alerkin formulations},
+  author={Chan, Jesse},
+  journal={Journal of Scientific Computing},
+  volume={81},
+  number={1},
+  pages={459--485},
+  year={2019},
+  publisher={Springer}
+}
+
+@article{chan2019efficient,
+  title={Efficient entropy stable {G}auss collocation methods},
+  author={Chan, Jesse and Del Rey Fern{\'a}ndez, David C and Carpenter, Mark H},
+  journal={SIAM Journal on Scientific Computing},
+  volume={41},
+  number={5},
+  pages={A2938--A2966},
+  year={2019},
+  publisher={SIAM}
+} 
+
+@article{fernandez2019extension,
+  title={Extension of tensor-product generalized and dense-norm summation-by-parts operators to curvilinear coordinates},
+  author={Fern{\'a}ndez, David C Del Rey and Boom, Pieter D and Carpenter, Mark H and Zingg, David W},
+  journal={Journal of Scientific Computing},
+  volume={80},
+  number={3},
+  pages={1957--1996},
+  year={2019},
+  publisher={Springer}
+}
+
+@article{fernandez2019staggered,
+  title={Staggered-grid entropy-stable multidimensional summation-by-parts discretizations on curvilinear coordinates},
+  author={Fern{\'a}ndez, David C Del Rey and Crean, Jared and Carpenter, Mark H and Hicken, Jason E},
+  journal={Journal of Computational Physics},
+  volume={392},
+  pages={161--186},
+  year={2019},
+  publisher={Elsevier}
+}
+
+@article{aalund2019encapsulated,
+  title={Encapsulated high order difference operators on curvilinear non-conforming grids},
+  author={{\AA}lund, Oskar and Nordstr{\"o}m, Jan},
+  journal={Journal of Computational Physics},
+  volume={385},
+  pages={209--224},
+  year={2019},
+  publisher={Elsevier}
+} 
+
+@article{nordstrom2019energy,
+  title={Energy stable boundary conditions for the nonlinear incompressible {N}avier--{S}tokes equations},
+  author={Nordstr{\"o}m, Jan and La Cognata, Cristina},
+  journal={Mathematics of Computation},
+  volume={88},
+  number={316},
+  pages={665--690},
+  year={2019}
+}
+
+@article{chen2020review,
+  title={Review of entropy stable discontinuous {G}alerkin methods for systems of conservation laws on unstructured simplex meshes},
+  author={Chen, Tianheng and Shu, Chi-Wang},
+  journal={CSIAM Transactions on Applied Mathematics},
+  volume={1},
+  number={1},
+  pages={1--52},
+  year={2020}
+}
+
+@article{linders2020properties,
+  title={Properties of {R}unge--{K}utta-summation-by-parts methods},
+  author={Linders, Viktor and Nordstr{\"o}m, Jan and Frankel, Steven H},
+  journal={Journal of Computational Physics},
+  volume={419},
+  pages={109684},
+  year={2020},
+  publisher={Elsevier}
+}
+
+
+@article{abgrall2020analysis,
+  title={Analysis of the {SBP-SAT} stabilization for finite element methods part I: Linear problems},
+  author={Abgrall, R{\'e}mi and Nordstr{\"o}m, Jan and {\"O}ffner, Philipp and Tokareva, Svetlana},
+  journal={Journal of Scientific Computing},
+  volume={85},
+  number={2},
+  pages={1--29},
+  year={2020},
+  publisher={Springer}
+}
+
+@article{abgrall2021analysis,
+  title={Analysis of the {SBP-SAT} stabilization for finite element methods part II: Entropy stability},
+  author={Abgrall, R{\'e}mi and Nordstr{\"o}m, Jan and {\"O}ffner, Philipp and Tokareva, Svetlana},
+  journal={Communications on Applied Mathematics and Computation},
+  pages={1--23},
+  year={2021},
+  publisher={Springer}
+}
+
+@article{aalund2021learning,
+  title={Learning to differentiate},
+  author={{\AA}lund, Oskar and Iaccarino, Gianluca and Nordstr{\"o}m, Jan},
+  journal={Journal of Computational Physics},
+  volume={424},
+  pages={109873},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@article{ranocha2021broad,
+  title={A Broad Class of Conservative Numerical Methods for Dispersive
+         Wave Equations},
+  author={Ranocha, Hendrik and Mitsotakis, Dimitrios and Ketcheson, David I},
+  journal={Communications in Computational Physics},
+  year={2021},
+  volume={29},
+  number={4},
+  pages={979--1029},
+  publisher={Global Science Press}
+  }
+
+
+%%% Boundary treatment %%% 
+
+@article{nordstrom1999boundary,
+  title={Boundary and interface conditions for high-order finite-difference methods applied to the {E}uler and {N}avier--{S}tokes equations},
+  author={Nordstr{\"o}m, Jan and Carpenter, Mark H},
+  journal={Journal of Computational Physics},
+  volume={148},
+  number={2},
+  pages={621--645},
+  year={1999},
+  publisher={Elsevier}
+}
+
+
+%%% Flux reconstruction & correction procedure via reconstruction %%%
+
+@inproceedings{huynh2007flux,
+  title={A flux reconstruction approach to high-order schemes including discontinuous {G}alerkin methods},
+  author={Huynh, Hung T},
+  booktitle={18th AIAA Computational Fluid Dynamics Conference},
+  pages={4079},
+  year={2007}
+}
+
+@article{vincent2011new,
+  title={A new class of high-order energy stable flux reconstruction schemes},
+  author={Vincent, Peter E and Castonguay, Patrice and Jameson, Antony},
+  journal={Journal of Scientific Computing},
+  volume={47},
+  number={1},
+  pages={50--72},
+  year={2011},
+  publisher={Springer}
+}
+
+@article{jameson2012non,
+  title={On the non-linear stability of flux reconstruction schemes},
+  author={Jameson, Antony and Vincent, Peter E and Castonguay, Patrice},
+  journal={Journal of Scientific Computing},
+  volume={50},
+  number={2},
+  pages={434--445},
+  year={2012},
+  publisher={Springer}
+}
+
+
+%%% residual distribution schemes %%%
+
+@article{abgrall2010comment,
+  title={A comment on the computation of non-conservative products},
+  author={Abgrall, R{\'e}mi and Karni, Smadar},
+  journal={Journal of Computational Physics},
+  volume={229},
+  number={8},
+  pages={2759--2763},
+  year={2010},
+  publisher={Elsevier}
+}
+
+@article{abgrall2018some,
+  title={Some remarks about conservation for residual distribution schemes},
+  author={Abgrall, R{\'e}mi},
+  journal={Computational Methods in Applied Mathematics},
+  volume={18},
+  number={3},
+  pages={327--351},
+  year={2018},
+  publisher={De Gruyter}
+}
+
+
+
+@article{abgrall2020notion,
+  title={The notion of conservation for residual distribution schemes (or fluctuation splitting schemes), with some applications},
+  author={Abgrall, R{\'e}mi},
+  journal={Communications on Applied Mathematics and Computation},
+  volume={2},
+  number={3},
+  pages={341--368},
+  year={2020},
+  publisher={Springer}
+}
+
+
+%%% Conservation Laws %%% 
+
+@article{lax1960systems,
+  title={Systems of conservation laws},
+  author={Lax, Peter and Wendroff, Burton},
+  journal={Communications on Pure and Applied Mathematics},
+  volume={13},
+  pages={217-237},
+  year={1960},
+  publisher={Elsevier}
+}
+
+@article{shi2018local,
+  title={On local conservation of numerical methods for conservation laws},
+  author={Shi, Cengke and Shu, Chi-Wang},
+  journal={Computers \& Fluids},
+  volume={169},
+  pages={3--9},
+  year={2018},
+  publisher={Elsevier}
+}
+
+
+%%% Numerical Integration %%% 
+
+@article{wilson1970necessary,
+  title={Necessary and sufficient conditions for equidistant quadrature formula},
+  author={Wilson, M Wayne},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={7},
+  number={1},
+  pages={134--141},
+  year={1970},
+  publisher={SIAM}
+}
+
+@article{wilson1970discrete,
+  title={Discrete least squares and quadrature formulas},
+  author={Wilson, M Wayne},
+  journal={Mathematics of Computation},
+  volume={24},
+  number={110},
+  pages={271--282},
+  year={1970}
+}
+
+@incollection{mysovskikh1980approximation,
+  title={The approximation of multiple integrals by using interpolatory cubature formulae},
+  author={Mysovskikh, IP},
+  booktitle={Quantitative Approximation},
+  pages={217--243},
+  year={1980},
+  publisher={Elsevier}
+}
+
+@book{engels1980numerical,
+  title={Numerical Quadrature and Cubature},
+  author={Engels, Hermann},
+  year={1980},
+  publisher={Academic Press}
+}
+
+@book{krommer1998computational,
+  title={Computational Integration},
+  author={Krommer, Arnold R and Ueberhuber, Christoph W},
+  year={1998},
+  publisher={SIAM}
+}
+
+@article{mysovskikh2001cubature,
+  title={Cubature formulae that are exact for trigonometric polynomials},
+  author={Mysovskikh, Ivan Petrovich},
+  journal={TW Reports},
+  year={2001},
+  publisher={Department of Computer Science, KU Leuven; Leuven, Belgium}
+}
+
+@book{krylov2006approximate,
+  title={Approximate Calculation of Integrals},
+  author={Krylov, Vladimir Ivanovich and Stroud, Arthur H},
+  year={2006},
+  publisher={Courier Corporation}
+}
+
+@book{davis2007methods,
+  title={Methods of Numerical Integration},
+  author={Davis, Philip J and Rabinowitz, Philip},
+  year={2007},
+  publisher={Courier Corporation}
+}
+
+@article{huybrechs2009stable,
+  title={Stable high-order quadrature rules with equidistant points},
+  author={Huybrechs, Daan},
+  journal={Journal of Computational and Applied Mathematics},
+  volume={231},
+  number={2},
+  pages={933--947},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@book{brass2011quadrature,
+  title={Quadrature Theory: The Theory of Numerical Integration on a Compact Interval},
+  author={Brass, Helmut and Petras, Knut}, 
+  series={Mathematical Surveys and Monographs},
+  number={178},
+  year={2011},
+  publisher={AMS}
+}
+
+@article{ryu2015extensions,
+  title={Extensions of {G}auss quadrature via linear programming},
+  author={Ryu, Ernest K and Boyd, Stephen P},
+  journal={Foundations of Computational Mathematics},
+  volume={15},
+  number={4},
+  pages={953--971},
+  year={2015},
+  publisher={Springer}
+}
+
+@article{jakeman2018generation,
+  title={Generation and application of multivariate polynomial quadrature rules},
+  author={Jakeman, John D and Narayan, Akil},
+  journal={Computer Methods in Applied Mechanics and Engineering},
+  volume={338},
+  pages={134--161},
+  year={2018},
+  publisher={Elsevier}
+}
+
+@article{keshavarzzadeh2018numerical,
+  title={Numerical integration in multiple dimensions with designed quadrature},
+  author={Keshavarzzadeh, Vahid and Kirby, Robert M and Narayan, Akil},
+  journal={SIAM Journal on Scientific Computing},
+  volume={40},
+  number={4},
+  pages={A2033--A2061},
+  year={2018},
+  publisher={SIAM}
+}
+
+@article{glaubitz2020stableDG,
+  title={Stable discretisations of high-order discontinuous {G}alerkin methods on equidistant and scattered points},
+  author={Glaubitz, Jan and {\"O}ffner, Philipp},
+  journal={Applied Numerical Mathematics},
+  volume={151},
+  pages={98--118},
+  year={2020},
+  publisher={Elsevier}
+}
+
+@article{glaubitz2020stableQF,
+  title={Stable high order quadrature rules for scattered data and general weight functions},
+  author={Glaubitz, Jan},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={58},
+  number={4},
+  pages={2144--2164},
+  year={2020},
+  publisher={SIAM}
+}
+
+@article{glaubitz2020stableCFs,
+  title={Stable high-order cubature formulas for experimental data},
+  author={Glaubitz, Jan},
+  journal={Journal of Computational Physics},
+  pages={110693},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@article{glaubitz2021constructing,
+  title={Construction and application of provable positive and exact cubature formulas},
+  author={Glaubitz, Jan},
+  journal={arXiv preprint arXiv:2108.02848},
+  year={2021}
+}
+
+
+%%% Numerical integration - RBFs %%% 
+
+@article{sommariva2006numerical,
+  title={Numerical cubature on scattered data by radial basis functions},
+  author={Sommariva, Alvise and Vianello, Marco},
+  journal={Computing},
+  volume={76},
+  number={3-4},
+  pages={295},
+  year={2006},
+  publisher={Springer}
+} 
+
+@article{reeger2018numerical,
+  title={Numerical quadrature over smooth surfaces with boundaries},
+  author={Reeger, Jonah A and Fornberg, Bengt},
+  journal={Journal of Computational Physics},
+  volume={355},
+  pages={176--190},
+  year={2018},
+  publisher={Elsevier}
+}
+
+@article{sommariva2021rbf,
+  title={{RBF} moment computation and meshless cubature on general polygonal regions},
+  author={Sommariva, A and Vianello, M},
+  journal={Applied Mathematics and Computation},
+  volume={409},
+  pages={126375},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@article{glaubitz2021towardsRBF,
+  title={Towards stability of radial basis function based cubature formulas},
+  author={Glaubitz, Jan and Reeger, Jonah},
+  journal={arXiv preprint arXiv:2108.06375},
+  year={2021}
+}
+
+
+%%% Local and global conservation %%% 
+
+@article{hughes2000continuous,
+  title={The continuous Galerkin method is locally conservative},
+  author={Hughes, Thomas JR and Engel, Gerald and Mazzei, Luca and Larson, Mats G},
+  journal={Journal of Computational Physics},
+  volume={163},
+  number={2},
+  pages={467--488},
+  year={2000},
+  publisher={Elsevier}
+} 
+
+@article{perot2011discrete,
+  title={Discrete conservation properties of unstructured mesh schemes},
+  author={Perot, J Blair},
+  journal={Annual review of fluid mechanics},
+  volume={43},
+  pages={299--318},
+  year={2011},
+  publisher={Annual Reviews}
+}
+
+
+%%% Miscellaneous %%% 
+
+@book{karlin1966tchebycheff,
+  title={Tchebycheff Systems: With Applications in Analysis and Statistics},
+  author={Karlin, Samuel and Studden, William J}, 
+  series={Pure and Applied Mathematics}, 
+  volume={15},
+  year={1966},
+  publisher={Wiley}
+}
+
+@book{abramowitz1972handbook,
+  title={Handbook of Mathematical Functions With Formulas, Graphs, and Mathematical Tables},
+  author={Abramowitz, Milton and Stegun, Irene A},
+  volume={55},
+  year={1972},
+  publisher={US Government printing office}
+}
+
+@article{cline1976l2,
+  title={$\ell_2$-Solutions to Underdetermined Linear Systems},
+  author={Cline, Randall E and Plemmons, Robert J},
+  journal={SIAM Review},
+  volume={18},
+  number={1},
+  pages={92--106},
+  year={1976},
+  publisher={SIAM}
+}
+
+@book{brualdi1977introductory,
+  title={Introductory Combinatorics},
+  author={Brualdi, Richard A},
+  year={1977},
+  publisher={Pearson Education India}
+}
+
+@article{tadmor1987numerical,
+  title={The numerical viscosity of entropy stable schemes for systems of conservation laws. {I}},
+  author={Tadmor, Eitan},
+  journal={Mathematics of Computation},
+  volume={49},
+  number={179},
+  pages={91--103},
+  year={1987}
+}
+
+@article{hou1994nonconservative,
+  title={Why nonconservative schemes converge to wrong solutions: error analysis},
+  author={Hou, Thomas Y and LeFloch, Philippe G},
+  journal={Mathematics of computation},
+  volume={62},
+  number={206},
+  pages={497--530},
+  year={1994}
+}
+
+@book{trefethen1997numerical,
+  title={Numerical Linear Algebra},
+  author={Trefethen, Lloyd N and Bau III, David},
+  volume={50},
+  year={1997},
+  publisher={SIAM}
+}
+
+@book{gautschi1997numerical,
+  title={Numerical Analysis},
+  author={Gautschi, Walter},
+  year={1997},
+  publisher={Springer Science \& Business Media}
+}
+
+@book{ben2003generalized,
+  title={Generalized Inverses: Theory and Applications},
+  author={Ben-Israel, Adi and Greville, Thomas NE}, 
+  series={CMS Books in Mathematics},
+  volume={15},
+  year={2003},
+  publisher={Springer Science \& Business Media}
+}
+
+@book{golub2012matrix,
+  title={Matrix Computations},
+  author={Golub, Gene H and Van Loan, Charles F},
+  volume={3},
+  year={2012},
+  publisher={JHU Press}
+}
+
+@book{horn2012matrix,
+  title={Matrix Analysis},
+  author={Horn, Roger A and Johnson, Charles R},
+  year={2012},
+  publisher={Cambridge University Press}
+}
+
+@book{strang2019linear,
+  title={Linear Algebra and Learning From Data},
+  author={Strang, Gilbert},
+  year={2019},
+  publisher={Wellesley-Cambridge Press}
+}
+
+@book{glaubitz2020shock,
+  title={Shock Capturing and High-Order Methods for Hyperbolic Conservation Laws},
+  author={Glaubitz, Jan},
+  year={2020},
+  publisher={Logos Verlag Berlin GmbH}
+}
+
+@book{oeffner2021approximation,
+  title={Approximation and Stability Properties of Numerical Methods for Hyperbolic Conservation Laws},
+  author={ {\"O}ffner, Philipp},
+  year={2021},
+  publisher={to appear}
+}
+
+
+
+%%%%% ADER
+
+@article{schwartzkopff2002ader,
+	title={{ADER}: A high-order approach for linear hyperbolic systems in 2D},
+	author={Schwartzkopff, T and Munz, Claus-Dieter and Toro, Eleuterio F},
+	journal={Journal of Scientific Computing},
+	volume={17},
+	number={1-4},
+	pages={231--240},
+	year={2002},
+	publisher={Springer}
+}
+
+
+@incollection{toro2001towards,
+	title={Towards very high order {G}odunov schemes},
+	author={Toro, EF and Millington, RC and Nejad, LAM},
+	booktitle={Godunov methods},
+	pages={907--940},
+	year={2001},
+	publisher={Springer}
+}
+
+@article{titarev2002ader,
+	title={{ADER}: Arbitrary high order {G}odunov approach},
+	author={Titarev, Vladimir A and Toro, Eleuterio F},
+	journal={Journal of Scientific Computing},
+	volume={17},
+	number={1-4},
+	pages={609--618},
+	year={2002},
+	publisher={Springer}
+}
+
+@article{dumbser2007FVStiff,
+	author = {Dumbser, Michael and Enaux, Cedric and Toro, Eleuterio F.},
+	title = {Finite Volume Schemes of Very High Order of Accuracy for Stiff Hyperbolic Balance Laws},
+	year = {2008},
+	issue_date = {April, 2008},
+	publisher = {Academic Press Professional, Inc.},
+	address = {USA},
+	volume = {227},
+	number = {8},
+	issn = {0021-9991},
+	url = {https://doi.org/10.1016/j.jcp.2007.12.005},
+	doi = {10.1016/j.jcp.2007.12.005},
+	journal = {J. Comput. Phys.},
+	month = apr,
+	pages = {3971–4001},
+	numpages = {31},
+	keywords = {ADER approach, Finite volume schemes, Local space-time discontinuous Galerkin method, Hyperbolic balance laws, Stiff source terms, WENO reconstruction}
+}
+
+
+
+@article{schwartzkopff2004fast,
+	title={Fast high order {ADER} schemes for linear hyperbolic equations},
+	author={Schwartzkopff, Thomas and Dumbser, Michael and Munz, Claus-Dieter},
+	journal={Journal of Computational Physics},
+	volume={197},
+	number={2},
+	pages={532--539},
+	year={2004},
+	publisher={Elsevier}
+}
+
+@article{dumbser2005ader,
+	title={{ADER} discontinuous {G}alerkin schemes for aeroacoustics},
+	author={Dumbser, Michael and Munz, Claus-Dieter},
+	journal={Comptes Rendus M{\'e}canique},
+	volume={333},
+	number={9},
+	pages={683--687},
+	year={2005},
+	publisher={Elsevier}
+}
+@article{hidalgo2011ader,
+	title={{ADER} schemes for nonlinear systems of stiff advection--diffusion--reaction equations},
+	author={Hidalgo, Arturo and Dumbser, Michael},
+	journal={Journal of Scientific Computing},
+	volume={48},
+	number={1-3},
+	pages={173--189},
+	year={2011},
+	publisher={Springer}
+}
+
+@article{zanotti2015space,
+	title={Space--time adaptive {ADER} discontinuous {G}alerkin finite element schemes with a posteriori sub-cell finite volume limiting},
+	author={Zanotti, Olindo and Fambri, Francesco and Dumbser, Michael and Hidalgo, Arturo},
+	journal={Computers \& Fluids},
+	volume={118},
+	pages={204--224},
+	year={2015},
+	publisher={Elsevier}
+}
+
+
+@article{dumbser2008unified,
+	title={A unified framework for the construction of one-step finite volume and discontinuous {G}alerkin schemes on unstructured meshes},
+	author={Dumbser, Michael and Balsara, Dinshaw S and Toro, Eleuterio F and Munz, Claus-Dieter},
+	journal={Journal of Computational Physics},
+	volume={227},
+	number={18},
+	pages={8209--8253},
+	year={2008},
+	publisher={Elsevier}
+}
+
+@book{toro2009riemann,
+	title={Riemann Solvers and Numerical Methods for Fluid Dynamics: A Practical Introduction},
+	author={Toro, E.F.},
+	isbn={9783540498346},
+	lccn={2009921818},
+	url={https://books.google.com/books?id=SqEjX0um8o0C},
+	year={2009},
+	publisher={Springer Berlin Heidelberg}
+}
+
+@article{boscheri2014direct,
+	title={{A direct Arbitrary-Lagrangian--Eulerian ADER-WENO finite volume scheme on unstructured tetrahedral meshes for conservative and non-conservative hyperbolic systems in 3D}},
+	author={Boscheri, Walter and Dumbser, Michael},
+	journal={Journal of Computational Physics},
+	volume={275},
+	pages={484--523},
+	year={2014},
+	publisher={Elsevier}
+}
+@article{micalizzi2023efficient,
+	title={Efficient iterative arbitrary high-order methods: an adaptive bridge between low and high order},
+	author={Micalizzi, Lorenzo and Torlo, Davide and Boscheri, Walter},
+	journal={Communications on Applied Mathematics and Computation},
+	pages={1--38},
+	year={2023},
+	publisher={Springer}
+}
+
+@article{ruuth2002,
+	author = {Ruuth, Steven J. and Spiteri, Raymond J.},
+	title = {Two Barriers on Strong-Stability-Preserving Time Discretization Methods},
+	year = {2002},
+	issue_date = {December 2002},
+	publisher = {Plenum Press},
+	address = {USA},
+	volume = {17},
+	number = {1–4},
+	issn = {0885-7474},
+	url = {https://doi.org/10.1023/A:1015156832269},
+	doi = {10.1023/A:1015156832269},
+	journal = {J. Sci. Comput.},
+	month = dec,
+	pages = {211–220},
+	numpages = {10},
+	keywords = {strong stability preserving, high-order accuracy, total variation diminishing, {R}unge–{K}utta methods, time discretization}
+}
+
+
+@article{laxwendroff,
+	author = {Lax, Peter and Wendroff, Burton},
+	title = {Systems of conservation laws},
+	journal = {Communications on Pure and Applied Mathematics},
+	volume = {13},
+	number = {2},
+	pages = {217-237},
+	doi = {10.1002/cpa.3160130205},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/cpa.3160130205},
+	eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/cpa.3160130205},
+	year = {1960}
+}
+
+
+
+@article{grptoro,
+	title={Solution of the generalized {R}iemann problem for advection--reaction equations},
+	author={Toro, EF and Titarev, VA},
+	journal={Proceedings of the Royal Society of London. Series A: Mathematical, Physical and Engineering Sciences},
+	volume={458},
+	number={2018},
+	pages={271--281},
+	year={2002},
+	publisher={The Royal Society}
+}
+
+
+
+%%% DeC %%%
+
+%%%%%%%%%%%%%%%%%DeC
+
+@article{minion2003dec,
+	author = "Minion, M.~L.",
+	fjournal = "Communications in Mathematical Sciences",
+	journal = "Commun. Math. Sci.",
+	month = "09",
+	number = "3",
+	pages = "471--500",
+	publisher = "International Press of Boston",
+	title = "Semi-implicit spectral deferred correction methods for ordinary differential equations",
+	url = "https://projecteuclid.org:443/euclid.cms/1250880097",
+	volume = "1",
+	year = "2003"
+}
+@article{layton2004conservative,
+	title={Conservative multi-implicit spectral deferred correction methods for reacting gas dynamics},
+	author={Layton, Anita T and Minion, Michael L},
+	journal={Journal of Computational Physics},
+	volume={194},
+	number={2},
+	pages={697--715},
+	year={2004},
+	publisher={Elsevier}
+}
+@article{speck2015multi,
+title={A multi-level spectral deferred correction method},
+author={Speck, Robert and Ruprecht, Daniel and Emmett, Matthew and Minion, Michael and Bolten, Matthias and Krause, Rolf},
+journal={BIT Numerical Mathematics},
+volume={55},
+number={3},
+pages={843--867},
+year={2015},
+publisher={Springer}
+}
+
+
+@article{dutt2000dec,
+	abstract = {We introduce a new class of methods for the Cauchy problem for ordinary differential equations (ODEs). We begin by converting the original ODE into the corresponding Picard equation and apply a deferred correction procedure in the integral formulation, driven by either the explicit or the implicit Euler marching scheme. The approach results in algorithms of essentially arbitrary order accuracy for both non-stiff and stiff problems; their performance is illustrated with several numerical examples. For non-stiff problems, the stability behavior of the obtained explicit schemes is very satisfactory and algorithms with orders between 8 and 20 should be competitive with the best existing ones. In our preliminary experiments with stiff problems, a simple adaptive implementation of the method demonstrates performance comparable to that of a state-of-the-art extrapolation code (at least, at moderate to high precision).},
+	author = {Dutt, A. and Greengard, L. and Rokhlin, V.},
+	doi = {10.1023/A:1022338906936},
+	issn = {1572-9125},
+	journal = {BIT Numerical Mathematics},
+	number = {2},
+	pages = {241--266},
+	title = {{Spectral Deferred Correction Methods for Ordinary Differential Equations}},
+	url = {http://dx.doi.org/10.1023/A:1022338906936},
+	volume = {40},
+	year = {2000}
+}
+
+
+@Article{abgrall2017dec,
+	author="Abgrall, R.",
+	title="High Order Schemes for Hyperbolic Problems Using Globally Continuous Approximation and Avoiding Mass Matrices",
+	journal="Journal of Scientific Computing",
+	year="2017",
+	month="Dec",
+	day="01",
+	volume="73",
+	number="2",
+	pages="461--494",
+	abstract="When integrating unsteady problems using globally continuous representation of the solution, as for continuous finite element methods, one faces the problem of inverting a mass matrix. In some cases, one has to recompute this mass matrix at each time steps. In some other methods that are not directly formulated by standard variational principles, it is not clear how to write an invertible mass matrix. Hence, in this paper, we show how to avoid this problem for hyperbolic systems, and we also detail the conditions under which this is possible. Analysis and simulation support our conclusions, namely that it is possible to avoid inverting mass matrices without sacrificing the accuracy of the scheme. This paper is an extension of Abgrall et al. (in: Karas{\"o}zen B, Manguoglu M, Tezer-Sezgin M, Goktepe S, Ugur O (eds) Numerical mathematics and advanced applications ENUMATH 2015. Lecture notes in computational sciences and engineering, vol 112, Springer, Berlin, 2016) and Ricchi
+	uto and Abgrall (J Comput Phys 229(16):5653--5691, 2010).",
+	issn="1573-7691",
+	doi="10.1007/s10915-017-0498-4",
+	url="https://doi.org/10.1007/s10915-017-0498-4"
+}
+
+
+
+
+@book{hairer1987solving,
+	title={Solving Ordinary Differential Equations {I}: Nonstiff Problems},
+	author={ Hairer, Ernst and N{\o}rsett, S.P. and Wanner, G},
+	address={Berlin},
+	year={1987},
+	publisher={Springer-Verlag}
+}
+
+@book{wanner1996solving,
+	title={Solving ordinary differential equations {II}: Stiff and Differential-Algebraic Problems},
+	author={Wanner, Gerhard and Hairer, Ernst},
+	address={Berlin},
+	volume={375},
+	year={1996},
+	publisher={Springer Berlin Heidelberg}
+}
+
+@book{stetter1973analysis,
+title={Analysis of discretization methods for ordinary differential equations},
+author={Stetter, Hans J and others},
+volume={23},
+year={1973},
+publisher={Springer}
+}
+
+
+@article{scherer1979necessary,
+	title={A necessary condition for {B}-stability},
+	author={Scherer, Rudolf},
+	journal={BIT Numerical Mathematics},
+	volume={19},
+	pages={111--115},
+	year={1979},
+	publisher={Springer}
+}
+
+
+@article{veiga2023improving,
+	title={On improving the efficiency of {ADER} methods},
+	author={{Han Veiga}, Maria and Micalizzi, Lorenzo and Torlo, Davide},
+	journal = {Applied Mathematics and Computation},
+	volume = {466},
+	pages = {128426},
+	year = {2024},
+	issn = {0096-3003},
+	doi = {10.1016/j.amc.2023.128426},
+}
+
+%%%%% Inclueded from Louis for the IMEX DeC and ADER paper
+
+@article{Han_Veiga_2021,
+	title={{DeC} and {ADER:} Similarities, Differences and a Unified Framework},
+	volume={87},
+	ISSN={1573-7691},
+	url={http://dx.doi.org/10.1007/s10915-020-01397-5},
+	DOI={10.1007/s10915-020-01397-5},
+	number={1},
+	journal={Journal of Scientific Computing},
+	publisher={Springer Science and Business Media LLC},
+	author={Han Veiga, Maria and \"Offner, Philipp and Torlo, Davide},
+	year={2021},
+	month=feb }
+
+@article{Iserles1982,
+	title={Order Stars and a Saturation Theorem for First-order Hyperbolics},
+	volume={2},
+	ISSN={1464-3642},
+	url={http://dx.doi.org/10.1093/imanum/2.1.49},
+	DOI={10.1093/imanum/2.1.49},
+	number={1},
+	journal={IMA Journal of Numerical Analysis},
+	publisher={Oxford University Press (OUP)},
+	author={Iserles, A.},
+	year={1982},
+	pages={49–61}
+}
+
+@article{fornberg_finite_difference,
+	title={Generation of finite difference formulas on arbitrarily spaced grids},
+	volume={51},
+	ISSN={1088-6842},
+	url={http://dx.doi.org/10.1090/s0025-5718-1988-0935077-0},
+	DOI={10.1090/s0025-5718-1988-0935077-0},
+	number={184},
+	journal={Mathematics of Computation},
+	publisher={American Mathematical Society (AMS)},
+	author={Fornberg, B.},
+	year={1988},
+	pages={699–706}
+}
+
+@Article{TanChenShu_ImEx_Stability, 
+  	author = {Tan , M. and Cheng , J. and Shu , C.-W.}, 
+  	title = {Stability of High Order Finite Difference Schemes with Implicit-Explicit Time-Marching for Convection-Diffusion and Convection-Dispersion Equations},
+  	journal = {International Journal of Numerical Analysis and Modeling}, 
+  	year = {2021}, 
+  	volume = {18}, 
+  	number = {3}, 
+  	pages = {362--383}, 
+  	issn = {2617-8710}, 
+	doi = {https://doi.org/}, 
+	url = {http://global-sci.org/intro/article_detail/ijnam/18730.html} 
+}
+
+@article{WangShuZhang_LDG1_2015,
+  	title={Stability and Error Estimates of Local Discontinuous {Galerkin} Methods with Implicit-Explicit Time-Marching for Advection-Diffusion Problems},
+  	volume={53},
+  	ISSN={1095-7170},
+  	url={http://dx.doi.org/10.1137/140956750},
+  	DOI={10.1137/140956750},
+  	number={1},
+  	journal={SIAM Journal on Numerical Analysis},
+  	publisher={Society for Industrial \& Applied Mathematics (SIAM)},
+  	author={Wang, H. and Shu, C.-W. and Zhang, Q.},
+  	year={2015},
+  	month=jan,
+  	pages={206–227}
+}
+   
+@article{WangShuZhang_LDG_2016,
+	title={Stability analysis and error estimates of local discontinuous {Galerkin} methods with implicit–explicit time-marching for nonlinear convection–diffusion problems},
+	volume={272},
+	ISSN={0096-3003},
+	url={http://dx.doi.org/10.1016/j.amc.2015.02.067},
+	DOI={10.1016/j.amc.2015.02.067},
+	journal={Applied Mathematics and Computation},
+	publisher={Elsevier BV},
+	author={Wang, H. and Shu, C.-W. and Zhang, Q.},
+	year={2016},
+	month=jan,
+	pages={237–258}
+}
+@article{torlo2022,
+	title={A New Efficient Explicit Deferred Correction Framework: Analysis and Applications to Hyperbolic {PDEs} and Adaptivity},
+	ISSN={2661-8893},
+	url={http://dx.doi.org/10.1007/s42967-023-00294-6},
+	DOI={10.1007/s42967-023-00294-6},
+	journal={Communications on Applied Mathematics and Computation},
+	publisher={Springer Science and Business Media LLC},
+	author={Micalizzi, L. and Torlo, D.},
+	year={2023}
+}
+@article{abgrall2018asymptotic,
+	title={High Order Asymptotic Preserving Deferred Correction Implicit-Explicit Schemes for Kinetic Models},
+	volume={42},
+	ISSN={1095-7197},
+	url={http://dx.doi.org/10.1137/19m128973x},
+	DOI={10.1137/19m128973x},
+	number={3},
+	journal={SIAM Journal on Scientific Computing},
+	publisher={Society for Industrial \& Applied Mathematics (SIAM)},
+	author={Abgrall, R. and Torlo, D.},
+	year={2020},
+	month=jan,
+	pages={B816–B845}
+}
+
+@article{ADERHistorical1, 
+	author = {Schwartzkopff, T. and Munz, C. D. and Toro, E. F.}, 
+	title = {{ADER}: A High-Order Approach for Linear Hyperbolic Systems in 2D}, 
+	year = {2002}, 
+	issue_date = {December 2002}, 
+	publisher = {Plenum Press},
+	address = {USA},
+	volume = {17},
+	number = {1–4}, 
+	issn = {0885-7474}, 
+	url = {https://doi.org/10.1023/A:1015160900410}, 
+	doi = {10.1023/A:1015160900410}, 
+	journal = {J. Sci. Comput.},
+	month = {dec}, 
+	pages = {231–240}, 
+	numpages = {10}, 
+	keywords = {high order accuracy, ADER, finite-volume, linear hyperbolic system, aeroacoustics} 
+}
+  
+@inbook{ADERHistorical2,
+	title={Towards Very High Order {Godunov} Schemes}, 
+	ISBN={9781461506638}, 
+	url={http://dx.doi.org/10.1007/978-1-4615-0663-8_87}, 
+	DOI={10.1007/978-1-4615-0663-8_87}, 
+	booktitle={Godunov Methods}, 
+	publisher={Springer US}, 
+	author={Toro, E. F. and Millington, R. C. and Nejad, L. A. M.}, 
+	year={2001}, 
+	pages={907–940}
+}
+  
+  
+@article{ADERHistorical4, 
+	title={Space–time adaptive {ADER} discontinuous {Galerkin} finite element schemes with a posteriori sub-cell finite volume limiting}, 
+	volume={118}, 
+	ISSN={0045-7930}, 
+	url={http://dx.doi.org/10.1016/j.compfluid.2015.06.020}, 
+	DOI={10.1016/j.compfluid.2015.06.020}, 
+	journal={Computers \&amp; Fluids}, 
+	publisher={Elsevier BV}, 
+	author={Zanotti, O. and Fambri, F. and Dumbser, M. and Hidalgo, A.}, 
+	year={2015}, 
+	month=sep, 
+	pages={204–224}
+}
+  
+@article{ADERModern, 
+	title={A unified framework for the construction of one-step finite volume and discontinuous {Galerkin} schemes on unstructured meshes}, 
+	volume={227}, 
+	ISSN={0021-9991}, 
+	url={http://dx.doi.org/10.1016/j.jcp.2008.05.025}, 
+	DOI={10.1016/j.jcp.2008.05.025}, 
+	number={18}, 
+	journal={Journal of Computational Physics}, 
+	publisher={Elsevier BV}, 
+	author={Dumbser, M. and Balsara, D. S. and Toro, E. F. and Munz, C.-D.}, 
+	year={2008}, 
+	month=sep, 
+	pages={8209–8253} 
+}
+@book{Hundsdorfer, 
+	title={Numerical Solution of Time-Dependent Advection-Diffusion-Reaction Equations}, 
+	ISBN={9783662090176}, 
+	ISSN={0179-3632}, 
+	url={http://dx.doi.org/10.1007/978-3-662-09017-6}, 
+	DOI={10.1007/978-3-662-09017-6}, 
+	journal={Springer Series in Computational Mathematics}, 
+	publisher={Springer Berlin Heidelberg}, 
+	author={Hundsdorfer, W. and Verwer, J.}, 
+	year={2003} 
+}
+      
+@article{liu2008strong,
+      	ISSN = {02549409, 19917139},
+      	URL = {http://www.jstor.org/stable/43693468},
+      	abstract = {In this paper, we study the strong stability preserving (SSP) property of a class of deferred correction time discretization methods, for solving the method-of-lines schemes approximating hyperbolic partial differential equations.},
+      	author = {Yuan Liu and Chi-Wang Shu and Mengping Zhang},
+      	journal = {Journal of Computational Mathematics},
+      	number = {5},
+      	pages = {633--656},
+      	publisher = {Institute of Computational Mathematics and Scientific/Engineering Computing},
+      	title = {Stron Stability Preserving Property of the Deferred Correction Time Discretization},
+      	urldate = {2023-12-14},
+      	volume = {26},
+      	year = {2008}
+      }
+  
+@article{offner2019arbitrary,
+  	title={Arbitrary high-order, conservative and positivity preserving {Patankar}-type deferred correction schemes},
+  	volume={153},
+  	ISSN={0168-9274},
+  	url={http://dx.doi.org/10.1016/j.apnum.2020.01.025},
+  	DOI={10.1016/j.apnum.2020.01.025},
+  	journal={Applied Numerical Mathematics},
+  	publisher={Elsevier BV},
+  	author={\"Offner, Philipp and Torlo, Davide},
+  	year={2020},
+  	month=jul, pages={15–34} }
+  	
+@book{leveque2007finite,
+	title={Finite difference methods for ordinary and partial differential equations: steady-state and time-dependent problems},
+ 	author={LeVeque, Randall J},
+ 	year={2007},
+	publisher={SIAM}
+}
+
+@book{vanloan1993approximation,
+	title={Approximation with Kronecker products},
+	author={Van Loan, Charles F and Pitsianis, Nikos},
+	year={1993},
+	publisher={Springer}
+}
+
+@misc{fdcc,
+	title={Finite Difference Coefficients Calculator},
+	author={Taylor, Cameron R.},
+	year={2016},
+	howpublished="\url{https://web.media.mit.edu/~crtaylor/calculator.html}"
+}
+
+@article{liotta2000central,
+	title={Central schemes for balance laws of relaxation type},
+	author={Liotta, Salvatore Fabio and Romano, Vittorio and Russo, Giovanni},
+	journal={SIAM Journal on Numerical Analysis},
+	volume={38},
+	number={4},
+	pages={1337--1356},
+	year={2000},
+	publisher={SIAM}
+}
+
+@article{caflisch1997uniformly,
+	title={Uniformly accurate schemes for hyperbolic systems with relaxation},
+	author={Caflisch, Russel E and Jin, Shi and Russo, Giovanni},
+	journal={SIAM Journal on Numerical Analysis},
+	volume={34},
+	number={1},
+	pages={246--281},
+	year={1997},
+	publisher={SIAM}
+}
+
+@article{zhong1996additive,
+	title={Additive semi-implicit Runge--Kutta methods for computing high-speed nonequilibrium reactive flows},
+	author={Zhong, Xiaolin},
+	journal={Journal of Computational Physics},
+	volume={128},
+	number={1},
+	pages={19--31},
+	year={1996},
+	publisher={Elsevier}
+}
+
+@Article{abgrall2022relaxation,
+ Author = {Abgrall, R{\'e}mi and Le M{\'e}l{\'e}do, {\'E}lise and {\"O}ffner, Philipp and Torlo, Davide},
+ Title = {Relaxation deferred correction methods and their applications to residual distribution schemes},
+ FJournal = {SMAI Journal of Computational Mathematics},
+ Journal = {SMAI J. Comput. Math.},
+ ISSN = {2426-8399},
+ Volume = {8},
+ Pages = {125--160},
+ Year = {2022},
+ Language = {English},
+ DOI = {10.5802/smai-jcm.82},
+ Keywords = {65M60,65L05,65L06,65M06,65N30,35L65},
+ zbMATH = {7616212},
+ Zbl = {1501.65061}
+}
+
+@Article{zbMATH07627644,
+ Author = {Gaburro, Elena and {\"O}ffner, Philipp and Ricchiuto, Mario and Torlo, Davide},
+ Title = {High order entropy preserving {ADER}-{DG} schemes},
+ FJournal = {Applied Mathematics and Computation},
+ Journal = {Appl. Math. Comput.},
+ ISSN = {0096-3003},
+ Volume = {440},
+ Pages = {21},
+ Year = {2023},
+ Language = {English},
+ DOI = {10.1016/j.amc.2022.127644},
+ Keywords = {65M70,65L06,35L65,65L20,65M12,65P10},
+ zbMATH = {7627644},
+ Zbl = {1511.65109}
+}
+
+
+@book{offner2023approximation,
+  title={Approximation and stability properties of numerical methods for hyperbolic conservation laws},
+  author={{\"O}ffner, Philipp},
+  year={2023},
+  publisher={Springer Nature}
+}
+
+
+
+@Article{dec_overview,
+ Author = {Ong, Benjamin W. and Spiteri, Raymond J.},
+ Title = {Deferred correction methods for ordinary differential equations},
+ FJournal = {Journal of Scientific Computing},
+ Journal = {J. Sci. Comput.},
+ ISSN = {0885-7474},
+ Volume = {83},
+ Number = {3},
+ Pages = {29},
+ Year = {2020},
+ Language = {English},
+ DOI = {10.1007/s10915-020-01235-8},
+ Keywords = {65L05,65L06,65B05,65M20,65Y05},
+ zbMATH = {7212386},
+ Zbl = {1442.65124}
+}
+
+@Article{christlieb2010integral,
+ Author = {Christlieb, Andrew and Ong, Benjamin and Qiu, Jing-Mei},
+ Title = {Integral deferred correction methods constructed with high order {Runge}-{Kutta} integrators},
+ FJournal = {Mathematics of Computation},
+ Journal = {Math. Comput.},
+ ISSN = {0025-5718},
+ Volume = {79},
+ Number = {270},
+ Pages = {761--783},
+ Year = {2010},
+ Language = {English},
+ DOI = {10.1090/S0025-5718-09-02276-5},
+ Keywords = {65L06,34A34,65L20,65L05,65L70},
+ zbMATH = {5776244},
+ Zbl = {1209.65073}
+}
+
+@Article{tang2013high,
+ Author = {Tang, Tao and Xie, Hehu and Yin, Xiaobo},
+ Title = {High-order convergence of spectral deferred correction methods on general quadrature nodes},
+ FJournal = {Journal of Scientific Computing},
+ Journal = {J. Sci. Comput.},
+ ISSN = {0885-7474},
+ Volume = {56},
+ Number = {1},
+ Pages = {1--13},
+ Year = {2013},
+ Language = {English},
+ DOI = {10.1007/s10915-012-9657-9},
+ Keywords = {65L20,65L05,65L50,34A34,65L06},
+ zbMATH = {6176982},
+ Zbl = {1277.65062}
+}
+
+
+@Article{zbMATH06856490,
+ Author = {Boscarino, Sebastiano and Qiu, Jing-Mei and Russo, Giovanni},
+ Title = {Implicit-explicit integral deferred correction methods for stiff problems},
+ FJournal = {SIAM Journal on Scientific Computing},
+ Journal = {SIAM J. Sci. Comput.},
+ ISSN = {1064-8275},
+ Volume = {40},
+ Number = {2},
+ Pages = {a787--a816},
+ Year = {2018},
+ Language = {English},
+ DOI = {10.1137/16M1105232},
+ Keywords = {65L04,65L06,65L80},
+ zbMATH = {6856490},
+ Zbl = {1453.65153}
+}
+
+
+@article{michel2021spectral,
+	title={{Spectral analysis of continuous FEM for hyperbolic PDEs: influence of approximation, stabilization, and time-stepping}},
+	author={Michel, Sixtine and Torlo, Davide and Ricchiuto, Mario and Abgrall, R{\'e}mi},
+	journal={Journal of Scientific Computing},
+	volume={89},
+	pages={1--41},
+	year={2021},
+	publisher={Springer}
+}
+@article{michel2023spectral,
+	title={{Spectral analysis of high order continuous FEM for hyperbolic PDEs on triangular meshes: influence of approximation, stabilization, and time-stepping}},
+	author={Michel, Sixtine and Torlo, Davide and Ricchiuto, Mario and Abgrall, R{\'e}mi},
+	journal={Journal of Scientific Computing},
+	volume={94},
+	number={3},
+	pages={49},
+	year={2023},
+	publisher={Springer}
+}
+@article{titarev2007analysis,
+	title={{Analysis of ADER and ADER-WAF schemes}},
+	author={Titarev, VA and Toro, Eleuterio Francisco},
+	journal={IMA journal of numerical analysis},
+	volume={27},
+	number={3},
+	pages={616--630},
+	year={2007},
+	publisher={Oxford University Press}
+}
+@article{dematte2020ader,
+	title={{ADER methods for hyperbolic equations with a time-reconstruction solver for the generalized Riemann problem: the scalar case}},
+	author={Dematt{\'e}, R and Titarev, VA and Montecinos, GI and Toro, EF},
+	journal={Communications on Applied Mathematics and Computation},
+	volume={2},
+	pages={369--402},
+	year={2020},
+	publisher={Springer}
+}
+@phdthesis{torlo2020hyperbolic,
+	title={Hyperbolic problems: high order methods and model order reduction},
+	author={Torlo, Davide},
+	year={2020},
+	school={Universit{\"a}t Z{\"u}rich}
+}
+
+%IMEX
+@article{pareschi2000implicit,
+	title={Implicit-explicit {Runge-Kutta} schemes for stiff systems of differential equations},
+	author={Pareschi, Lorenzo and Russo, Giovanni},
+	journal={Recent trends in numerical analysis},
+	volume={3},
+	pages={269--289},
+	year={2000}
+}

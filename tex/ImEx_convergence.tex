@@ -1,0 +1,142 @@
+As seen above, the order of accuracy of the DeC procedure \eqref{DeC_method} is $\textrm{min}\{K,Y\}$ where $K$ is the number of iteration and $Y$ the order of the $\L^2$ operator.
+The proof of this statement, as stated in \cite{abgrall2017dec, Han_Veiga_2021,veiga2023improving}, requires some hypotheses that must be checked for the implicit and IMEX cases.
+\begin{proposition}[DeC iterative method]\label{DeC_prop}
+	Let $\L^1$ and $\L^2$ be two operators defined on $\mathbb{R}^{(M+1)\times I}$, 
+	which depend on the discretization scale $\Delta = \Delta t$, such that
+	\begin{itemize}
+		\item[\namedlabel{itm:coercivity}{\bf{C1.}}] $\L^1$ is coercive with respect to a norm, i.e., 
+		$\exists\, \gamma_1 >0$ independent of $\Delta$, such that for any $\bbc,\bbd$
+		$$\gamma_1||\bbc-\bbd||\leq ||\L^1 (\bbc)-\L^1 (\bbd)||,$$
+		\item[\namedlabel{itm:Lipschitz}{\bf{C2.}}] $\L^1 - \L^2$ is Lipschitz with constant $\gamma_2>0$
+		uniformly with respect to $\Delta$, i.e., for any $\bbc,\bbd$
+		$$
+		||(\L^1(\bbc)-\L^2(\bbc))-(\L^1(\bbd)-\L^2(\bbd))||\leq \gamma_2 \Delta ||\bbc-\bbd||,
+		$$
+		\item[\namedlabel{itm:existence}{\bf{C3.}}] there exists a 
+		unique $\bbc^*$ such that $\L^2(\bbc^*)=0$. 
+	\end{itemize}
+	Then, if $\eta:=\frac{\gamma_2}{\gamma_1}\Delta<1$,
+	the DeC is converging to $\bbc^*$ and after $k$ iterations
+	the error $||\bbc^{(k)}-\bbc^*||$ is smaller than $\eta^k||\bbc^{(0)}-\bbc^{*}||$.
+\end{proposition}
+
+Proofs of this proposition and of the hypotheses of the proposition for operators $\L^1$ and $\L^2$ for explicit DeC and ADER can be found in \cite{abgrall2017dec,abgrall2018asymptotic,offner2019arbitrary}.
+The condition for $\eta$ comes from the fixed--point theorem and it is needed to converge.
+As foreshadowed in Proposition~\ref{DeC_prop}, we need to prove the conditions~\ref{itm:coercivity}, \ref{itm:Lipschitz} and \ref{itm:existence} also in the implicit and IMEX cases, as for the explicit cases this was shown in \cite{Han_Veiga_2021}.
+Here, we want to extend this proof to the IMEX $\mathcal{L}^1$ operators. 
+The proof of~\ref{itm:existence} is as in the explicit case, because just the $\mathcal{L}^1$ operator changes in the implicit and IMEX cases. 
+The arguments to prove \ref{itm:Lipschitz} are also exactly the same as in the explicit case, because it all boils down to the Lipschitz continuity of the right hand side of the ODE. \\
+%For the general case, it turns out we can not prove the coercivity, so we proceed with a linearization of the stiff term in $\L^1$, see \cite{Han_Veiga_2021}, which is still a first order approximation to the implicit terms.
+\PO{In the general scenario, we find ourselves unable to prove coercivity. Therefore, we opt to linearize the stiff term in $\mathcal{L}^1$, as outlined in \cite{Han_Veiga_2021}. This linearization still provides a first-order approximation to the implicit terms.}
+We substitute $S(\bbc)$ with $S'(\vec{1}\bc_n)\bbc$, where $S'$ is the Jacobian of $S$. Note that this simplification is exact for linear systems where $S(\bbc)=\mat{S}'(\vec{1}\bc_n)\bbc$. 
+Moreover, this formulation can also be used to incorporate the nonlinear solver inside the DeC iteration method, without the need of further nonlinear solvers \cite{Han_Veiga_2021}.
+\begin{prop}[IMEX DeC: \ref{itm:coercivity}]\label{prop: ImDeC_Coercivity}
+	Assume that we apply a first order approximation of the IMEX DeC method linearizing the implicit terms, i.e., $\mathcal{L}^1$ is defined as
+	\begin{equation}
+	\label{eq: L1_linearized_DeC}
+	\tilde{\mathcal{L}}^1(\bbc):=\bbc -\vec{1}\bc_n-\Delta t\vec{\beta}S'(\vec{1}\bc_n)(\bbc-\vec{1}\bc_n)  - \Delta t\vec{\beta}\left(S(\vec{1}\bc_n)+F(\vec{1}\bc_n)\right).
+	\end{equation}
+	Let
+	\begin{equation}\label{eq: timestep_restriction_IMDeC}
+	\Delta t< \frac{1}{2\tilde{\beta} L},
+	\end{equation}
+	where $\tilde{\beta}:=\max\limits_{1\le m\le M}\{\beta^i\}\leq 1$ and $L$ is the Lipschitz constant of $S$.
+	Then, given any $\bbc, \bbd \in \mathbb{R}^{(M+1)\times I}$, there exists a positive $C_0$, such that
+	\begin{equation*}
+	C_0||\bbc-\bbd||\leq ||\tilde{\mathcal{L}}^1 (\bbc)-\tilde{\mathcal{L}^1} (\bbd)||
+	\end{equation*}
+	is fulfilled for the $\tilde{\mathcal{L}}^1$ IMEX DeC operator.
+\end{prop}
+\begin{proof}
+	First, we recall some basic properties for eigenvalues, which we will use in the proof.
+	\begin{itemize}	
+		\item[\namedlabel{itm:eigen_bound}{i)}] 	Let $\lambda$ be an eigenvalue of $\mat{A}\in \mathbb{C}^{n\times n}$. Then, it holds
+		$\lvert \lambda \rvert \le \norm{\mat{A}}$.
+		%\item[ii)] Let $\lambda$ be an eigenvalue of $\mat{A}\in \mathbb{C}^{n\times n}$, $k\in \mathbb{C}$, then $k\cdot \lambda$ is an eigenvalue of $k\cdot \mat{A}$.
+		%for an arbitrary, vector induced matrix norm $\norm{\cdot}$.
+		\item[\namedlabel{itm:eigen_plus_id}{ii)}] Let $\mat{A}\in\mathbb{C}^{n\times n}$, $\mat{Id}$ the $n$-dimensional identity matrix and $\gamma, \delta \in \mathbb{C}$ and $\lambda \in \mathbb C$ an eigenvalue of $\mat{A}$.
+		Then, $\gamma \lambda+\delta$ is an eigenvalue of $\gamma  \mat{A}+\delta \mat{Id}$.
+	\end{itemize}
+	We know that  $\norm{S'(\bc)}$ is bounded by $L$, the Lipschitz continuity constant of $S$, and, by property~\ref{itm:eigen_bound}, all the absolute values of the eigenvalues $\lambda_{S'}(\bc)$ of $S'(\bc)$ are bounded by $L$ for every $\bc\in \mathbb{R}^{I}$. 
+	Now, using property \ref{itm:eigen_plus_id} and the restriction \eqref{eq: timestep_restriction_IMDeC}, we have that for every eigenvalue $\lambda_{\beta_m}$ of $\Delta t \beta_mS'(\bc)$ it holds $\lvert \lambda_{\beta_m}(\bc)\rvert<\frac{1}{2}$.
+	Using property~\ref{itm:eigen_plus_id}, we can estimate for each $m=0,\dots,M$ the absolute value of the eigenvalues  of 
+	\begin{equation*}
+	\mat{Z_m}:=\mat{Id}-\Delta t \beta^m S'(\bc),
+	\end{equation*}
+	which are therefore all larger than $\frac{1}{2}$ for every $\bc \in \mathbb{R}^{I}, \; 1\le m  \le M$, leading to the invertibility of $\mat{Z_m}$. \\
+	We consider the block-diagonal matrix $\mat{Z}$ with $\mat{Z_m}$ on each block-entry, that correspond to the system matrix of $\tilde{\L}^1$.
+	The eigenvalues of $\mat{Z}^{-1}$ are the reciprocal of the eigenvalues of $\mat{Z}$, hence, all smaller than 2, and so $\lVert \mat{Z}^{-1}\rVert \leq 2$. Note that for any $\bbc, \bbd \in \mathbb{R}^{(M+1)\times I}$, it holds
+	\begin{align}
+	\label{eq: dec_coercivity_conclusion}
+		\lVert \bbc -\bbd  \rVert = \lVert \mat{Z}^{-1} \mat{Z}(\bbc -\bbd ) \rVert \leq  \lVert \mat{Z}^{-1}\rVert \lVert \mat{Z}(\bbc -\bbd ) \rVert \leq 2 \lVert \mat{Z}(\bbc -\bbd ) \rVert.
+	\end{align}
+	By considering the $\tilde{\mathcal{L}}^1$ operator of the ImDeC, we expand
+	\begin{align*}
+	\tilde{\mathcal{L}}^1(\bbc)-\tilde{\mathcal{L}}^1(\bbd)&=\bbc-\bbc^0-\Delta t\vec{\beta}S'(\bbc^0)\bbc -\Delta t\vec{\beta}F(\bbc^0) - \bbd+\bbd^0+\Delta t\vec{\beta}S'(\bbc^0)\bbd +\Delta t\vec{\beta}F(\bbc^0)\\
+	%&=\bbc-\bbd - \Delta t \vec{\beta}S'(\bbc^0)\left(\bbc-\bbd\right)\\
+	&=\left(\mat{Id}-\Delta t \vec{\beta}S'(\bbc^0)\right)\left(\bbc-\bbd\right)%\\
+	%&
+	=Z\left(\bbc-\bbd\right).
+	\end{align*}
+	Finally, we conclude that
+\begin{equation}
+\norm{\tilde{\mathcal{L}}^1 (\bbc)-\tilde{\mathcal{L}^1} (\bbd)} = \norm{\mat{Z}(\bbc -\bbd )} \geq \frac12 \norm{\bbc -\bbd },
+\end{equation} 
+thanks to  \eqref{eq: dec_coercivity_conclusion}.
+\end{proof}
+
+\begin{prop}[IMEX ADER: \ref{itm:coercivity}]\label{prop:coercivity_ADER_IMEX}
+	Assume we apply a first order linear approximation of the IMEX ADER method, i.e., we change the $\mathcal{L}^1$ operator to
+	\begin{equation}
+	\label{eq: L1_linearized_ADER}
+	\tilde{\mathcal{L}}^1(\bbc):=\bbc-\bbc^0-\Delta t \M^{-1}\mat{R} S'(\bbc^0)(\bbc -\bbc^0) -\Delta t \M^{-1}\mat{R} (S(\bbc^0)+F(\bbc^0)).
+	\end{equation}
+	Let
+	\begin{equation}\label{eq: timestep_restriction_IMADER}
+	\Delta t< \frac{1}{2CL},
+	\end{equation}
+	where $C=\norm{\M^{-1}\mat{R}}=\mathcal{O}(1)$ and $L$ is the Lipschitz constant of $S$. 
+	Then, given any $\bbc, \bbd \in \mathbb{R}^{(M+1)\times I}$, there exists a positive $C_0$, such that
+	\begin{equation*}
+	C_0||\bbc-\bbd||\leq ||\tilde{\mathcal{L}}^1 (\bbc)-\tilde{\mathcal{L}^1} (\bbd)||
+	\end{equation*}
+	is fulfilled for the $\tilde{\mathcal{L}}^1$ IMEX ADER operator.
+\end{prop}
+\begin{proof}
+	Also for the $\tilde{\mathcal{L}}^1$ operator of the ImADER, the proof is similar to the ImDeC one. 
+	We know that $\norm{S'(\bc)}\le L$ holds for every $\bc$ and $C=\norm{\M^{-1}\mat{R}}>0$, because $\mat{M}$ and $\mat{R}$ are constant. 
+	Therefore, we can deduce that the eigenvalues $\lambda_{M^{-1}R}(\bbc)$ of $\M^{-1}\mat{R}S'(\bbc)$ can be estimated by 
+	\begin{equation*}
+	\lvert \lambda_{M^{-1}R}(\bbc) \rvert \le \norm{(\M^{-1}\mat{R})S'(\bbc)} \le \norm{\M^{-1}\mat{R}}\norm{S'(\bbc)} \le C \cdot L
+	\end{equation*}
+	for every $\bc$. 
+	This, combined with condition \eqref{eq: timestep_restriction_IMADER}, leads us again to the property that all the absolute values of the eigenvalues of
+	\begin{equation*}
+	\mat{Id}-\Delta t \M^{-1}\mat{R}S'(\bbc)
+	\end{equation*} 
+	are bigger than $\frac{1}{2}$.
+	With the same arguments as in the proof of Proposition~\ref{prop: ImDeC_Coercivity}, we conclude that $\tilde{\mathcal{L}}^1$ is coercive.
+\end{proof}
+In many applications, the hypothesis on the time-step as assumed in Propositions~\ref{prop: ImDeC_Coercivity} and \ref{prop:coercivity_ADER_IMEX} are too restrictive, especially when considering stiff equations. So, we present a variation of this proof, which does not require these time-step restrictions but uses, instead, another assumption on $S$ that is typical for damping/diffusion operators.
+\begin{prop}[IMEX DeC/ADER: Variation of \ref{itm:coercivity} for diffusion terms]
+	Consider again the first order approximations $\tilde{\mathcal{L}^1}$ as in \eqref{eq: L1_linearized_DeC} for the IMEX DeC and in \eqref{eq: L1_linearized_ADER} for IMEX ADER. 
+	Assume additionally that the Jacobian $S'$ is symmetric negative definite.
+	Then, given any $\bbc, \bbd \in \mathbb{R}^{(M+1)\times I}$, there exists a positive $C_0\geq 1$ independent of $\Delta t$, such that
+	\begin{equation*}
+	C_0||\bbc-\bbd||\leq ||\tilde{\mathcal{L}}^1 (\bbc)-\tilde{\mathcal{L}^1} (\bbd)||
+	\end{equation*}
+	is fulfilled for both $\tilde{\mathcal{L}}^1$ operators.
+\end{prop}
+\begin{proof}
+	%\todo{You're right, we can skip some parts}
+	We start from the IMEX DeC. Using again property~\ref{itm:eigen_plus_id} from the proof of Proposition \ref{prop: ImDeC_Coercivity}, we can deduce immediately that $\mat{Z}:=\mat{Id}-\Delta t \beta^m S'$ is symmetric positive definite and any eigenvalue $\lambda_{Z}$ is larger than $1+ \Delta t \beta^m |\lambda_{S'}|>1$. Hence, the eigenvalues of $\mat{Z}^{-1}$ are all smaller than one. 
+	Therefore, as in Proposition~\ref{prop: ImDeC_Coercivity}, we have that 
+	\begin{equation}\label{eq:coerc_L1_pos_def}
+		\norm{\tilde{\L}^1(\bbc)-\tilde{\L}^1(\bbd)} = \norm{\mat{Z}(\bbc - \bbd) } \geq \frac{1}{\norm{\mat{Z}^{-1}}}\norm{\bbc-\bbd} > \norm{\bbc-\bbd}. 
+	\end{equation}
+	This result holds independently of the size of $\Delta t$.	
+	For IMEX ADER the matrix in consideration is $$\mat{Z}:= \mat{Id}-\Delta t \mat{M}^{-1}\mat{R} S'(\bc_n),$$
+	where, implicitly, there is a Kronecker product between $\mat{M}^{-1}\mat{R}\in \mathbb R^{(M+1)\times (M+1)}$ and $S'(\bc_n)\in\mathbb R^{I\times I}$. We know that $-S'(\bc_n)$ is positive definite, if also $\mat{M}^{-1}\mat{R}$ is positive define. Then, we have that their Kronecker product is positive definite \cite[Section 1]{vanloan1993approximation}. In \cite{veiga2023improving}, it has been shown that $\mat{M}$ is invertible and it is equivalent to a Hilbert matrix with an extra column of zeros on the left and an extra row of ones on the top.  
+	Since, Hilbert matrices are positive definite, also $\mat{M}$ is positive definite and its inverse is positive definite as well.
+	Now, $\bbc^T\mat{R}\bbc = \int_{0}^{1} \bc(t)^2 \geq 0$ when computed exactly, and for Gauss--Lobatto nodes, where the quadrature is not exact \cite{veiga2023improving}, it is $\bbc^T\mat{R}\bbc = \sum_{m=0}^M w_m (\bc^{m})^2 \geq 0$ as $w_m>0$. Hence,  $\mat{R}$ is positive definite and all eigenvalues of $\mat{Z}$ are $\lambda_Z>1$. We can then proceed as in \eqref{eq:coerc_L1_pos_def} to show that $\tilde{\L}^1$ is coercive with $C_0\geq 1$.
+\end{proof}

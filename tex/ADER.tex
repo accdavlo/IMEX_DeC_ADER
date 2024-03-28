@@ -1,0 +1,424 @@
+%\DTT{Restructure this section! ADER, IMEX ADER, IMEX ADER as DeC and RK, stability regions}
+
+%\subsection{ADER method}
+%Approaching the ADER method, at first it is worth to mention, that there are two different main formulations of the ADER algorithm. The first ADER method was developed for linear hyperbolic equations in \cite{schwartzkopff2002ader}, \cite{ADERHistorical2}  and extended for nonlinear hyperbolic systems in \cite{titarev2002ader}. It is based on a reconstruction of given values from cell averages, for which generalized Riemann problems have to be solved at the cell interfaces.\\
+%The second, one on which we will focus, was presented in \cite{ADERModern} and is known as the \textit{modern} ADER approach. For simplicity, we will stay just with the term ADER. Its main idea is based on the variational formulation in the finite element context for an ODE, leading to a fixed-point problem.\\
+%So starting with an $I$-dimensional system of ordinary differential equations as in \eqref{eq:scalarODE}, we consider the interval $T^n:=[t^n,t^{n+1}]$ where we represent $\bc(t)$ as a linear combination of $(M+1)$ basis functions (to receive order $M$ in time):
+
+In this section, we present the modern ADER introduced as space-time DG solver for hyperbolic PDEs in \cite{ADERModern} and adapted for ODEs in \cite{Han_Veiga_2021,veiga2023improving}. Starting with an $I$-dimensional system of ODEs \eqref{eq:scalarODE}, we consider the interval $T^n:=[t^n,t^{n+1}]$ where we represent $\bc(t)$ as a linear combination of $(M+1)$ basis functions
+\begin{equation}\label{eq:basis_reconstruction}
+\bc(t) = \sum_{m=0}^M \phi_m(t)\bc^m = \bphi(t)^T\bbc,
+\end{equation}
+where 
+$\bphi = [ \phi_0, \dots , \phi_M ]^T:T^n\to \R^{M+1}$ is the vector of Lagrangian basis functions in some given nodes $\{t_m\}_{m=0}^M\subset T^n$, e.g. equispaced or Gauss-Lobatto nodes, and $\bbc=[ \bc^0, \dots, \bc^M]^T \in \R^{(M+1)\times I}$ is the vector of coefficients of the basis functions respectively. \\
+As described in \cite{Han_Veiga_2021}, ADER is derived multiplying \eqref{eq:scalarODE} with a smooth test function and integrating over $T^n$ to obtain the weak formulation. We insert the reconstruction \eqref{eq:basis_reconstruction} in the weak formulation, we use as test functions the basis functions, we apply integration by parts in time and using the quadrature $\lbrace (w_q, x_q)\rbrace_{q=0}^Q$ in $[t_n,t_{n+1}]$ results in a system
+\begin{equation}\label{eq:ADER_fix_point}
+\M \bbc = \vec{r}(\bbc) \Longleftrightarrow \mathcal{L}^2(\bbc):=\M\bbc-\vec{r}(\bbc)\stackrel{!}{=}0.
+\end{equation}
+%which can be expressed again with an $\L^2$ operator. 
+Thereby, the mass-matrix $\M \in \R^{(M+1)\times(M+1)}$ and the (nonlinear) right-hand side functional $\vec{r}(\bbc):\R^{(M+1)\times I}\to \R^{(M+1)\times I}$ are given by
+\begin{align}\label{eq:MassmatrixAder}
+\M_{m,l} :&= \phi_m(t_{n+1})\phi_l(t_{n+1})- \sum_{q=0}^Q \partial_t \phi_m(x_q) \phi_l(x_q) w_q\\
+\label{eq:aderrhsMatrix}
+\vec{r}(\bbc)_m:&=\phi_m(t_{n})\bc_n
++ \Delta t \underbrace{\sum_{q=0}^{Q} w_q \phi_m(x_q) \bphi(x_q)^T}_{=:\mat{R}^m_z} F(\bbc) , \quad m=0,\dots,M+1.
+\end{align}
+The right hand side can also be written in matricial form as $\vec{r}(\bbc) = \vec{\phi}(t^{n})\bc(t^n) + \Delta t \mat{R} F(\bbc).$
+%The nodes $\{t^q_z\}_{z=0}^Z\subset T^n$ and the weights $\{w_z\}_{z=0}^Z$ originate out of the used quadrature for the integrals, which can coincide (or can not) with the ones defining the Lagrange polynomials.
+%
+%Like mentioned before, to get an approximation $\bc_{n+1}$ to the solution $\bc(t^{n+1})$, we consider a smooth test function $\psi(t): \R \to \R$ and integrate over $T^n$ to shift to the variational formulation:
+%\begin{equation}\label{eq:ADERODEL2}
+%\int_{T^n}  \psi(t)\partial_t \bc(t) dt - \int_{T^n} \psi(t)F(\bc(t))  dt = 0, \quad  \forall \psi: T^n\to \R.
+%\end{equation}
+%Now, we replace the unknown solution with its reconstruction and the test function with the $(M+1)$ basis functions respectively. This results in the following definition of the operator $\mathcal{L}^2: \R^{(M+1 )\times I} \to \R^{(M+1 )\times I} $
+%\begin{equation}\label{eq:L2_ADER}
+%\mathcal{L}^2(\bbc ):= \int_{T^n} \bphi(t) \partial_t \bphi(t)^T \bbc dt - \int_{T^n} \bphi(t)  F(\bphi(t)^T\bbc)  dt = 0.
+%\end{equation}
+%
+%Integrating the first term by parts yields 
+%\begin{equation}\label{eq:L2_ADER_ibp}
+%\begin{aligned}
+%\mathcal{L}^2(\bbc )&=\left[\bphi(t) \bphi(t)^T \bbc\right]_{t^n}^{t^{n+1}}
+%- \int_{T^n}  \partial_t\bphi(t) \bphi(t)^T dt  \bbc
+%- \int_{T^n}\bphi(t) F(\bphi(t)^T\bbc ) dt = 0.\\
+%&=\bphi(t^{n+1}) \bphi(t^{n+1})^T \bbc
+%- \bphi(t^n) \bc(t^n) 
+%- \int_{T^n}  \partial_t\bphi(t) \bphi(t)^T dt  \bbc
+%- \int_{T^n}\bphi(t) F(\bphi(t)^T\bbc ) dt\\
+%& = 0.
+%\end{aligned}
+%\end{equation}
+%Now we want to find an appropriate approximation for the integrals. In literature it is used to replace the integrals by quadrature and apply the nonlinear functions $F$ on the interpolation of the solution. Remark that it is also possible to choose a silghtly different high order approach by directly interpolating the function $F$ instead, leading to
+%\begin{equation}\label{eq:IntegralInterpolation}
+%\begin{aligned}
+%\int_{T^n}\bphi(t) F(\bphi(t)^T\bbc ) dt \approx \int_{T^n}\bphi(t) \bphi(t)^T F(\bbc ) dt = \int_{T^n}\bphi(t) \bphi(t)^T  dtF(\bbc ). 
+%\end{aligned}
+%\end{equation} 
+%
+%The quadrature nodes can coincide (or can not) with the ones defining the Lagrange polynomials\footnote{In this work we choose the quadrature nodes as Gauss-Lobatto or Gauss-Legendre nodes according to the definition of the Lagrange polynomials. However, in many applications of ADER, Gauss-Legendre nodes are the typical choice to guarantee the exactness 
+%	of the integration. But remark that choosing Gauss-Legendre as interpolation nodes requires an extrapolation because the desired values at $t^{n+1}$ and $t^n$ are not included.}. We denote them as $\lbrace t^q_z \rbrace_{z=0}^Z \subset T^n$ and
+%with respective weights $\lbrace w_z \rbrace_{z=0}^Z$. We choose the weights, the nodes and the basis functions to be scaled for the interval $[0,1]$, so that we explicitly highlight the presence of $\Delta t=t^{n+1}-t^n$. The integration terms reduce to 
+%
+%\begin{equation}\label{eq:quadrature}
+%\begin{aligned}
+%\int_{T^n} \partial_t \bphi(t) \bphi(t)^T dt \bbc &
+%\approx \sum_{z=0}^Z w_z \partial_t \bphi(t^q_z) \bphi(t^q_z)^T\bbc  \\
+%\int_{T^n}  \bphi(t)F(\bphi(t)^T\bbc)  dt &\approx
+%\Delta t \sum_{z=0}^{Z} w_z \bphi(t^q_z) F(\bphi(t^q_z)^T\bbc).
+%\end{aligned}
+%\end{equation}
+%
+%Then, the approximation of \eqref{eq:L2_ADER_ibp} yields for every test function indexed by $m=0,\dots, M$
+%\begin{equation}\label{eq:System}
+%\phi_m(t^{n+1})\bphi(t^{n+1})^T\bbc -
+%\sum_{z=0}^Z w_z \partial_t \bphi(t^q_z) \bphi(t^q_z)^T\bbc
+%=\phi_m(t^{n})\bc(t^n) 
+%+ \Delta t\sum_{z=0}^{Z} w_z \bphi(t^q_z) F(\bphi(t^q_z)^T\bbc) .
+%\end{equation}
+%
+%This is a system of $M+1$ equations with $M+1$ unknowns for every ODE of the system \eqref{eq:scalarODE}. 
+%The order depends on the used quadrature rule. 
+%Using, as an example, Gauss-Legendre or Gauss-Lobatto nodes both for the definition of the basis functions and the quadrature nodes results in a high order quadrature formula. One can also use different points for the quadrature and the basis functions, resulting in more varieties of this scheme. For the implementation, we set $Z$ as the required order of the scheme (so its degree of exactness coincides at least with that of the polynomial).
+%To cut the system \eqref{eq:System} short, we can substitute the mass matrix $\M \in \R^{(M+1)\times(M+1)}$, given by
+%\begin{equation}\label{eq:MassmatrixAder}
+%\begin{aligned}
+%\M_{m,l} :&= \phi_m(t^{n+1})\phi_l(t^{n+1})- \sum_{z=0}^Z \partial_t \phi_m(t^q_z) \phi_l(t^q_z) w_z\\
+%& = \phi_m(t^{n+1})\phi_l(t^{n+1})- \int_{t^n}^{t^{n+1}} \partial_t \phi_m(t) \phi_l(t)  dt
+%\end{aligned}
+%\end{equation}
+%and the right-hand side functional $\vec{r}(\bbc):\R^{(M+1)\times I}\to \R^{(M+1)\times I}$, given by
+%
+%\begin{equation}\label{eq:aderrhs}
+%\vec{r}(\bbc)_m:=\phi_m(t^{n})\bc(t^n)
+%+ \Delta t\sum_{z=0}^{Z} w_z \phi_m(t^q_z) F(\bphi(t^q_z)^T\bbc), \quad m=0,\dots,M+1.
+%\end{equation}
+%Here we will use the high order approach of \eqref{eq:IntegralInterpolation} instead that was mentioned before, which changes $\vec{r}(\bbc)$ to
+%\begin{equation}\label{eq:aderrhsMatrix}
+%\begin{aligned}
+%&\vec{r}(\bbc)_m:=\phi_m(t^{n})\bc(t^n)
+%+ \Delta t \underbrace{\sum_{z=0}^{Z} w_z \phi_m(t^q_z) \bphi(t^q_z)^T}_{\vec{R}^m} F(\bbc) , \quad m=0,\dots,M+1,\\
+%&\vec{r}(\bbc) = \vec{\phi}(t^{n})\bc(t^n)
+%+ \Delta t \mat{R} F(\bbc)
+%\end{aligned}
+%\end{equation}
+%and we can write with a matrix formulation (of which we will take usage later on) thanks to the definition 
+%\begin{equation}
+%R_i^m = \sum_{z=0}^Z \omega_z \phi_m(t^q_z) \phi_i(t^q_z) \approx \int_{t^n}^{t^{n+1}} \phi_m(t) \phi_i(t).
+%\end{equation}
+%With this notation we can separate the equation into a linear part $\M\bbc$ and a nonlinear part $\vec{r}(\bbc)$ to conclude the system again in the $\mathcal{L} ^2$ operator:
+%%%%%%%%%%%%%
+%
+\subsection{Explicit ADER}
+To obtain an explicit approximation of the system \eqref{eq:ADER_fix_point} for the unknown $\bbc$, ADER resorts to a fixed-point problem, whose solution will give us a high order $Y$ accurate solution in $t$. In particular, the order of accuracy will be $Y=M+1$ for equispaced nodes and quadrature, order $Y=2M$ for Gauss--Lobatto nodes and quadrature and, order $Y=2M+1$ for Gauss--Legendre nodes and quadrature \cite{veiga2023improving}. 
+%If $F(\bbc)$ is nonlinear, so is $r(\bbc)$ and therefore the fixed-point problem is in need to be solved approximately. 
+We will use the following iterative procedure and then we reconstruct $\bc_{n+1}\approx\bc(t^{n+1})$ as %\\
+%\centerline{\textbf{ADER Algorithm}} 
+\begin{equation}\label{eq:fixpoint_iteration}
+\begin{aligned}
+&\text{\textbf{ADER Algorithm}}\\
+&\bbc^{(0)}:=[\bc_n,\dots, \bc_n ]^T,\\
+&\bbc^{(k)}=\M^{-1} \vec{r}(\bbc^{(k-1)}), \quad k=1,\dots,K, \\
+&\bc_{n+1}=\bc_n+\Delta t \sum_{m=0}^M \int_{t_n}^{t_{n+1}}\phi_m(t) F(\bc^{(K),m})dt=\bc_n+\Delta t \underline{b}^TF(\bbc^{(K)}),
+\end{aligned}
+\end{equation}
+with $b_i:=\int_{t^n}^{t^{n+1}} \phi_i(t)dt$.
+
+%Several questions arise automatically for \eqref{eq:fixpoint_iteration},
+%such as how is the convergence of the method influenced by the mass matrix $\M$ and, hence, by the node placement. In the next section, we build a bridge to the DeC algorithm as in \cite{Han_Veiga_2021}, to analyze and answer these questions.
+\begin{remark}[ADER as DeC and order of accuracy of \eqref{eq:ADER_fix_point}]\label{rmk:ADERasDeC}
+	As shown in \cite{Han_Veiga_2021,veiga2023improving}, 
+	%it was shown, that the ADER and DeC can be expressed in the framework of one another by just small adaptations: For a different choice of test functions, we can express DeC as ADER.\\
+	%The other way around, we can embed 
+	ADER can be written into the DeC formalism by defining
+	\begin{equation}\label{eq:L1ADER}
+	\mathcal{L}^1(\vec{\bc}):=\mat{M}\vec{\bc}-\vec{r}(\vec{1} \bc_n ),
+	\end{equation}
+	so that the DeC iterations \eqref{DeC_method} coincide with the fixed point iterations of \eqref{eq:fixpoint_iteration}, i.e.,
+%	and the $\L^2$ operator of the ADER framework in the DeC recursion \eqref{DeC_method}:
+%	\begin{equation}\label{eq:iterativeADERasDeC}
+%	\mathcal{L}^1(\vec{\bc}^{(k)})=\mathcal{L}^1(\vec{\bc}^{(k-1)})-\mathcal{L}^2(\vec{\bc}^{(k-1)}).
+%	\end{equation}
+%	 This is just to the ADER recursion
+	 \begin{equation}
+	 \mat{M}\vec{\bc}^{(k)}-\vec{r}(\vec{\bc}^{(k-1)})=0.
+	 \end{equation}
+	 If we set the starting values as $\bc^{(0),m}=\bc(t^n)$ for every $m$, like it is done in DeC, we obtain exactly the fixed-point iteration \eqref{eq:fixpoint_iteration} and therefore an equivalent definition of the ADER method.
+	  This also tells us that the order of accuracy of \eqref{eq:fixpoint_iteration} with respect to the solution of $\L^2(\bbc^*)=0$ is $K$.
+\end{remark}
+
+%\subsubsection{ADER as DeC}\label{ADERasDeC}
+%First, we want to embed the ADER algorithm into the DeC framework. Therefore, we take equation \eqref{eq:ADER_fix_point}, which we already defined as an $\mathcal{L}^2$ operator. Analogusly to the DeC, we define 
+%\begin{equation}
+%\begin{aligned}
+%\mathcal{L}^1(\vec{\bc}):&=\mat{M}\vec{\bc}-\vec{r}(\bc(t^n))\\
+%&=\M\bbc-\vec{\phi}(0)\bc_n-\Delta t\mat{R}F(\vec{1}\bc_n)
+%\end{aligned}
+%\end{equation}
+%and can introduce the ADER-DeC algorithm
+%
+%\begin{equation}\label{eq:iterativeADERasDeC}
+%\mathcal{L}^1(\vec{\bc}^{(k)})=\mathcal{L}^1(\vec{\bc}^{(k-1)})-\mathcal{L}^2(\vec{\bc}^{(k-1)}).
+%\end{equation}
+%By expanding this equation, most of the terms cancel out directly, resulting in
+%
+%\begin{equation}
+%\mat{M}\vec{\bc}^{(k)}-\vec{\bc}^{(k-1)}=0.
+%\end{equation}
+%If we set the starting values as $\bc^{(0),m}=\bc(t^n)$ for every $m$, like it is done in DeC, we receive exactly the fixed-point iteration we already know from \eqref{eq:fixpoint_iteration} and therefore an equivalent definition of the ADER method.
+%\begin{remark}\mbox{}\\
+%	Considering our result, the choices of the $\mathcal{L}^1$ and $\mathcal{L}^2$ operators can have other shapes. For example, we receive the same algorithm by defining 
+%	\begin{align}\label{eq: ADERasDeC}
+%	\left\{
+%	\begin{array}{l}
+%	\mathcal{L}^1(\vec{\bc}):=\vec{\bc}-\mat{M}^{-1}\vec{r}(\bc(t^n)) \\
+%	\mathcal{L}^2(\vec{\bc}):=\vec{\bc}-\mat{M}^{-1}\vec{r}(\vec{\bc}) 
+%	\end{array}
+%	\right.
+%	\end{align}
+%	In the upcoming proofs, we will also use this equivalent definition to prove properties for the ADER method by using the DeC framework.
+%\end{remark}
+%
+%\subsubsection{DeC as ADER}
+%The other way around, we can also express the DeC scheme similar to the ADER method with some few adaptations. We start by taking the $m$th line of the DeC $\mathcal{L}^2$-operator in \eqref{eq:L2} and modifying it by artificially including characteristic functions (line 3). Then, we comprehend the left terms as the evaluation of an integral over the respective $m$-th interval (line 4):
+%\begin{align*}
+%0&=\bc^m-\bc^0-\Delta t \sum\limits_{r=0}^M\theta_r^mF(\bc^r)\\
+%&=\bc^m -\bc^0 - \sum\limits_{r=0}^M F(\bc^r)\int_{t^0}^{t^m}\phi_r(t)dt\\
+%&=\chi_{[t_0,t^m]}\left(t^m\right)\bc^m-\chi_{[t_0,t^m]}\left(t_0\right)\bc^0-\sum\limits_{r=0}^M F(\bc^r)\int_{t^0}^{t^M}\chi_{[t_0,t^m]}\phi_r(t)dt\\
+%&=\int_{t^0}^{t^M} \chi_{[t_0,t^m]} \partial_t \bc(t)dt-\sum\limits_{r=0}^M F(\bc^r)\int_{t^0}^{t^M}\chi_{[t_0,t^m]}\phi_r(t)dt,\\
+%\end{align*}
+%where
+%\begin{equation*}
+%\psi_m = \chi_{[t_0,t^m]}(t) = \begin{cases} 1, \quad \text{if} \; t\in [t^0, t^m], \\ 0, \quad \text{else} \end{cases}
+%\end{equation*}
+%are the test functions chosen here. \\
+%If we consider here the same approximation to the integrals as done for the ADER method, we result in 
+%\begin{equation*}
+%0=\int_{T^n}\psi_m(t)\partial_t\bc(t)dt-\int_T^n \psi_m(t)F(\bc(t))dt.
+%\end{equation*}
+%This is exactly the $\mathcal{L}^2$-operator defined for the ADER method except for the choice of test functions $\psi_m$, which have been defined as basis functions there.\\
+\subsection{Implicit and IMEX ADER}
+We start describing the implicit version of ADER (ImADER), considering \eqref{eq:scalarODE} with $F(\bc)$ stiff, by modifying the iterative process to
+\begin{equation}\label{eq:imADER}
+\vec{\bc}^{(k)} = \M^{-1}\vec{r}(\vec{\bc}^{(k)}) %= \vec{1} \bc_n + \Delta t \M^{-1}\mat{R} F(\vec{\bc}^{(k)}).
+\end{equation}
+or, as explained in Remark \ref{rmk:ADERasDeC}, with the ADER-DeC notation:
+\begin{equation}\label{eq:L1IMADER}
+\mathcal{L}^1(\bbc):=\M\bbc-\vec{\phi}(0)\bc_n-\Delta t \mat{R} F(\bbc).
+\end{equation}
+We soon realize that performing multiple corrections does not give us any advantages as \eqref{eq:imADER} does not depend on the previous iteration.
+%, because one has to use a numerical approximation for the implicit corrections again, resulting for instance in the explicit fixed-point iteration, which solves for every $k$ the same equation. 
+Hence, the construction of ImADER  does not seem purposeful, but it will become useful for the IMEX case, as presented in \cite{dumbser2007FVStiff} for PDE with stiff source terms or in \cite{Han_Veiga_2021} for ODEs. % and has to be taken in mind in the subsequent analysis.
+%Nevertheless, we will take use of this approach to build the IMEX ADER method, like presented in \cite{dumbser2007FVStiff} but for the ODE case:
+
+We consider the separated ODE system \eqref{eq:IMEXODE}. To construct the IMEX ADER $\L^1$ operator, we combine the implicit \eqref{eq:L1IMADER} and explicit \eqref{eq:L1ADER} treatments of the ADER iteration for the stiff and non-stiff terms, and get
+\begin{equation}
+\label{eq:IMEXADERL1}
+\mathcal{L}^1(\vec{\bc}) :=  \M \vec{\bc} - \vec{\phi}(0)\bc_n -\Delta t \mat{R} S(\vec{\bc})-\Delta t \mat{R} G(\vec{1} \bc_n).
+\end{equation}
+This leads to the iterative process \eqref{eq:fixpoint_iteration} with the iteration given by
+\begin{equation}
+\begin{aligned}
+&\M \vec{\bc}^{(k)} - \vec{\phi}(0)\bc_n -\Delta t \mat{R} S(\vec{\bc}^{(k)}) - \Delta t \mat{R} G(\vec{\bc}^{(k-1)})=0\\
+\Longleftrightarrow\qquad &\vec{\bc}^{(k)} = \vec{1}\bc_n -\Delta t \M^{-1}\mat{R} S(\vec{\bc}^{(k)}) - \Delta t \M^{-1}\mat{R} G(\vec{\bc}^{(k-1)}),
+\end{aligned}
+\end{equation}
+which is in fact just an additive combination of the implicit and explicit parts.
+We apply the following proposition demonstrated in \cite[Proposition 2.4]{veiga2023improving} to write the IMEX ADER algorithms.
+\begin{prop}[ADER right-hand side]\label{prop:RHS_ADER}
+	Given the definition of $\underline{\underline{M}}$ in \eqref{eq:MassmatrixAder} and defining with $\vec{1}=[1,\dots,1]^T \in \R^{M+1}$, we have that 
+	\begin{equation}
+		\M^{-1}\vec{\phi}(t_n) = \vec{1}.
+	\end{equation}
+\end{prop}
+
+If we take this under consideration in the whole ADER process, it leads to the %\\
+%\centerline{\textbf{IMEX ADER Algorithm}} 
+\begin{equation}
+\begin{aligned}
+&\text{\textbf{IMEX ADER Algorithm}}\\
+&\bbc^{(0)}:=[\bc_n,\dots, \bc_n ]^T,\\
+&\bbc^{(k)}=\vec{1}\bc_n -\Delta t \M^{-1}\mat{R} S(\vec{\bc}^{(k)}) - \Delta t \M^{-1}\mat{R} G(\vec{\bc}^{(k-1)}), \quad k=1,\dots,K,\\
+&\bc_{n+1}=\bc_n+\Delta t \sum_{m=0}^M\int_{t_n}^{t_{n+1}} \left(S(\bc^{(K),m})+G(\bc^{(K),m})\right)dt=\bc_n+\Delta t \underline{b}^T\left(S(\bbc^{(K)})+G(\bbc^{(K)})\right). %\\ &\qquad\,\,
+\end{aligned}
+\end{equation}
+We remark that the iteration process contains a (nonlinear) system of equations in $\bbc^{(k)}$ of dimension $(M+1)\times I$ for every $(k)$. If the stiff term is linear, the system becomes linear, otherwise, it is possible to linearize the stiff term in the definition of $\L^1$ \cite{Han_Veiga_2021}.
+ 
+\subsection{IMEX ADER as RK}
+In order to put the ADER method into a RK form, in \eqref{eq:fixpoint_iteration} we have to multiply the right-hand side by the inverse of the mass matrix. This will show the explicit dependence on $\bc_n$ for every iteration and subtimestep. 
+Proposition~\ref{prop:RHS_ADER} allows us to rewrite the explicit iteration process \eqref{eq:fixpoint_iteration} as
+\begin{equation}\label{eq: ADER_RK_step}
+\begin{aligned}
+\vec{\bc}^{(k)} = \M^{-1}\vec{r}(\vec{\bc}^{(k-1)})& =\M^{-1}\vec{\phi}(t_n) \bc_n + \Delta t \M^{-1}\mat{R} F(\vec{\bc}^{(k-1)})
+=\vec{1} \bc_n + \Delta t \M^{-1}\mat{R} F(\vec{\bc}^{(k-1)}).
+\end{aligned}
+\end{equation}
+
+Let us define the matrix $\mat{Q}:=\M^{-1} \mat{R}$ and the vector $\vec{P}$ such that $P_{m=0}^M=\sum_l Q_{ml}$. This last equation is directly used in the first iteration of the ADER process where all coefficients are initialized as $\bc_n$:
+\begin{align*}
+\vec{\bc}^{(1)}=\vec{1}\bc_n+\Delta t \mat{Q} F(\vec{\bc}^{(0)})
+=\vec{1}\bc_n+\Delta t \mat{Q} F(\vec{1}\bc_n) 
+=\vec{1}\bc_n+\Delta t \vec{P} F(\bc_n),
+\end{align*}
+representing the non-zero entries in the first column of the Butcher matrix $\mat{A}$. The further $(K-1)$ iterations just use the previous steps as in \eqref{eq: ADER_RK_step}, which give the entries of $\mat{Q}$. To achieve order $p$, we choose $p=K=Y$, i.e., $M=p-1$ for equispaced, $M=\lceil \frac{p}{2} \rceil$ for Gauss--Lobatto and $M = \lfloor \frac{p}{2} \rfloor$ for Gauss--Legendre, % to receive with the $K$ iterations over the $M+1$ subtimesteps and the initial stage 
+for a total amount of $Z=K\times (M+1)+1$ stages, which for example for equispaced nodes is equal to $Z=p^2+1$ \cite{veiga2023improving} (some stages can be avoided when the row is identically 0). We can write the ADER, ImADER and IMEX ADER method of order $p$ as RK methods in a blockdiagonal matrix structure. Then, the Butcher tableaux of the IMEX ADER, which is composed of the explicit and implicit ones, is given by
+%
+%\begin{equation}\label{eq:ADER_RK_ButcherTableu}
+%\begin{aligned}
+%\begin{array}{c|ccccccc}
+%0 &  &   & &  & & &  \\
+%\vec{P} & \vec{P} &  &   & & & &  \\
+%\vec{P}  & \vec{0} &   \mat{Q} & & & & & \\
+%\vdots & \vec{0} & \mat{0}  &\mat{Q}   && & & \\
+%\vdots & \vec{0} &  \mat{0}   &   \mat{0}  & \mat{Q}  &  &  & \\
+%\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots& &  \\
+%\vec{P} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  &  \mat{Q}  \\
+%\hline
+%&  \vec{0}^T  & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{b}^{T} 
+%\end{array}.
+%\end{aligned}
+%\end{equation}
+%
+%
+%
+%In the same manner, we can interpret the ADER iteration with the implicit $L^1$-operator as a RK-method in the same way as in the explicit case. The only changes in $\eqref{eq: ADER_RK_step}$ appear in the argument of $F$, which considers now $\bbc^{(k)}$ instead of $\bbc^{(k-1)}$ leading to the Butcher tableau
+%\begin{equation}\label{eq:ImADER_RK_ButcherTableu}
+%\begin{array}{c|cccccc}
+%
+%\vec{P} &  \mat{Q}  &   & & & &   \\
+%\vec{P}  &  \mat{0} &   \mat{Q} & & & &  \\
+%\vdots &   \mat{0}  &\mat{0} &\mat{Q}   && & \\
+%\vdots &   \mat{0}   &   \mat{0}  &\mat{0} & \mat{Q}  &  &   \\
+%\vdots &     \vdots &  \vdots &  \ddots  &  \ddots&\ddots &  \\
+%\vec{P} &   \mat{0}  &  \hdots &  \hdots & \mat{0}  & \mat{0} & \mat{Q}  \\
+%\hline
+%&   \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{b}^{T} 
+%\end{array}.
+%\end{equation}
+%The Butcher tableaux for the IMEX ADER is the combination of the explicit \eqref{eq:ADER_RK_ButcherTableu} and implicit ADER Butcher tableaux \eqref{eq:ImADER_RK_ButcherTableu}.
+%both as introduced in \eqref{eq:IMEXADERL1}:
+\begin{equation}\label{eq:ImExADER_RK_ButcherTableu}
+\begin{array}{c|ccccccc}
+0 & 0 &   & &  & & &   \\
+\vec{P} & \vec{0} &\mat{Q}  &   & & &    \\
+\vec{P}  & \vec{0} &\mat{0} &   \mat{Q} & & & &  \\
+\vdots & \vec{0} & \mat{0}  &\mat{0} &\mat{Q}   && & \\
+\vdots & \vec{0} &  \mat{0}   &   \mat{0}  &\mat{0} & \mat{Q}  &  &   \\
+\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots&\ddots &  \\
+\vec{P} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  & \mat{0} & \mat{Q}  \\
+\hline
+&  \vec{0}^T  & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{b}^{T} 
+\end{array},\qquad
+\begin{array}{c|ccccccc}
+0 & 0 &   & &  & & &   \\
+\vec{P} & \vec{P} &  &   & & & &   \\
+\vec{P}  & \vec{0} &   \mat{Q} & & & & & \\
+\vdots & \vec{0} & \mat{0}  &\mat{Q}   && & & \\
+\vdots & \vec{0} &  \mat{0}   &   \mat{0}  & \mat{Q}  &  &  & \\
+\vdots &  \vdots  &  \vdots &  \vdots &  \ddots  &  \ddots& &  \\
+\vec{P} & \vec{0} &  \mat{0}  &  \hdots &  \hdots & \mat{0}  &  \mat{Q} & \\
+\hline
+&  \vec{0}^T  & \vec{0}^T    & \hdots  &   &   \hdots &    \vec{0}^T& \vec{b}^{T} 
+\end{array}.
+\end{equation}
+Note that the implicit matrix $\mat{A}$ is particularly sparse and that it is block diagonal. Nevertheless, the method is not diagonally implicit, and also the final update does not have the same coefficients of the last stage.
+
+\subsection{A-Stability of ImADER methods}
+\label{subsec:ADER_A-stability}
+First of all, let us notice that for all ImADER, the only determining iteration is the last one as $\bbc^{(k)} = \vec{1}\bc_n -\Delta t \mat{Q} S(\bbc^{(k)})$ for all $k$ does not depend on previous iterations in the purely implicit case.
+Hence, the stability function reduces for all ImADER to the $\L^2=0$ methods denoted as ADER-IWF-RK in \cite{veiga2023improving}. It is given by the following Butcher tableau
+\begin{equation}
+	\begin{array}{c|c}
+		\vec{P} & \mat{Q} \\ \hline 
+		&b^T 
+	\end{array}.
+\end{equation}
+
+For the Gauss--Lobatto nodes, it has been proven in \cite[Theorem A.3]{veiga2023improving} that the ADER-IWF-RK method coincide with the Lobatto IIIC method, hence, its stability function is the Pad\'e$(M-1,M+1)$ approximation, with $M+1$ the number of stages, and for \cite[Theorem 4.12]{wanner1996solving} it is A-stable.
+This means that all ImADER with Gauss--Lobatto nodes are A-stable.
+
+For Gauss--Legendre nodes, we need some theorems that can be found in \cite{wanner1996solving} to prove the same results. 
+First a classical result of \cite{stetter1973analysis,scherer1979necessary} on the stability function of a RK method.
+\begin{theorem}[{\cite[Proposition 3.2]{wanner1996solving}}]
+	The stability function of a RK scheme satisfies
+	\begin{equation}\label{eq:stability_function_form}
+	R(z) = \frac{\det(\mat{Id}-z\mat{A}+z\vec{1} b^T)}{\det(\mat{Id}-z\mat{A})} = \frac{N(z)}{Q(z)}.
+	\end{equation}
+\end{theorem}
+
+Then, we introduce the Pad\'e approximations and the following result.
+\begin{theorem}[{\cite[Theorem 3.11]{wanner1996solving}}]\label{th:pade_order}
+	The $(k,j)$-Pad\'e approximation to $e^z$ is given by
+	\begin{equation}
+	R_{kj}(z) = \frac{N_{kj}(z)}{Q_{kj}(z)}
+	\end{equation}
+	is the unique rational approximation to $e^z$ of order $j+k$, such that the degrees of the numerator and denominator are $k$ and $j$, respectively. 
+\end{theorem}
+
+Finally, we need the A-stability result for the Pad\'e approximations.
+\begin{theorem}[{\cite[Theorem 4.12]{wanner1996solving}}]\label{th:pade_A_stab}
+	A $(k,j)$-Pad\'e approximation $R_{kj}(z)$ to $e^z$ is A-stable if and only if $k\leq j \leq k+2$. All zeros and all poles are simple.
+\end{theorem}
+
+
+With these theorems, we can proceed studying the A-stability of the implicit ADER methods for Gauss--Legendre nodes.
+We  prove that the stability function of the ADER-IWF-RK with $M+1$ Gauss--Legendre nodes is the Pad\'e$(M,M+1)$.
+% Before doing it, we need an auxiliary result on the matrices involved in the numerator of the stability function.
+\PO{Prior to proceeding, we require an additional outcome concerning the matrices present in the numerator of the stability function.}
+\begin{proposition}[Zero determinant of $\mat{A}-\vec{1}b^T$]\label{prop:zero_det}
+	For the ADER-IWF-RK, we have $\det(\mat{A}-\vec{1}b^T)=0$.
+\end{proposition}
+\begin{proof}
+	\PO{Without loss of generality, we consider the interval $[t_n,t_{n+1}]=[0,1]$ for simplicity}. %With a simple rescaling it can be proven on any interval.
+	To prove the result, let us recall the definition of the matrices. $\mat{A}=\mat{Q} = \M^{-1} \mat{R} $ and
+	\begin{align*}
+	b_i = w_i = \int_0^1 \phi_i(t)dt, \qquad  M_{ij} = \phi_i(1)\phi_j(1) - \int_0^1 \phi_i'(t)\phi_j(t) dt, \qquad R_{ij} = \int_0^1 \phi_i(t) \phi_j(t) dt = \delta_{ij} w_j.
+	\end{align*} 
+	Proving that $\det(\mat{A}-\vec{1}b^T)=\det(\mat{M}^{-1}\mat{R}-\vec{1}b^T)=0$ is equivalent to show that $\det(\mat{R}-\mat{M}\vec{1}b^T)=0$. 
+	
+	First, we study the matrix $\mat{M}\vec{1}b^T$. It can be rewritten as follows:
+	\begin{align*}
+	(\mat{M}\vec{1}b^T)_{ij}  = \sum_k M_{ik} 1_k b_j = \sum_k \left(\phi_i(1)\phi_k(1) - \int_0^1 \phi_i'(t)\phi_k(t) dt \right) w_j = \left(\phi_i(1) - \int_0^1 \phi_i'(t)dt \right) w_j = \phi_i(0) w_j.
+	\end{align*}
+	
+	Then, we define $\mat{E}:=\mat{R}-\mat{M}\vec{1}b^T$ and we show that the sum of its rows is identically 0, hence, its rows are linearly dependent. It is
+	\begin{align}
+	\sum_{i} E_{ij} = \sum_{i} \left(R_{ij}-\phi_i(0) w_j\right) =  \sum_{i} \left(\delta_{ij} w_j-\phi_i(0) w_j\right) =  \sum_{i} \left(\delta_{ij}-\phi_i(0) \right) w_j  = (1-1)w_j = 0, \quad \forall j.
+	\end{align} 
+	This proves the statement.
+\end{proof}
+
+\begin{theorem}[Stability function of ADER-IWF-RK Gauss--Legendre]\label{th:pade_GLG}
+	The stability function  of ADER-IWF-RK Gauss--Legendre is  the Pad\'e$(M,M+1)$ approximation.
+\end{theorem}
+\begin{proof}
+	In \cite[Theorem 3.9]{veiga2023improving}, it has been shown that ADER-IWF-RK Gauss--Legendre is of order $2M+1$.
+	Now, since the determinant of $\mat{A}-\mathbbm{1}b^T$ is zero, see Proposition~\ref{prop:zero_det}, there exists a unitary matrix $\mat{W} \in \R^{(M+1)\times (M+1)}$ such that $\mat{W}\mat{W}^T=\mat{Id}$ and
+	\begin{equation}
+	\mat{W} (\mat{A} -\vec{1}b^T )\mat{W}^T = \begin{pmatrix}
+	0 & 0 & \dots &0\\
+	* & * &  \dots &*\\
+	\vdots & * &  \dots &*\\
+	* & * &  \dots &*
+	\end{pmatrix}. 
+	\end{equation}
+	%Hence, the numerator of \eqref{eq:stability_function_form} has the following expression
+	\PO{Therefore, the numerator of \eqref{eq:stability_function_form} can be expressed as follows:}
+	\begin{align}
+	\det\left(\mat{Id}-z\mat{A}+z\vec{1}b^T \right) = \det\left(\mat{Id}+z \mat{W} \left( \mat{A}-\vec{1}b^T\right)\mat{W}^T \right)= \det\left(\begin{pmatrix}
+	1 & \underline{0}^T \\
+	\underline{*} & \mat{Id}-z \mat{G} 
+	\end{pmatrix}\right) = \det\left(\mat{Id}-z \mat{G} \right)
+	\end{align}
+	with $\mat{G}\in \R^{M\times M}$. Te degree of $N(z)$ is smaller or equal to $M$. Since the order of the ADER-IWF-RK Gauss--Legendre is $2M+1$, it must be that the degree of $N(z)$ is $M$ and the degree of $Q(z)$ is $M+1$.
+	%From Theorem~\ref{th:pade_order} we know that the only approximation of $e^z$ with order $2M+1$, numerator with degree $M$ and denominator with degree $M+1$ is the Pad\'e$(M,M+1)$, it must be the one of ADER-IWF-RK Gauss--Legendre.
+	\PO{Theorem~\ref{th:pade_order} establishes that the unique approximation of $e^z$ with an order of $2M+1$, a numerator of degree $M$, and a denominator of degree $M+1$ is the Padé$(M,M+1)$, implying it aligns with the ADER-IWF-RK Gauss--Legendre method.}
+\end{proof}
+
+\begin{corollary}[A-stability of ImADER Gauss--Legendre]
+	ADER-IWF-RK Gauss--Legendre and all ImADER Gauss--Legendre are A-stable.
+\end{corollary}
+
+
+%For equispaced ADER methods it is not so easy to derive similar results. Numerically, from order 5 on, we observe some instabilities on the imaginary axis and unstable regions in $\mathbb C^-$ with width close to machine precision and we think that the stability region may cross that axis. 
+\PO{
+Deriving similar results for equispaced ADER methods poses a challenge. Numerically, starting from the fifth order onward, we notice instabilities along the imaginary axis and unstable regions within $\mathbb{C}^-$, with widths approaching machine precision. This observation suggests the possibility of the stability region intersecting that axis.}

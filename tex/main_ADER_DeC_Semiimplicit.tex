@@ -1,0 +1,266 @@
+\documentclass[USenglish]{article}
+\setlength\parindent{0pt}
+%%%%%%%%%%%%%%
+\usepackage{fullpage}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{color,xcolor}
+\usepackage{ifpdf}
+\usepackage{psfrag}
+\usepackage{graphicx,graphics}
+\usepackage{hhtensor}
+\usepackage{comment}
+\usepackage[small]{caption}
+\usepackage{subcaption}
+
+\usepackage{xparse}
+\usepackage{bigints}
+
+
+
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{todonotes}
+\usepackage{cleveref}
+\usepackage{ulem} \normalem
+% ------------------------------------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{conclusion}[theorem]{Conclusion}
+
+\usepackage{cancel}
+\usepackage{algorithm,algorithmic}
+\usepackage{enumitem}
+
+\usepackage{mathtools, mathrsfs}
+\usepackage{bbm}
+\usepackage{fancybox}
+\usepackage[nottoc]{tocbibind}
+\usepackage{float}
+
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\K}{\mathbb K}
+\renewcommand{\L}{\mathcal L}
+\newcommand{\I}{\mathcal I}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\normal}{\mathbf{N}}
+
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\EE}{\mathcal{E}}
+
+% ---- Notation Philipp
+\newcommand{\ww}[1]{\underline{#1}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\est}[1]{\left\langle#1\right\rangle}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\bbfh}{{\mathbf {f}^h}}
+\newcommand{\Ol}{\mathcal{O}}
+\newcommand{\WW}{\mathrm{W}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\II}{\hat{I}_0}
+\newcommand{\1}{\begin{pmatrix}
+		1\\
+		1
+\end{pmatrix}}
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\newcommand{\tp}{t^{n+1}}
+\newcommand{\tn}{t^{n}}
+
+
+\renewcommand{\vec}[1]{\ww{#1}}
+\NewDocumentCommand{\mat}{mo}{%
+	\IfValueTF{#2}{%
+		\underline{\underline{#1}}{#2}
+	}{%
+		\underline{\underline{#1}}\,
+	}%
+}
+%Davide
+
+\usepackage{bbm}
+\def\bbc{\underline{\boldsymbol{\alpha}}}
+\def\bc{\boldsymbol{\alpha}}
+\def\bbu{\underline{\boldsymbol{u}}}
+\def\bu{\boldsymbol{u}}
+\def\bbv{\underline{\boldsymbol{v}}}
+\def\bv{\boldsymbol{v}}
+\def\bbw{\underline{\boldsymbol{w}}}
+\def\bw{\boldsymbol{w}}
+\def\br{\boldsymbol{r}}
+\def\bd{\mathbf{d}}
+\def\bbd{\underline{\mathbf{d}}}
+\def\bphi{\underline{\phi}}
+\def\M{\underline{\underline{\mathrm{M}}}}
+\def\S{\underline{\underline{\mathrm{S}}}}
+
+\def\TMM{\textsc{TMM}}
+\def\DeC{\textsc{DeC}}
+\def\ADER{\textsc{ADER}}
+\def\sDeC{\textsc{sDeC}}
+\def\eq{\textsc{EQ}}
+\def\GLB{\textsc{GLB}}
+
+\def\NODES{\textsc{NODES}}
+
+
+%Colors 
+\definecolor{darkspringgreen}{rgb}{0., 0.55, 0.3}
+\definecolor{dartmouthgreen}{rgb}{0.05, 0.5, 0.06}
+\definecolor{etonblue}{rgb}{0.59, 0.78, 0.64}
+\definecolor{airforceblue}{rgb}{0., 0.4, 0.66}
+\definecolor{arylideyellow}{rgb}{0.91, 0.84, 0.42}
+\definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
+\definecolor{uclagold}{rgb}{1.0, 0.7, 0.0}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+
+
+\newtheorem{prop}{Proposition}
+
+
+
+
+%Shorten for Entropy function
+\newcommand{\Ucof}[2]{U_{(#1)}^{(#2)}}
+\newcommand{\Vcof}[2]{\bv_{(#1)}^{(#2),T}}
+\newcommand{\ecof}[2]{\eta_{(#1)}^{(#2)}}
+
+% Corrections
+\newcommand{\rev}[1]{#1}%{\textcolor{red}{#1}}
+\newcommand{\PO}[1]{{\color{blue}#1}}
+\newcommand{\DT}[1]{{\color{darkspringgreen}#1}}
+\newcommand{\LP}[1]{{\color{brown}#1}}
+\newcommand{\DTT}[1]{{\color{darkspringgreen}#1}}
+\newcommand{\revMA}[1]{#1}%{\textcolor{darkspringgreen}{#1}}
+%%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={IMEX DeC and ADER},
+	pdfauthor={P. \"Offner, L. Petri and D. Torlo},
+	pdfpagemode=UseOutlines,
+	linkbordercolor=0 0 0,
+	linkcolor=red,
+	citecolor=blue,
+	colorlinks=true,
+	bookmarks = true
+}
+
+
+
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+	#2%
+	\def\@currentlabel{#2}%
+	\phantomsection\label{#1}\endgroup
+}
+\makeatother
+
+% Sets running headers as well as PDF title and authors
+%\headers{ADER and DeC for Advection-Diffusion}{ P. \"Offner, A. Thomann, and D. Torlo}
+
+% Title. If the supplement option is on, then "Supplementary Material"
+% is automatically inserted before the title.
+\title{Analysis for Implicit and Implicit-Explicit ADER and DeC Methods for Ordinary Differential Equations, Advection-Diffusion and Advection-Dispersion Equations}
+
+%Authors: full names plus addresses.
+\author{
+	\PO{Philipp \"Offner}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, (\email{poeffner@uni-mainz.de}, \orcid{0000-0002-1367-1917})
+	} 
+	\and 
+	\LP{Louis Petri}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, (\email{lopetri@students.uni-mainz.de}), } 
+	\and 
+	\DTT{Davide Torlo}\thanks{SISSA Mathlab, SISSA, Trieste, Italy, (\email{davide.torlo@sissa.it})} 
+}
+
+
+
+\usepackage{amsopn}
+
+
+\begin{document}
+	\title{Analysis for Implicit and Implicit-Explicit ADER and DeC Methods for Ordinary Differential Equations, Advection-Diffusion and Advection-Dispersion Equations}
+	
+	\author{\PO{Philipp \"Offner}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, mail@philippoeffner.de},
+	\LP{Louis Petri}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, lopetri@students.uni-mainz.de },  
+	Davide Torlo\thanks{SISSA Mathlab, SISSA, Trieste, Italy, davide.torlo@sissa.it}
+	}
+	\date{}
+	\maketitle
+	
+	%\keywords{test} 
+	\begin{abstract}
+		\input{abstract}	
+	\end{abstract}
+%	\tableofcontents
+	\input{introduction}
+	
+	\section{Deferred Correction}
+	\label{sec:dec}
+	\input{DeC}
+	
+	\section{ADER}
+	\label{sec:ader}
+	\input{ADER} 
+	
+	\section{Convergence Analysis}
+	\label{sec:convergence}
+	\input{ImEx_convergence}
+	
+	\section{Numerical Stability Analysis}
+	\label{sec: stability_analysis_ODE}
+	\input{ODE_stability_analysis}
+
+	\section{PDE: analysis of advection-diffusion}
+	\label{sec: advection_diffusion}
+	\input{PDE_advection_diffusion} 
+	
+	\section{PDE: analysis of advection-dispersion}
+	\label{sec:PDE_adv_disp}
+	\input{PDE_advection_dispersion} 
+	
+	
+	\section{Numerical tests}
+	\label{sec:numerics}
+	\input{numerics}
+	%\input{numerics_long_sDeC}
+	
+	
+	\section{Conclusions}
+	\label{sec:conclusion}
+	\PO{Has to be written}
+	\input{conclusion} 
+	
+	\appendix
+	\section{Appendix}
+	\label{sec:appendix}
+	\PO{We may think to delete this appendi and bring all equispace tests here...}
+	\input{appendix} 
+	
+
+	
+	
+	\section*{Acknowledgements}
+	\PO{P.Ö. is supported by the DFG within SPP 2410, project  525866748 (OE 661/5-1) and under the personal grant 520756621 (OE 661/4-1).  P.Ö. gratefully acknowledges the 		 	support of the Gutenberg Research College, JGU Mainz.}
+	D. T. is funded by a SISSA Mathematical Fellowship.
+\todo{Louis have to include stuff???}
+	\bibliographystyle{abbrv}
+	\bibliography{literature}
+\end{document}
