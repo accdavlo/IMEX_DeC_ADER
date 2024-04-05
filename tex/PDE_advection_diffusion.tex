@@ -130,24 +130,7 @@ Therefore, for a given method solving the advection-diffusion equation, we can r
 		\item $D_m$ denotes the central second derivative stencil of order $m$ in Table~\ref{tab: CFD-schemes_first_deriv} used for the diffusion term.
 	\end{itemize}
 \end{definition}
-\begin{example}[Stability of IMEX DeC3 with $A_1$ and $D_2$ operators]
-	To give an example of how to study the stability region, we show in Figure~\ref{fig: exa_ImExDeC3_diff2_adv1} the stability areas $\lbrace |g(k,C,E)|\leq 1 ,\, \forall k \in [-n_0-1,n_0+1]\rbrace$ for the $[\DeC,\eq,3, A_1,D_2]$. On the left, we plot the stability area as a function of $C$ and $D$, while on the right as a function of $C$ and $E$. The black area is associated to the unstable area, while the yellow displays the stable region.
-	\begin{figure}[!h]
-		\centering
-		\begin{minipage}[t]{0.45\textwidth}
-			\includegraphics[width=\textwidth]{pdf/pdepics/exa_DeC3_CD.pdf}
-			\centering
-			Coefficients $C$ and $D$
-		\end{minipage} 
-		\begin{minipage}[t]{0.45\textwidth}
-			\includegraphics[width=\textwidth]{pdf/pdepics/exa_DeC3_CE.pdf}
-			\centering
-			Coefficients $C$ and $E$
-		\end{minipage}
-		\caption{Stability areas (yellow) for the $[DeC,eq,3, A_1,D_2]$.}
-		\label{fig: exa_ImExDeC3_diff2_adv1}
-	\end{figure}
-\end{example}
+
 
 \begin{remark}
 	With the previous plots, we recognize two sufficient conditions to obtain stability:
@@ -232,20 +215,6 @@ This is probably impacted by the catastrophic cancellation which occurs in Newto
 For this reason, we will mainly analyze this method with Gauss-Lobatto nodes for the other cases.
 
 
-As an example, we plot the stability region of $[\sDeC,\GLB,2, A_1,D_2]$ in Figure \ref{fig: exa_limits}. We observe an asymptotic behavior both for $E\rightarrow \infty$ against a line $C=C_0$ and also some sort of border line $E<E_0$ for $C\rightarrow \infty$, which secures stability for an arbitrary $C$, if $E\le E_0$. These are the desired values for $C_0$ and $E_0$.
-\begin{figure}
-	\centering
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{pdepics/IMEXsDeC2_GLB_diff2_adv1_C_log.png}
-	\end{minipage} 
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{pdepics/IMEXsDeC2_GLB_diff2_adv1_E_log.png}
-	\end{minipage}
-	\caption{$[\sDeC,\GLB,2, A_1,D_2]$: Stability Behavior for large $C$ (left) and large $E$ (right)}
-	\label{fig: exa_limits}
-\end{figure}
-\todo{This part also needs to be rewritten. We do not look anymore at several different cases that show the ADER instabilites for high TMM orders, but just the ones with good results. Maybe give a hint here, that the high order ADER still produce these instabilities.}
-
 
 In Figure~\ref{fig: exa_advterm}, we display the stability areas for the $[\DeC,\eq,8, A_k,D_2]$, $[\sDeC,\eq,8, A_k,D_8]$ and $[\ADER,\GLB,8, A_k,D_8]$ increasing the order for the finite difference scheme for the advection operator. 
 For DeC (left), this does not lead to higher values for $E_0$ or $C_0$, but seemingly decreases for odd orders and increases for even orders, while starting with relatively big values for order 1 and relatively small values for order 2. 
@@ -265,13 +234,29 @@ This is again not true for order 6 for which all time methods do not show a stab
 	\begin{minipage}[t]{0.32\textwidth}
 		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_subtimesteps_equispaced_adv_ord_1-8.pdf}
 		\centering
-		$[\DeC,\eq,8, A_k,D_2]$
+		$[\sDeC,\eq,8, A_k,D_2]$
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
-	\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_gaussLobatto_adv_ord_1-8.pdf}
-	\centering
-	$[\ADER,\GLB,8, A_k,D_2]$
-\end{minipage}
+		WAITING FOR PLOT!
+		%\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_equispaced_adv_ord_1-8.pdf}
+		\centering
+		$[\ADER,\eq,8, A_k,D_2]$
+	\end{minipage}\\
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_gaussLobatto_adv_ord_1-8.pdf}
+		\centering
+		$[\DeC,\GLB,8, A_k,D_2]$
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_subtimesteps_gaussLobatto_adv_ord_1-8.pdf}
+		\centering
+		$[\sDeC,\GLB,8, A_k,D_2]$
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_gaussLobatto_adv_ord_1-8.pdf}
+		\centering
+		$[\ADER,\GLB,8, A_k,D_2]$
+	\end{minipage}
 	\caption{DeC Stability areas varying the order of the advection method}
 	\label{fig: exa_advterm}
 \end{figure}
@@ -283,19 +268,35 @@ In Figure~\ref{fig: exa_diffterm}, we show the stability regions increasing the 
 	\centering
 	\includegraphics[width=0.6\textwidth,trim={160 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-8_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
-		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_subtimesteps_equispaced_diff_ord_2468.pdf}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_equispaced_diff_ord_2468.pdf}
 		\centering
 		$[\DeC,\eq, 8, A_1,D_k]$
 	\end{minipage} 
 	\begin{minipage}[t]{0.32\textwidth}
-		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_equispaced_diff_ord_2468.pdf}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_subtimesteps_equispaced_diff_ord_2468.pdf}
 		\centering
 		$[\sDeC,\eq, 8, A_1,D_k]$
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
-		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_gaussLobatto_diff_ord_2468.pdf}
+		WAITING FOR PLOT
+		%\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_equispaced_diff_ord_2468.pdf}
 		\centering
 		$[\ADER,\eq, 8, A_1,D_k]$
+	\end{minipage}\\
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_gaussLobatto_diff_ord_2468.pdf}
+		\centering
+		$[\DeC,\GLB, 8, A_1,D_k]$
+	\end{minipage} 
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_subtimesteps_gaussLobatto_diff_ord_2468.pdf}
+		\centering
+		$[\sDeC,\GLB, 8, A_1,D_k]$
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_gaussLobatto_diff_ord_2468.pdf}
+		\centering
+		$[\ADER,\GLB, 8, A_1,D_k]$
 	\end{minipage}
 	\caption{Stability areas varying the order of the diffusion method}
 	\label{fig: exa_diffterm}
@@ -307,6 +308,21 @@ Here, we can observe for all cases that the higher order terms results in slight
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.6\textwidth,trim={160 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-8_no_order.pdf}\\
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_equispaced_all_2-8.pdf}
+		\centering
+		$[\DeC,\eq, k, A_k,D_{2\lceil k/2 \rceil}]$
+	\end{minipage} 
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_subtimesteps_equispaced_all_2-8.pdf}
+		\centering
+		$[\sDeC,\eq, k, A_k,D_{2\lceil k/2 \rceil}]$
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_equispaced_all_2-8.pdf}
+		\centering
+		$[\ADER,\eq, k, A_k,D_{2\lceil k/2 \rceil}]$
+	\end{minipage}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXDeC_gaussLobatto_all_2-8.pdf}
 		\centering
@@ -321,13 +337,7 @@ Here, we can observe for all cases that the higher order terms results in slight
 		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_gaussLobatto_all_2-8.pdf}
 		\centering
 		$[\ADER,\GLB, k, A_k,D_{2\lceil k/2 \rceil}]$
-	\end{minipage}
-	
-	\begin{minipage}[t]{0.32\textwidth}
-		\includegraphics[width=\textwidth]{pdf/pdepics/diff/IMEXADER_equispaced_all_2-8.pdf}
-		\centering
-		$[\ADER,\eq, k, A_k,D_{2\lceil k/2 \rceil}]$
-	\end{minipage}
+	\end{minipage}	
 	\caption{Stability areas varying the order of all partial methods.}
 	\label{fig: exa_difftermsim}
 \end{figure}

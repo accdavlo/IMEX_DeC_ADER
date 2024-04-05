@@ -183,28 +183,22 @@ We have tried increasing the order of (upwinded) dispersion terms without notici
 
 \begin{figure}
 	\centering
-	\begin{minipage}[t]{0.44\textwidth}
+	\includegraphics[width=0.4\textwidth,trim={230 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-6_no_order.pdf}\\
+	\begin{minipage}[t]{0.325\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_advTMM_2-6_newE.pdf}
-		\small$[\DeC, \GLB,k,A_k,P_u]$\par
-	\end{minipage}\hfill
-	\begin{minipage}[t]{0.44\textwidth}
+		\small$[\DeC, \GLB,k,A_k,B_3]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.325\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_advTMM_2-6_newE.pdf}
+	\small$[\sDeC, \GLB,k,A_k,B_3]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.325\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_gaussLobatto_disp_advTMM_2-6_newE.pdf}
-		\small$[\ADER, \GLB,k,A_k,P_u]$\par
+		\small$[\ADER, \GLB,k,A_k,B_3]$\par
 	\end{minipage}
-	\includegraphics[width=0.08\textwidth, trim={491 180 30 23}, clip]{pdf/pdepics/legends/colors_a-d_new_2-6_no_order.pdf}
-	%	\\
-	%	\begin{minipage}[t]{0.45\textwidth}
-		%		\centering
-		%		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_advTMM_2-6_small.pdf}
-		%		\small$[\DeC, \GLB,k,A_k,P_u]$(zoomed)\par
-		%	\end{minipage}\hfill
-	%	\begin{minipage}[t]{0.45\textwidth}
-		%		\centering
-		%		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_gaussLobatto_disp_advTMM_2-6_small.pdf}
-		%		\small$[\ADER, \GLB,k,A_k,P_u]$(zoomed)\par
-		%	\end{minipage}
 	\caption{Stability areas varying orders 2 to 6 of the advection scheme and time scheme}
 	\label{fig: disp_alladv_GLB}
 \end{figure}
@@ -242,21 +236,6 @@ We find a loss of stability by increasing the order. We already see a slight red
 	\includegraphics[width=0.4\textwidth,trim={230 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-6_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_all_2-6_newE.pdf}
-		\small$[\DeC, \GLB,k, A_k,B_{\lceil k/2 \rceil}]$\par
-	\end{minipage}
-	\begin{minipage}[t]{0.32\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_all_2-6_newE.pdf}
-		\small$[\sDeC, \GLB,k, A_k,B_{\lceil k/2 \rceil}]$\par
-	\end{minipage}
-	\begin{minipage}[t]{0.32\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_gaussLobatto_disp_all_2-6_newE.pdf}
-		\small$[\ADER, \GLB,k, A_k,B_{\lceil k/2 \rceil}]$\par
-	\end{minipage}\\
-	\begin{minipage}[t]{0.32\textwidth}
-		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_equispaced_disp_all_2-6_newE.pdf}
 		\small$[\DeC, \eq,k,A_k,B_{\lceil k/2 \rceil}]$\par
 	\end{minipage}
@@ -269,6 +248,21 @@ We find a loss of stability by increasing the order. We already see a slight red
 		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_equispaced_disp_all_2-6_newE.pdf}
 		\small$[\ADER, \eq,k, A_k,B_{\lceil k/2 \rceil}]$\par
+	\end{minipage}\\
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_all_2-6_newE.pdf}
+		\small$[\DeC, \GLB,k, A_k,B_{\lceil k/2 \rceil}]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_all_2-6_newE.pdf}
+		\small$[\sDeC, \GLB,k, A_k,B_{\lceil k/2 \rceil}]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_gaussLobatto_disp_all_2-6_newE.pdf}
+		\small$[\ADER, \GLB,k, A_k,B_{\lceil k/2 \rceil}]$\par
 	\end{minipage}
 	\caption{Stability areas for orders 2 to 6 with GLB (top) and equi (bottom) nodes, dispersion with stencil $[-\lceil (k+2)/2 \rceil +1 ,\lceil (k+2)/2\rceil]$, advection of order $k$ as in \eqref{eq: r-s_scheme} and time scheme of order $k$}
 	\label{fig: disp_allall}
