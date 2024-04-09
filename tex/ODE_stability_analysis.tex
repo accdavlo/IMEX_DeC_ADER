@@ -1,7 +1,7 @@
 In this section, we study the stability of the presented method for the linear Dahlquist equation $u' = -\lambda u$ or $u' = -\lambda_I u - \lambda_E u$ for IMEX methods. All methods can be rewritten as $u_{n+1} = R(z)u_n$ or $u_{n+1}= R(z_I,z_E)$ being $R$ stability functions and $z,z_I,z_E\in \mathbb C$. 
-We will study the stability regions $\lbrace |R|\leq 1\rbrace \subset \mathbb C$ for the implicit ADER/DeC, while for the IMEX schemes we consider different approaches, while the explicit cases the stability functions have already been investigated in \cite{Han_Veiga_2021} and reported, for completeness, in Appendix~\ref{sec:stability_explicit} with also the sDeC. 
-We will use equispaced (eq) or Gauss-Lobatto (GLB) nodes as quadrature nodes. \todo{We can delete the appendix A1 and they only that the intersect as done in our work the sdec is not really as interesting maybe sader...}
-We will numerically compute the stability regions obtained from the stability functions of ADER/DeC that are defined through their Butcher tableaux \eqref{eq:ImDeC_RK_ButcherTableu}, \eqref{eq:IMEX_DeC_RK}, \eqref{eq:ImExADER_RK_ButcherTableu}, see \cite{hairer1987solving}.
+We will study the stability regions $\lbrace |R|\leq 1\rbrace \subset \mathbb C$ for the explicit and implicit ADER/DeC, while for the IMEX schemes we consider different approaches. 
+We will use equispaced (eq) or Gauss-Lobatto (GLB) nodes as quadrature nodes.
+We will numerically compute the stability regions obtained from the stability functions of ADER/DeC that are defined through their Butcher tableaux, see \cite{hairer1987solving}.
 In detail, we compute on $200\times 200$ grid points with an offset of $+0.01$ from the origin for both axes to avoid singularities. 
 The plot bounds are dependent on the type of scheme and their stability regions.
 We decreased the offset in Figures~\ref{fig: ODE_minor_instabilitys} to a fraction of $10^{-2}$ of the largest real value displayed when zooming on small areas.
@@ -20,6 +20,32 @@ To distinguish the different orders, we apply different colors and line styles t
 %		\caption{Legend for the classic RK and the IMEX stability regions}
 %	\label{fig: legend_standard}
 %\end{figure}
+\subsection{Explicit schemes}
+\subsection{Stability analysis of explicit schemes}\label{sec:stability_explicit}
+In figure~\ref{fig: ODEEXADERDeCeq}, we show the results obtained in \cite{Han_Veiga_2021}, extended up to order 13. It was pointed out, that the regions of the explicit ADER and DeC coincide and that they are independent of the chosen interpolation nodes. Here, we just display them once. We can highlight the growth of stability by increasing the order of the respective method. 
+\begin{figure}[!h]
+	\centering
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[width=\textwidth,trim={0 0 0 22}, clip]{pdf/odepics/DeC_GLB_ord13.pdf}
+	\end{minipage}
+	\caption{Stability regions for the explicit ADER and DeC methods with GLB or equispaced nodes for orders 2 to 13.}
+	\label{fig: ODEEXADERDeCeq}
+\end{figure}
+
+Furthermore, we want to take a look at the explicit sDeC, whose stability regions can be observed in figure~\ref{fig: ODEEXsDeC}. 
+This method differs not only from the ADER and DeC, but also from sDeC with different nodes. The qualitative shape is still similar to the others, but it is just remarkable that the sDeC methods with equispaced interpolation points have respectively larger stability regions.
+
+\begin{figure}
+	\centering
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{pdf/odepics/sDeC_eq_ord13.pdf}
+	\end{minipage}
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{pdf/odepics/sDeC_GLB_ord13.pdf}
+	\end{minipage}
+	\caption{sDeC for orders 2 to 13.}
+	\label{fig: ODEEXsDeC}
+\end{figure}
 \subsection{Implicit schemes}
 In the following, we plot the contour lines of the bounds of the stability regions of various implicit methods. We start from ImDeC and ImADER schemes with equispaced nodes and GLB nodes in Figure~\ref{fig: ODEIMDeCADER}. 
 Clearly, all these stability regions are unbounded, but they are not all A-stable, as we will see soon. Moreover, we can observe a great variability changing the scheme or the nodes, in opposition to the explicit case \cite{Han_Veiga_2021}. In most of the cases, ImADER have larger stability regions than ImDeC.
@@ -366,6 +392,6 @@ Therefore, it seems like we can not guarantee this almost A-stability for the IM
 %\end{figure}
 
 %Remark that for the $\mathcal{D}_0$ case, an order of magnitude of the explicit Euler stability region can be considered as good as it gets controlled by the non-stiff term, while for the $\mathcal{D}_1$ case A-stability would be desired due to stiffness. 
-Therefore, we can conclude, that the IMEX ADER methods fulfill these requirements to a certain \todo{``These requirements'' is very vague, write more explicitly what you refer to.} extent, while the DeC and sDeC methods have their limitations with $\mathcal{D}_0= \emptyset$ in every case and bounded stability regions for most of the cases in the scope of $\mathcal{D}_1$. Nevertheless, we need to keep in mind that the set conditions are very strict, so,  the methods might still be applicable to some stiff equations. % \\
+Therefore, we can conclude, that some of the IMEX ADER stability regions cover the areas in the complex plane, that we assumed for a stable method in the context of $\mathcal{D}_0$ and $\mathcal{D}_1$, while the DeC and sDeC methods have their limitations with $\mathcal{D}_0= \emptyset$ in every case and bounded stability regions for most of the cases in the scope of $\mathcal{D}_1$. Nevertheless, we need to keep in mind that the set conditions are very strict, so,  the methods might still be applicable to some stiff equations. % \\
 These results reflect what we have seen for the respective implicit methods.
 \PO{These findings mirror our observations regarding the corresponding implicit methods.} \todo{we may think about deleting equidistant discussion and put the pictures inside the appendix. or shorten this a little bit? Lets discuss}
