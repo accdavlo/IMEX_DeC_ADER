@@ -149,21 +149,6 @@ We have tried increasing the order of (upwinded) dispersion terms without notici
 	\includegraphics[width=0.4\textwidth,trim={230 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-6_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_TMM_2-6_newE.pdf}
-		\small$[\DeC, \GLB,k, A_1,B_3]$\par
-	\end{minipage}
-	\begin{minipage}[t]{0.32\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_TMM_2-6_newE.pdf}
-		\small$[\sDeC, \GLB,k, A_1,B_3]$\par
-	\end{minipage}
-	\begin{minipage}[t]{0.32\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_gaussLobatto_disp_TMM_2-6_newE.pdf}
-		\small$[\ADER, \GLB,k, A_1,B_3]$\par
-	\end{minipage}\\
-	\begin{minipage}[t]{0.32\textwidth}
-		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_equispaced_disp_TMM_2-6_newE.pdf}
 		\small$[\DeC, \eq,k,A_1,B_3]$\par
 	\end{minipage}
@@ -176,6 +161,21 @@ We have tried increasing the order of (upwinded) dispersion terms without notici
 		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_equispaced_disp_TMM_2-6_newE.pdf}
 		\small$[\ADER, \eq,k, A_1,B_3]$\par
+	\end{minipage}\\
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_TMM_2-6_newE.pdf}
+		\small$[\DeC, \GLB,k, A_1,B_3]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_TMM_2-6_newE.pdf}
+		\small$[\sDeC, \GLB,k, A_1,B_3]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_gaussLobatto_disp_TMM_2-6_newE.pdf}
+		\small$[\ADER, \GLB,k, A_1,B_3]$\par
 	\end{minipage}
 	\caption{Stability areas for orders 2 to 6 with GLB (top) and equi (bottom) nodes, the upwind scheme of \eqref{eq: shu_upwind_dispersion} for the dispersion and an first order backward scheme for the advection term}
 	\label{fig: disp_allRK}
@@ -186,13 +186,28 @@ We have tried increasing the order of (upwinded) dispersion terms without notici
 	\includegraphics[width=0.4\textwidth,trim={230 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-6_no_order.pdf}\\
 	\begin{minipage}[t]{0.325\textwidth}
 		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_equispaced_disp_advTMM_2-6_newE.pdf}
+		\small$[\DeC, \eq,k,A_k,B_3]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.325\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_equispaced_disp_advTMM_2-6_newE.pdf}
+	\small$[\sDeC, \eq,k,A_k,B_3]$\par
+	\end{minipage}
+	\begin{minipage}[t]{0.325\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXADER_equispaced_disp_advTMM_2-6_newE.pdf}
+		\small$[\ADER, \eq,k,A_k,B_3]$\par
+	\end{minipage}\\
+	\begin{minipage}[t]{0.325\textwidth}
+		\centering
 		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_gaussLobatto_disp_advTMM_2-6_newE.pdf}
 		\small$[\DeC, \GLB,k,A_k,B_3]$\par
 	\end{minipage}
 	\begin{minipage}[t]{0.325\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_advTMM_2-6_newE.pdf}
-	\small$[\sDeC, \GLB,k,A_k,B_3]$\par
+		\centering
+		\includegraphics[width=\textwidth]{pdf/pdepics/disp/IMEXDeC_subtimesteps_gaussLobatto_disp_advTMM_2-6_newE.pdf}
+		\small$[\sDeC, \GLB,k,A_k,B_3]$\par
 	\end{minipage}
 	\begin{minipage}[t]{0.325\textwidth}
 		\centering
