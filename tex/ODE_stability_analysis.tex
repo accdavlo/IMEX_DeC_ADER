@@ -20,37 +20,36 @@ To distinguish the different orders, we apply different colors and line styles t
 %		\caption{Legend for the classic RK and the IMEX stability regions}
 %	\label{fig: legend_standard}
 %\end{figure}
-\subsection{Explicit schemes}
 \subsection{Stability analysis of explicit schemes}\label{sec:stability_explicit}
-In figure~\ref{fig: ODEEXADERDeCeq}, we show the results obtained in \cite{Han_Veiga_2021}, extended up to order 13. It was pointed out, that the regions of the explicit ADER and DeC coincide and that they are independent of the chosen interpolation nodes. Here, we just display them once. We can highlight the growth of stability by increasing the order of the respective method. 
-\begin{figure}[!h]
-	\centering
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth,trim={0 0 0 22}, clip]{pdf/odepics/DeC_GLB_ord13.pdf}
-	\end{minipage}
-	\caption{Stability regions for the explicit ADER and DeC methods with GLB or equispaced nodes for orders 2 to 13.}
-	\label{fig: ODEEXADERDeCeq}
-\end{figure}
-
-Furthermore, we want to take a look at the explicit sDeC, whose stability regions can be observed in figure~\ref{fig: ODEEXsDeC}. 
-This method differs not only from the ADER and DeC, but also from sDeC with different nodes. The qualitative shape is still similar to the others, but it is just remarkable that the sDeC methods with equispaced interpolation points have respectively larger stability regions.
-
+In figure~\ref{fig: ODEEX} (left), we show the results obtained in \cite{Han_Veiga_2021}, extended up to order 13. It was pointed out, that the regions of the explicit ADER and DeC coincide and that they are independent of the chosen interpolation nodes. Here, we just display them once. We can highlight the growth of stability by increasing the order of the respective method. 
 \begin{figure}
 	\centering
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{pdf/odepics/sDeC_eq_ord13.pdf}
+	\includegraphics[width=0.465\textwidth,trim={215 340 32 22}, clip]{pdf/odepics/colors_a-d_new_horiz_2-7_no_order.pdf}\!\!
+	\includegraphics[width=0.515\textwidth,trim={179 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/odepics/DeC_GLB_ord13.pdf}\\
+		DeC/ADER eq/GLB
 	\end{minipage}
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{pdf/odepics/sDeC_GLB_ord13.pdf}
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/odepics/sDeC_eq_ord13.pdf}\\
+		sDeC eq
 	\end{minipage}
-	\caption{sDeC for orders 2 to 13.}
-	\label{fig: ODEEXsDeC}
+	\begin{minipage}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{pdf/odepics/sDeC_GLB_ord13.pdf}\\
+		sDeC GLB
+	\end{minipage}
+	\caption{Stability regions for the explicit ADER and DeC methods with GLB or equispaced nodes for orders 2 to 13 (left), sDeC equispaced (center) and sDeC GLB (right).}
+	\label{fig: ODEEX}
 \end{figure}
+
+Furthermore, we want to take a look at the explicit sDeC, whose stability regions can be observed in figure~\ref{fig: ODEEX} (center and right). 
+This method differs not only from the ADER and DeC, but also from sDeC with different nodes. The qualitative shape is still similar to the others, but it is just remarkable that the sDeC methods with equispaced interpolation points have respectively larger stability regions.
 \subsection{Implicit schemes}
-In the following, we plot the contour lines of the bounds of the stability regions of various implicit methods. We start from ImDeC and ImADER schemes with equispaced nodes and GLB nodes in Figure~\ref{fig: ODEIMDeCADER}. 
+In the following, we plot the contour lines of the bounds of the stability regions of various implicit methods. We start from ImDeC (left) and ImADER (right) schemes with equispaced nodes (top) and GLB nodes (bottom) in Figure~\ref{fig: ODEIMDeCADER} up to order 13. 
 Clearly, all these stability regions are unbounded, but they are not all A-stable, as we will see soon. Moreover, we can observe a great variability changing the scheme or the nodes, in opposition to the explicit case \cite{Han_Veiga_2021}. In most of the cases, ImADER have larger stability regions than ImDeC.
-%We already see a different behavior in stability, contrary to the explicit counterparts. 
-%We also observe a slightly different behavior while changing the interpolation nodes to Gauss-Lobatto points in figure~\ref{fig: ODEIMDeCADERGLB}. Nevertheless, all the results coincide with what expected from implicit Runge-Kutta schemes and all the methods seem to be A-stable. Furthermore, the stability regions of the ImADER differ to the ImDeC for both types of nodes, differently from the explicit case \cite{Han_Veiga_2021}.  
 \begin{figure}
 	\centering
 	\includegraphics[width=0.465\textwidth,trim={215 340 32 22}, clip]{pdf/odepics/colors_a-d_new_horiz_2-7_no_order.pdf}\!\!
@@ -70,7 +69,6 @@ Clearly, all these stability regions are unbounded, but they are not all A-stabl
 		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMADER_eq_ord13-crop.pdf}\\
 		ImADER eq
 	\end{minipage}\\
-%	\includegraphics[width=0.08\textwidth, trim={491 140 30 23}, clip]{pdf/odepics/colors_a-d_new_2-13_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
 		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMDeC_GLB_ord13-crop.pdf}\\
@@ -86,16 +84,9 @@ Clearly, all these stability regions are unbounded, but they are not all A-stabl
 		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMADER_GLB_ord13-crop.pdf}\\
 		ImADER GLB
 	\end{minipage}
-%	\includegraphics[width=0.08\textwidth, trim={491 140 30 23}, clip]{pdf/odepics/colors_a-d_new_2-13_no_order.pdf}
 	\caption{Implicit DeC (left), sDeC (center) and ADER (right) with equispaced (top) and Gauss-Lobatto (bottom) nodes for orders 2 to 13}
 	\label{fig: ODEIMDeCADER}
 \end{figure}
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=0.08\textwidth, trim={491 180 30 23}, clip]{pdf/odepics/colors_a-d_new_2-13_no_order.pdf}
-%	\caption{Implicit sDeC for orders 2 to 13}
-%	\label{fig: ODEIMsDeC}
-%\end{figure}
 
 \begin{figure}
 	\centering
@@ -143,7 +134,7 @@ This behavior is not uniform and, at certain orders, the stability region will b
 %Remark that the outlines of these stability regions can display inner or outer bounds as described before. Thereby, the shapes of these bounded stability regions mostly seem to be elliptic shaped. 
 A detailed list of the bounded methods until order 20 is given in Table~\ref{tab:imsDeC_bounded}. 
 %Why we use the term unbounded instead of A-stable will be discussed shortly afterwards.\\
-For the sDeC, we can conclude that the choice of an implicit version does not guarantee an unbounded stability region. Nevertheless, even these implicit sDeC methods have larger stability regions than their explicit counterparts and therefore may be applicable to stiff problems. 
+For the sDeC, we can conclude that the choice of an implicit version does not guarantee an unbounded stability region. Nevertheless, even these implicit sDeC methods have larger stability regions than their explicit counterparts and therefore may be applicable to mildly stiff problems. 
 We notice again that this odd loss of stability in the left half plane could not be found in the ImDeC and ImADER methods. We checked it numerically up to order 50.
 
 
@@ -154,38 +145,46 @@ We notice again that this odd loss of stability in the left half plane could not
  	\includegraphics[width=0.465\textwidth,trim={215 340 33 22}, clip]{pdf/odepics/colors_a-d_new_horiz_2-7_no_order.pdf}\!\!
 	\includegraphics[width=0.515\textwidth,trim={179 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
 
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{pdf/odepics/IMEXDeC_gaussLobatto_zoom.pdf}
-		\centering
-		ImDeC GLB from order 2 to 9
-	\end{minipage}
-	\begin{minipage}[t]{0.45\textwidth}
+	\begin{minipage}[t]{0.325\textwidth}
 		\includegraphics[width=\textwidth]{pdf/odepics/IMEXDeC_equispaced_zoom.pdf}
 		\centering
 		ImDeC eq from order 2 to 9
 	\end{minipage}
-	\includegraphics[width=0.08\textwidth, trim={491 140 30 23}, clip]{pdf/odepics/colors_a-d_new_2-13_no_order.pdf}\\	
-	\begin{minipage}[t]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{pdf/odepics/IMEXDeC_subtimesteps_gaussLobatto_zoom.pdf}
+	\begin{minipage}[t]{0.325\textwidth}
+		\includegraphics[width=\textwidth,trim={0 0 3 0}, clip]{pdf/odepics/IMEXDeC_subtimesteps_equispaced_zoom.pdf}
 		\centering
-		ImsDeC GLB from orders 2 to 7
+		ImsDeC eq from order 2 to 7
 	\end{minipage}
-	\begin{minipage}[t]{0.45\textwidth}
+	\begin{minipage}[t]{0.325\textwidth}
 		\includegraphics[width=\textwidth]{pdf/odepics/IMEXADER_equispaced_zoom.pdf}
 		\centering
 		ImADER eq from orders 3 to 8
+	\end{minipage}\\[2mm]
+	\begin{minipage}[t]{0.325\textwidth}
+		\includegraphics[width=\textwidth]{pdf/odepics/IMEXDeC_gaussLobatto_zoom.pdf}
+		\centering
+		ImDeC GLB from order 2 to 9
+	\end{minipage}	
+	\begin{minipage}[t]{0.325\textwidth}
+		\includegraphics[width=\textwidth,trim={0 0 3 0}, clip]{pdf/odepics/IMEXDeC_subtimesteps_gaussLobatto_zoom.pdf}
+		\centering
+		ImsDeC GLB from orders 2 to 7
 	\end{minipage}
-	\includegraphics[width=0.08\textwidth, trim={491 180 30 23}, clip]{pdf/odepics/colors_a-d_new_2-8_no_order.pdf}
-	\caption{Zoomed stability region of various implicit schemes}
+	\begin{minipage}[t]{0.325\textwidth}
+		\includegraphics[width=\textwidth]{pdf/odepics/IMEXADER_gaussLobatto_zoom.pdf}
+		\centering
+		ImADER GLB from orders 3 to 8
+	\end{minipage}
+	\caption{Zoomed stability region of implicit schemes (watch out at the different scales).}
 	\label{fig: ODE_minor_instabilitys}
 \end{figure}
 
 Taking a closer look at the implicit methods, we additionally detect some minor instability regions on the negative half-plane, see Figure~\ref{fig: ODE_minor_instabilitys}.
 It turns out that these instabilities appear for all ImDeC and ImsDeC methods of orders larger than 2 and both types of nodes. We display the sDeC only with GLB nodes, as the equispaced nodes version is very similar to that.
-For a very small scale, the same can be seen for the ImADER methods with equispaced nodes of orders at least larger than 4, displayed on the bottom right of Figure~\ref{fig: ODE_minor_instabilitys}. 
+For a very small scale, the same can be seen for the ImADER methods with equispaced nodes of orders at least larger than 4, displayed on the top right of Figure~\ref{fig: ODE_minor_instabilitys}. 
 Notice that the sizes of the unstable regions are close to machine precision, which results in non-smooth boundaries and it is unclear if the ImADER with equispaced nodes are not A-stable or the visualization of the unstable area is given by machine precision errors.
 
-As proved in Section~\ref{subsec:ADER_A-stability}, also numerically we observe that the ImADER methods with Gauss-Lobatto nodes are A-stable for all orders. 
+As proved in \cite{petri2024analysis}, also numerically we observe that the ImADER methods with Gauss-Lobatto nodes are A-stable for all orders. Here, the noise in the stability region (bottom right of Figure~\ref{fig: ODE_minor_instabilitys}) is really of the size of machine precision.
 
 %Hence, we classify the implicit methods as A-stable, \textit{almost A-stable}, when the stability region is unbounded and it \textit{almost} includes the whole left half--plane, or with bounded stability region.
 %Remark that for \textit{almost A-stable} methods these minor instabilities do not influence the behavior of the scheme on many stiff problems. Nevertheless, when the eigenvalues $\lambda$ of the system are (almost) purely imaginary, they might encounter instabilities for some discretizations.
@@ -218,7 +217,7 @@ To study the stability of IMEX schemes, we will use the RK stability function
 \begin{equation}\label{eq:ImExStabilityFunction}
 R(z_I, z_E)=1+\left(z_I\vec{b}^T+z_E\vec{\hat{b}}^T\right)\vec{u}=1+\left(z_I\vec{b}^T+z_E\vec{\hat{b}}^T\right)\left(\mat{Id}-z_I\mat{A}-z_E\mat{\hat{A}}\right)^{-1} \vec{1}
 \end{equation}
-that uses the matrices defined by the Butcher tableau of an IMEX RK \eqref{eq:IMEX_Butcher}.
+that uses the matrices defined by the Butcher tableau of an IMEX RK.
 Remark that the standard approach of A-stability cannot be used anymore.
 Indeed, the region of absolute stability $$S=\left\{(z_I,z_E)\in \mathbb{C}^2 \ : \ \lvert{R(z_I,z_E)}\rvert\le1\right\}$$ lays in a larger space, with respect to classical RK schemes, therefore, its study, computation and visualization are challenging.
 %Like in the classic case, we do not need (and do not want) the whole region $\mathbb{C}^2$ for satisfying results besides the issue of problematic visualization. Here arises the question which subsets of stability we want to consider. \\
@@ -298,6 +297,8 @@ Finally, for the IMEX sDeC method in Figure~\ref{fig: ODEIMEX} (center) we see a
 Nevertheless, the result on the bottom center in Figure~\ref{fig: ODEIMEX} with GLB nodes coincides with the one in \cite{minion2003dec}, as expected. 
 %So we can conclude that the IMEX variations for all of these methods also have a somehow similar $A(\alpha)-$stability for some $\alpha>10^\circ$, at least for this view on the stability for IMEX methods.\\
 It is also noticeable that the IMEX sDeC stability region of order 2 is $A(\alpha)$-stable with larger $\alpha$ as it coincides with the IMEX DeC2.
+
+With the $\mathcal{D}_M$ approach, we do not observe strong variations between equispaced and Gauss--Lobatto points.
 
 
 \subsubsection*{$\mathcal{D}_0$ stability region}

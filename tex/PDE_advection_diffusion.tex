@@ -2,21 +2,21 @@ In this section, we want to extend our stability analysis to the one-dimensional
 \begin{equation}\label{eq: A-D_equation}
 u_t(x,t) + au_x(x,t) = du_{xx}(x,t), \quad a\ge0, \ d \ge 0, \qquad x \in \Omega \subset \mathbb R,
 \end{equation}
-where $a$ is the coefficient of the advection term and $d$ the coefficient of the diffusion term, using the von  \PO{Neumann stability analysis}. %principles.
-\PO{After the space discretization, we discretize the advection part with an explicit time-integration scheme and the diffusion with an implicit one}.
+where $a$ is the coefficient of the advection term and $d$ the coefficient of the diffusion term, using the von  Neumann stability analysis. %principles.
+After the space discretization, we discretize the advection part with an explicit time-integration scheme and the diffusion with an implicit one.
 The linear stability of the DeC method in PDE contexts was studied for explicit methods for advection equations with FEM spatial discretizations and various stabilization techniques in \cite{michel2021spectral,michel2023spectral}, while in the IMEX context for FEM methods applied to kinetic models in \cite{torlo2020hyperbolic}.
-For the ADER method, a von Neumann stability analysis was applied to the original formulation \cite{titarev2007analysis,dematte2020ader}, but not on the modern version that we are studying. \PO{We close this gap with our investigation in the following.}
+For the ADER method, a von Neumann stability analysis was applied to the original formulation \cite{titarev2007analysis,dematte2020ader}, but not on the modern version that we are studying. We close this gap with our investigation in the following.
 \subsection{Finite Difference discretization}
 \label{sec: spatial_discretization}
 We apply spatial discretizations to the spatial derivative operators, namely $\partial_x$ and $\partial_{xx}$. 
 We consider a uniformed grid $\Omega_{\Delta x}=\left\{x_j \ : \ x_j = x_0 + j\Delta x, \ j \in \{0,\hdots , J\}\right\}$ with periodic boundary conditions and we denote the approximation of $u(x_j)=u(x_j,t)$ by $w_j$.
 
-To discretize the advection term in \eqref{eq: A-D_equation}, i.e. the first spatial derivative $\partial_xu(x)$, we make usage of the stable finite difference stencils introduced in \cite{Iserles1982}. Assume we discretize $\partial_xu$ at $x_j$ by an $[r,s]$-discretization
+To discretize the advection term in \eqref{eq: A-D_equation}, i.e., the first spatial derivative $\partial_xu(x)$, we make usage of the stable finite difference stencils introduced in \cite{Iserles1982}. Assume we discretize $\partial_xu$ at $x_j$ by an $[r,s]$-discretization
 \begin{equation}\label{eq: r-s_scheme}
 \partial^{[r,s]}_{\Delta x}(u(x_j)) = \frac{1}{\Delta x} \sum\limits_{k=-r}^s \alpha_k w_{j+k},
 \end{equation}
 with $r,\ s$ such that $\alpha_{j-r}, \alpha_{j+s} \neq 0$.
-The maximum order we can achieve with an $[r,s]$- discretization is $q=r+s$ and this discretization actually reaches order $q$ and is unique by setting the coefficients in \eqref{eq: r-s_scheme} as
+The maximum order we can achieve with an $[r,s]$-discretization is $q=r+s$ and this discretization actually reaches order $q$ and is unique by setting the coefficients in \eqref{eq: r-s_scheme} as
 	\begin{align}\label{eq:def_advection_optimal_stencil}
 	\alpha_0&=
 	\begin{cases}
@@ -26,7 +26,7 @@ The maximum order we can achieve with an $[r,s]$- discretization is $q=r+s$ and 
 	\end{cases} \qquad
 	\alpha_k = \frac{(-1)^{k+1}}{k}\cdot \frac{r!s!}{(r+k)!(s-k)!}, \quad -r\le k \le s, \ k\neq0.
 	\end{align}
- It is also proven in \cite{Iserles1982} that these so-called $\textit{optimal-order}$ schemes of order $q$ are stable if and only if $s\le r \le s+2$ for $a>0$.\\
+ It is also proven in \cite{Iserles1982} that these so-called $\textit{optimal-order}$ schemes of order $q$ are stable if and only if $s\le r \le s+2$ for $a>0$.
 We  involve these stable $\textit{optimal-order}$ schemes into our analysis. 
 We introduce upwinding in the choice of the stencils, in particular, we will consider $[r, r +1]$ stencils for odd optimal-order scheme and $[r, r+2]$ stencils for an even optimal-order scheme for the advection part.
 
@@ -70,8 +70,8 @@ v^{n+1}=G(k, \Delta x, \Delta t, a, d)v^n.
 \end{equation}
 with the amplification factor $G\in \mathbb{C}$ independent on the mesh point $x_j$.
 %Now, to check the stability of the scheme, we need that $\lvert{v^{n+1}}\rvert= \lvert{G(k, \Delta x, \Delta t, a, d)v^n}\rvert \leq \lvert v^n\rvert$. 
-\PO{Stability means in our context that $\lvert{v^{n+1}}\rvert= \lvert{G(k, \Delta x, \Delta t, a, d)v^n}\rvert \leq \lvert v^n\rvert$ holds.}
-In practice, we check that $\lvert G (k, \Delta x, \Delta t, a, d) \rvert \le 1$. \PO{This implies stability for the related method and due to the  Lax-Richtmeyer theorem \cite{leveque2007finite} convergence can be ensured.}
+Stability means in our context that $\lvert{v^{n+1}}\rvert= \lvert{G(k, \Delta x, \Delta t, a, d)v^n}\rvert \leq \lvert v^n\rvert$ holds.
+In practice, we check that $\lvert G (k, \Delta x, \Delta t, a, d) \rvert \le 1$. This implies stability for the related method and due to the  Lax-Richtmeyer theorem \cite{leveque2007finite} convergence can be ensured.
 Note that for consistency, we included the parameters $a$ and $d$ into the dependency of $G$ to cover all advection-diffusion equations. \\
 % This theory concludes in the following condition: 
 %\begin{prop}\textbf{Richtmyer condition}\\
@@ -95,7 +95,7 @@ Hence, we will evaluate the amplification factor numerically, similarly to what 
 
 Before running all the simulations, we need to understand what are the free variables of the function $G$. First of all, the wavenumbers  should be bounded $k \in \lbrace -n_0-1 , \dots, n_0+1 \rbrace \subset \mathbb Z$ and the maximum wavenumber $n_0+1$ is strongly related with the discretization scale $\Delta x$. Indeed, by  Nyquist–Shannon sampling theorem, only functions with frequency less than $\frac{|x_J-x_0|}{2\Delta x}$ can be represented on our discretization. Hence, we will choose $n_0=10^3$ to take in consideration fine grids.
 
-Then, we have further variables $a,d,\Delta x,\Delta t $ that are often coupled together: in the advection term ($a\Delta t/\Delta x$) and in the diffusion term ($d\Delta t/\Delta x^2$). We keep this in mind when studying the behavior of $G$, as we can recast few methods to the same coefficients.
+Then, we have further variables $a,d,\Delta x,\Delta t $ that are actually coupled together: in the advection term ($a\Delta t/\Delta x$) and in the diffusion term ($d\Delta t/\Delta x^2$). We keep this in mind when studying the behavior of $G$, as we can recast few methods to the same coefficients.
 
 \subsubsection{Displaying stability}
 It is stated and numerically shown in \cite{TanChenShu_ImEx_Stability, WangShuZhang_LDG1_2015,WangShuZhang_LDG_2016} that several schemes as the local discontinuous Galerkin scheme \cite{WangShuZhang_LDG1_2015,WangShuZhang_LDG_2016} and other finite difference schemes combined with an IMEX RK method are stable if the time step is upper bounded by some $\tau_0$. This $\tau_0$ is proportional to $\frac{d}{a^2}$, i.e., if $\Delta t\le\tau_0= E_0\cdot \frac{d}{a^2}$ for some $E_0>0$.
@@ -115,7 +115,7 @@ is bounded by some constant $E_0$, indeed,
 \begin{equation*}
 E= \frac{a^2}{d}\Delta t\le E_0 \quad \Longleftrightarrow \quad \Delta t \le E_0 \cdot \frac{d}{a^2}=\tau_0.
 \end{equation*}
-Therefore, for a given method solving the advection-diffusion equation, we can rewrite the amplification factor  with \eqref{eq: ampfactor} as
+Therefore, for a given method solving the advection-diffusion equation, we can rewrite the amplification factor  in \eqref{eq: ampfactor} as
 \begin{equation}
 	g(k,C,E)=G(k,\Delta x, \Delta t, a,d).
 \end{equation}
@@ -123,24 +123,37 @@ Therefore, for a given method solving the advection-diffusion equation, we can r
 \begin{definition}[Scheme notation]	\label{defi: notation_pde_method}
 	To shorten the notation, we denote the considered method for the advection-diffusion equation by $[\TMM,\NODES,N, A_n,D_m],$ where
 	\begin{itemize}
-		\item $\TMM$ stands for the respective IMEX time-marching method, i.e. $\DeC$, $\ADER$, $\sDeC$,
-		\item $\NODES$ stands for the used quadrature nodes for the \TMM, i.e. {\eq} or $\GLB$,
+		\item $\TMM$ stands for the respective IMEX time-marching method, among $\DeC$, $\ADER$, $\sDeC$,
+		\item $\NODES$ stands for the used quadrature nodes for the \TMM, among {\eq} or $\GLB$,
 		\item $N$ stands for the order of the considered time-marching method $\TMM$,
 		\item $A_n$ denotes the optimal first derivative stencil of order $n$ defined in \eqref{eq:def_advection_optimal_stencil} used for the advection term,
 		\item $D_m$ denotes the central second derivative stencil of order $m$ in Table~\ref{tab: CFD-schemes_first_deriv} used for the diffusion term.
 	\end{itemize}
 \end{definition}
-
-
-\begin{remark}
-	With the previous plots, we recognize two sufficient conditions to obtain stability:
+\begin{example}[Stability of IMEX DeC3 with $A_1$ and $D_2$ operators]
+	\begin{figure}
+		\centering
+		\begin{minipage}[t]{0.42\textwidth}
+			\includegraphics[width=\textwidth]{pdf/pdepics/exa_DeC3_CD.pdf}
+			\centering
+			Coefficients $C$ and $D$
+		\end{minipage} 
+		\begin{minipage}[t]{0.42\textwidth}
+			\includegraphics[width=\textwidth]{pdf/pdepics/exa_DeC3_CE.pdf}
+			\centering
+			Coefficients $C$ and $E$
+		\end{minipage}
+		\caption{Stability areas (yellow) for the $[\DeC,\eq,3, A_1,D_2]$.}
+		\label{fig: exa_ImExDeC3_diff2_adv1}
+	\end{figure}
+	To give an example of how to study the stability region, we show in Figure~\ref{fig: exa_ImExDeC3_diff2_adv1} the stability areas $\lbrace |g(k,C,E)|\leq 1 ,\, \forall k \in [-n_0-1,n_0+1]\rbrace$ for the $[\DeC,\eq,3, A_1,D_2]$. On the left, we plot the stability area as a function of $C$ and $D$, while on the right as a function of $C$ and $E$. The black area is associated to the unstable area, while the yellow displays the stable region.
+	We recognize two sufficient conditions to obtain stability:
 	\begin{itemize}
 		\item the well known CFL-condition, i.e., if $C$ is lower than some constant $C_0$ only dependent on the method, then the method is stable.
 		\item the new numerically obtained condition, designated as the $E_0$-condition: If $E$ is lower than some constant $E_0$ dependent on the method, then the method is stable.
-	\end{itemize}
-	
-	These two parameters $C$ and $E$ include all the remaining ones and show therefore a full picture.
-\end{remark}
+	\end{itemize}	
+	The two parameters $C$ and $E$ include all the remaining ones and are enough to characterize the whole scheme.
+\end{example}
 
 As we can see in Figure~\ref{fig: exa_ImExDeC3_diff2_adv1}, the unstable area of this specific method seems to be bounded by the linear constraints $C\geq C_0$ and $E\geq E_0$. We will observe numerically that these unstable regions are indeed similarly bounded in most of our methods.
 \begin{definition}[Stability parameters $C_0$ and $E_0$]
@@ -157,13 +170,14 @@ Hence, we checked that the displayed limits for $E$ and $C$ are actually bounds 
 Moreover, we also observed that the considered results do not vary much for large values of $n_0$, hence, we set $n_0=10^3$. Due time-efficiency, we will use this value for every evaluation in the von Neumann stability analysis context for the rest of this work. Further, all plots in this section will be evaluated and displayed at $400\times 400$ grid points.
 \subsubsection{Numerical analysis}
 %To distinguish the different orders, we use different colors to the  bounds according to the legend figure~\ref{fig: legend_a-d}. 
-In the following plots, we remark that the colors are assigned to different orders, indeed, we will vary alternatively the order of the advection method, of the time-marching, of the diffusion method or of all of them. We will specify for each plot what is the object of the study.
+%In the following plots, we remark that the colors are assigned to different orders, indeed, we will vary alternatively the order of the advection method, of the time-marching, of the diffusion method or of all of them. We will specify for each plot what is the object of the study.
 %\begin{figure}
 %	\centering
 %	\includegraphics[width=0.17\textwidth, trim={461 256 30 23}, clip]{pdf/odepics/colors_a-d_new_1-8.pdf}
 %	\caption{Legend for the different orders.}
 %	\label{fig: legend_a-d}
 %\end{figure}
+In the following plots, we will study various configurations of methods and the variation of the stability region changing the order of the methods. In particular, we will focus on changing the order of the time discretization only and varying the order of all operators. In the repository \cite{ourrepo}, we include other variations of the order of only the advection or the diffusion operator that we discard here for brevity. Moreover, we will focus on Gauss--Lobatto nodes for the time discretization only mentioning the peculiarity of the equispaced ones that can be found, again, in the repository \cite{ourrepo}.
 
 We start by varying only the time scheme order. 
 In Figure~\ref{fig: grp_adv1_diff2}, the stability areas of several methods are shown, i.e., $[\TMM,\NODES,k, A_1,D_2]$ varying the time scheme and the nodes. 
@@ -208,11 +222,11 @@ Increasing the order of the time marching method results in a larger stability r
 \end{figure}
 
 In the equispaced case we do not observe major differences for the DeC and sDeC methods, 
-while, for the ADER cases, the usage of equispaced nodes results in an irregular reduction to $C_0=0$ for some orders (7 and 8), meaning that we can not assure stability as we did in the other cases for high order methods. 
-This is probably impacted by the catastrophic cancellation which occurs in Newton-Cotes quadratures with more than 8 points that occur for orders larger than $6$, used in the considered IMEX ADER method. 
+while, for the ADER cases, the usage of equispaced nodes results in an irregular reduction to $E_0=0$ for some orders (7 and 8), meaning that we can not ensure stability as we did in the other cases for high order methods, see Figure~\ref{fig: ADER_eq_adv_diff_stab} (left). 
+This is probably due to the numerical cancellation of Newton-Cotes quadratures with more than 8 points that occur for orders larger than $6$, used in the considered IMEX ADER method. 
 %The reason for this catastrophic cancellation effect lies in negative weights of the quadrature which firstly appear for 8 steps. 
 %This hypothesis is also supported by the IMEX ADER in figure~\ref{fig: grp_adv1_diff2_GLB} with Gauss-Lobatto nodes, where this phenomenon does not appear.
-For this reason, we will mainly analyze this method with Gauss-Lobatto nodes for the other cases.
+%For this reason, we will mainly analyze this method with Gauss-Lobatto nodes for the other cases.
 
 
 
@@ -221,9 +235,9 @@ For DeC (left), this does not lead to higher values for $E_0$ or $C_0$, but seem
 It seems that they all guide towards a specific border line. It is also surprising that  we do not get a border $E_0>0$ for order 6 in the advection term for equispaced nodes, while we do for GLB ones (not displayed). 
 These phenomena hold for all remaining combinations of time-marching methods, respective orders and nodes also, i.e. if we increase the order of the diffusion term, we can eliminate instabilities that occur due to the advection term, while the remaining variables just play a minor role. 
 Exemplary, we display in Figure~\ref{fig: exa_advterm} on the right the $[\ADER,\GLB,8, A_k,D_2]$  to underline this statement. 
-This is again not true for order 6 for which all time methods do not show a stability region of type $E\leq E_0$.
+This is again not true for order 6 for which all time methods do not show a stability region of type $E\leq E_0$ and for all IMEX ADER with equispaced nodes.
 %The only exception we observed appears for the higher order ADER with equispaced nodes, as we already saw in figure \ref{fig: grp_adv1_diff2_eq} and is displayed for varying advection terms in figure \ref{fig: exa_advtermADER} on the right: Under these conditions, the instabilities remain.
-\begin{figure}[!h]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth,trim={100 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_1-8_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
@@ -261,7 +275,7 @@ This is again not true for order 6 for which all time methods do not show a stab
 \end{figure}
 
 
-In Figure~\ref{fig: exa_diffterm}, we show the stability regions increasing the order of the diffusion operator for $[\TMM,eq, 8, A_1,D_k]$, where $\TMM$ is every of the 3 considered methods and $k \in \{2,4,6,8\}$.  We observe that the stability areas of all methods vary slightly, but do not increase or decrease the stability region in a significant way.
+In Figure~\ref{fig: exa_diffterm}, we show the stability regions for increasing order of the diffusion operator, keeping the order 8 in time and $A_1$ for the advection operator, i.e., $[\TMM,eq, 8, A_1,D_k]$, where $\TMM$ is every of the 3 considered methods and $k \in \{2,4,6,8\}$.  We observe that the stability areas of all methods vary slightly, but do not increase or decrease the stability region in a significant way.
 
 \begin{figure}[!h]
 	\centering
@@ -299,11 +313,10 @@ In Figure~\ref{fig: exa_diffterm}, we show the stability regions increasing the 
 	\caption{Stability areas varying the order of the diffusion method}
 	\label{fig: exa_diffterm}
 \end{figure}
-\todo{The following paragraph would be rewritten shortly. There do not happen many new interesting things, just showing it works, giving a hint to the table and reminding that the instabilities for advection order 6 gets removes by matching the dispersion order}
 In Figure~\ref{fig: exa_difftermsim}, we study the space--time discretizations matching the orders of the time scheme with the order of the spatial terms, i.e.  $[\TMM,\GLB, k, A_k,D_{2\lceil k/2 \rceil}]$, where $\TMM$ is one of the 3 considered methods and $k \in \{2, \hdots, 8\}$.
 Here, we can observe for all cases that the higher order terms results in slightly larger stability areas and also in bigger $C_0$ and $E_0$, which leads us to the behavior we have already seen in Figure~\ref{fig: grp_adv1_diff2} varying only the order of the time scheme. 
 
-\begin{figure}[!h]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth,trim={160 340 30 22}, clip]{pdf/pdepics/legends/colors_a-d_new_horiz_2-8_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
@@ -340,9 +353,16 @@ Here, we can observe for all cases that the higher order terms results in slight
 	\label{fig: exa_difftermsim}
 \end{figure}
 
-We can conclude that increasing the order of the time-marching method results in higher values for both $C_0$ and $E_0$. However, the here considered higher order finite differences for the spatial discretizations do not grant significant improvements. In the recent analysis, the border $E_0$ vanishes for the special setting IMEX ADER of order $>7$  with equispaced nodes, independently of the spatial discretization we used. We also get this phenomenon by setting the advection stencil to order 6, but this problem can be overcome by the usage of high order diffusion stencils.\\
-Remark also, that there are plenty more options to test, which we leave out because of space restrictions. Nevertheless, we presented all remarkable combinations of methods we tested and a summary of their results.
-
+We can conclude that increasing the order of the time-marching method results in higher values for both $C_0$ and $E_0$. However, the considered higher order finite differences for the spatial discretizations do not grant significant improvements. 
+A special mention to high order IMEX ADER with equispaced nodes is necessary also here. The border $E_0$ vanishes, indeed, for order $>7$, see Figure~\ref{fig: grp_adv1_diff2} (top right). Moreover, also varying the spatial discretization we obtain the same results. 
+\begin{figure}\centering
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{pdf/pdepics/diff/example_IMEXDeC_subtimesteps_gaussLobatto_TMM_ord_2.pdf}
+		\centering
+		$[\sDeC,\GLB, 2, A_1,D_2]$
+	\end{minipage}
+	\caption{ Bounds by $C_0$ and $E_0$ of the stability region (in yellow) for an sDeC method.}\label{fig: ADER_eq_adv_diff_stab}
+\end{figure}
 \begin{table}
 	\centering
 	\caption{Approximated border values $C_0$ (up to 2 decimals) and $E_0$ (up to 1 decimal) for Gauss--Lobatto methods with operators with optimal order $k$}\label{tab:CE_values}
@@ -362,7 +382,10 @@ Remark also, that there are plenty more options to test, which we leave out beca
 	\end{tabular}
 \end{table}
 
+
+
+As an example, we plot the stability region of $[\sDeC,\GLB,2, A_1,D_2]$ in Figure~\ref{fig: ADER_eq_adv_diff_stab}. We observe an asymptotic behavior both for $E\rightarrow \infty$ against a line $C=C_0$ and also some sort of border line $E<E_0$ for large values of $C$, which ensures stability for an arbitrary $C$, if $E\le E_0$. These are the desired values for $C_0$ and $E_0$.
 In Table~\ref{tab:CE_values}, we study the operators with order $k$ matching for the time and spatial discretization for time schemes defined by GLB nodes. We display in that table the maximal values $C_0$ and $E_0$. 
 We clearly see that they increase as the order increases. 
-The only value that is not uniform among the methods is $E_0$ for ADER GLB of order 2, for which we have a restrictive bound.
-We also want to highlight, that $C_0$ matches inbetween the DeC and ADER methods for the same orders. This is probably due to their coinciding explicit stability regions for ODEs, as pointed out in \cite{Han_Veiga_2021}.
+The only value that is not uniform among the methods is $E_0$ for ADER GLB of order 2, for which we have a restrictive bound. 
+We also want to highlight, that $C_0$ matches in between the DeC and ADER methods for the same orders. This is probably due to their coinciding explicit stability regions for ODEs, as pointed out in \cite{Han_Veiga_2021}.
