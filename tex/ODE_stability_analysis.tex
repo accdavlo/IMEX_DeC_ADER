@@ -54,36 +54,36 @@ Clearly, all these stability regions are unbounded, but they are not all A-stabl
 \begin{figure}
 	\centering
 	\includegraphics[width=0.465\textwidth,trim={215 340 32 22}, clip]{pdf/odepics/colors_a-d_new_horiz_2-7_no_order.pdf}\!\!
-	\includegraphics[width=0.515\textwidth,trim={178 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
+	\includegraphics[width=0.515\textwidth,trim={179 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/IMDeC_eq_ord13-crop.pdf}\\
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMDeC_eq_ord13-crop.pdf}\\
 		ImDeC eq
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-	\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/IMsDeC_eq_ord13-crop.pdf}\\
+	\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMsDeC_eq_ord13-crop.pdf}\\
 	ImsDeC eq
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/IMADER_eq_ord13-crop.pdf}\\
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMADER_eq_ord13-crop.pdf}\\
 		ImADER eq
 	\end{minipage}\\
 %	\includegraphics[width=0.08\textwidth, trim={491 140 30 23}, clip]{pdf/odepics/colors_a-d_new_2-13_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/IMDeC_GLB_ord13-crop.pdf}\\
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMDeC_GLB_ord13-crop.pdf}\\
 		ImDeC GLB
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-	\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/IMsDeC_GLB_ord13-crop.pdf}\\
+	\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMsDeC_GLB_ord13-crop.pdf}\\
 	ImsDeC GLB
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/IMADER_GLB_ord13-crop.pdf}\\
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/IMADER_GLB_ord13-crop.pdf}\\
 		ImADER GLB
 	\end{minipage}
 %	\includegraphics[width=0.08\textwidth, trim={491 140 30 23}, clip]{pdf/odepics/colors_a-d_new_2-13_no_order.pdf}
@@ -99,17 +99,17 @@ Clearly, all these stability regions are unbounded, but they are not all A-stabl
 
 \begin{figure}
 	\centering
-	\begin{minipage}[t]{0.45\textwidth}
+	\begin{minipage}[t]{0.33\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/ImsDeC_eq_ord20-crop.pdf}\\
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/ImsDeC_eq_ord20-crop.pdf}\\
 		ImsDeC eq
 	\end{minipage}
-	\begin{minipage}[t]{0.45\textwidth}
+	\begin{minipage}[t]{0.33\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/ImsDeC_GLB_ord20-crop.pdf}\\
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/ImsDeC_GLB_ord20-crop.pdf}\\
 		ImsDeC GLB
 	\end{minipage}
-	\includegraphics[width=0.08\textwidth, trim={491 180 30 23}, clip]{pdf/odepics/colors_a-d_new_14-20_no_order.pdf}
+	\includegraphics[width=0.1\textwidth, trim={491 230 30 23}, clip]{pdf/odepics/colors_a-d_new_14-20_no_order.pdf}
 	\caption{Implicit sDeC for orders 14 to 20}
 	\label{fig: exaImsDeC_high}
 \end{figure}
@@ -150,7 +150,10 @@ We notice again that this odd loss of stability in the left half plane could not
 
 
 \begin{figure}
-	\centering 
+	\centering
+ 	\includegraphics[width=0.465\textwidth,trim={215 340 33 22}, clip]{pdf/odepics/colors_a-d_new_horiz_2-7_no_order.pdf}\!\!
+	\includegraphics[width=0.515\textwidth,trim={179 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
+
 	\begin{minipage}[t]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{pdf/odepics/IMEXDeC_gaussLobatto_zoom.pdf}
 		\centering
@@ -180,8 +183,7 @@ We notice again that this odd loss of stability in the left half plane could not
 Taking a closer look at the implicit methods, we additionally detect some minor instability regions on the negative half-plane, see Figure~\ref{fig: ODE_minor_instabilitys}.
 It turns out that these instabilities appear for all ImDeC and ImsDeC methods of orders larger than 2 and both types of nodes. We display the sDeC only with GLB nodes, as the equispaced nodes version is very similar to that.
 For a very small scale, the same can be seen for the ImADER methods with equispaced nodes of orders at least larger than 4, displayed on the bottom right of Figure~\ref{fig: ODE_minor_instabilitys}. 
-Notice that the sizes of the unstable regions are close to machine precision, which results in non-smooth boundaries and it is unclear if the ImADER with equispaced nodes of order 3 and 4 
-are A-stable or not. \todo{Suggestion delete equidsitand nodes and bring everyhing in figure 3 in one line.. }
+Notice that the sizes of the unstable regions are close to machine precision, which results in non-smooth boundaries and it is unclear if the ImADER with equispaced nodes are not A-stable or the visualization of the unstable area is given by machine precision errors.
 
 As proved in Section~\ref{subsec:ADER_A-stability}, also numerically we observe that the ImADER methods with Gauss-Lobatto nodes are A-stable for all orders. 
 
@@ -190,11 +192,14 @@ As proved in Section~\ref{subsec:ADER_A-stability}, also numerically we observe 
 %, so that for certain step-sizes $\Delta t$ it is possible to get a $z=\lambda \Delta t$ located in the unstable region.
 
 
-Summarizing, we can categorize our methods in 3 different classes: The A-stable schemes, \textit{almost A-stable} schemes, when the stability region is unbounded and it \textit{almost} includes the whole left half--plane, and the non-A-stable schemes. 
-While only the implicit ADER methods with Gauss-Lobatto nodes are A-stable, we saw that the ADER methods with equispaced nodes and all DeC methods are almost A-stable by just possessing some minor instabilities on the negative half-plane around the origin. 
-For the sDeC methods, we even have bounded stability regions for some higher orders which make them clearly non-A-stable, while the remaining sDeC schemes also belong into the category of almost-A-stable methods. \todo{maybe a itemize or something minipages...}
+Summarizing, we can categorize our methods in 3 different classes: 
+\begin{itemize}
+	\item The A-stable schemes: all ImADER GLB and all second order implicit methods;
+	\item The \textit{almost A-stable} schemes, when the stability region is unbounded and it \textit{almost} includes the whole left half--plane: high order ImDeC, some ImsDeC and ImADER equispaced;
+	\item The bounded stability schemes: some ImsDeC.
+\end{itemize}
 
-Remark that for \textit{almost A-stable} methods these minor instabilities do not influence the behavior of the scheme on many stiff problems. Nevertheless, when the eigenvalues $\lambda$ of the system are (almost) purely imaginary, they might encounter instabilities for some discretizations.
+Remark that for \textit{almost A-stable} methods these minor instabilities do not influence the behavior of the scheme on many stiff problems. Nevertheless, when the eigenvalues $\lambda$ of the system are (almost) purely imaginary (typical for high order advection operators), they might encounter instabilities for some discretizations.
 
 \subsection{IMEX schemes}
 To study the stability of IMEX schemes, we will use the RK stability function 
@@ -245,35 +250,35 @@ Theoretically, the terms A-stability and A($\alpha$)-stability may be applied fo
 \begin{figure}
 	\centering
 	\includegraphics[width=0.465\textwidth,trim={215 340 32 22}, clip]{pdf/odepics/colors_a-d_new_horiz_2-7_no_order.pdf}\!\!
-	\includegraphics[width=0.515\textwidth,trim={178 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
+	\includegraphics[width=0.515\textwidth,trim={179 340 30 22}, clip]{pdf/odepics/colors_a-d_new_horiz_8-13_no_order.pdf}\\
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/Minion_IMEXDeC_eq_ord13-crop.pdf}
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/Minion_IMEXDeC_eq_ord13-crop.pdf}
 		IMEXDeC eq orders 2 to 13
 	\end{minipage}	
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/Minion_IMEXsDeC_eq_ord13-crop.pdf}
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/Minion_IMEXsDeC_eq_ord13-crop.pdf}
 		IMEXsDeC eq orders 2 to 13
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/Minion_IMEXADER_eq_ord6-crop.pdf}
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/Minion_IMEXADER_eq_ord6-crop.pdf}
 		IMEXADER eq orders 2 to 6
-	\end{minipage}\\
+	\end{minipage}\\[2mm]
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/Minion_IMEXDeC_GLB_ord13-crop.pdf}
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/Minion_IMEXDeC_GLB_ord13-crop.pdf}
 		IMEXDeC GLB orders 2 to 13
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/Minion_IMEXsDeC_GLB_ord13-crop.pdf}
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/Minion_IMEXsDeC_GLB_ord13-crop.pdf}
 		IMEXsDeC GLB orders 2 to 13
 	\end{minipage}
 	\begin{minipage}[t]{0.32\textwidth}
 		\centering
-		\includegraphics[width=\textwidth, trim={0 0 0 22}, clip]{pdf/odepics/Minion_IMEXADER_GLB_ord6-crop.pdf}
+		\includegraphics[width=\textwidth, trim={0 0 0 0}, clip]{pdf/odepics/Minion_IMEXADER_GLB_ord6-crop.pdf}
 		IMEXADER GLB orders 2 to 6
 	\end{minipage}
 	\caption{Minion's stability region for IMEX DeC (left), sDeC (center) and ADER (right) with equispaced (top) and GLB (bottom) nodes}
@@ -300,26 +305,25 @@ It is also noticeable that the IMEX sDeC stability region of order 2 is $A(\alph
 Now, we want to evaluate $\mathcal{D}_0$ stability for our IMEX methods. 
 We want to emphasize that the requirements here are stricter than in Minion's approach. 
 Indeed, for $\mathcal{D}_0$ we require the method to be at least fully A-stable for the implicit part and we look at the stability of the explicit part.
-
 The IMEX DeC and IMEX sDeC have $\mathcal{D}_0=\emptyset$ and this is probably related to the fact that their implicit counterpart is not A-stable.
 For the IMEX ADER, only few orders have non-empty $\mathcal{D}_0$ stability region. In Figure~\ref{fig: HundsdorferD0_IMEXADER}, we show the few stability regions, which eventually vanish when increasing the order of accuracy.
 \begin{figure}
 	\centering
-	\begin{minipage}[t]{0.45\textwidth}
+	\begin{minipage}[t]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{pdf/odepics/ImExD0_IMEXADER_equispaced.pdf}
 		\centerline{Order 2 with equispaced nodes}
-	\end{minipage}
-	\begin{minipage}[t]{0.45\textwidth}
+	\end{minipage}\,\,
+	\begin{minipage}[t]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{pdf/odepics/ImExD0_IMEXADER_gaussLobatto.pdf}
 		\centerline{Orders 2 to 4 with Gauss-Lobatto nodes}
 	\end{minipage}
-	\includegraphics[width=0.08\textwidth, trim={491 180 30 23}, clip]{pdf/odepics/colors_a-d_new_2-8_no_order.pdf}
+	\includegraphics[width=0.12\textwidth, trim={491 230 30 23}, clip]{pdf/odepics/colors_a-d_new_2-8_no_order.pdf}
 	\caption{$\mathcal{D}_0$ Stability regions for IMEX ADER. The smaller stability region displays order 2, while the larger one displays order 3 and 4 (right)}
 \label{fig: HundsdorferD0_IMEXADER}
 \end{figure}
 
 \subsubsection*{$\mathcal{D}_1$ stability region}
-We plot the $\mathcal{D}_1$ stability regions for DeC and sDeC methods in Figures~\ref{fig: HundsdorferD1_IMEX}, where we require the explicit part to cover the stability region of the explicit Euler method and we look at the stability of the implicit part. 
+We plot the $\mathcal{D}_1$ stability regions for DeC and sDeC methods in Figures~\ref{fig: HundsdorferD1_IMEX}, where we require the explicit part to cover the stability region of the explicit Euler method and we look at the stability of the implicit part.
 Contrary to the $\mathcal{D}_0$ cases, we observe non-empty, limited regions of stability for every order for the IMEX DeC methods. Moreover, there is no regularity in their shape and their size grow significantly as the order of accuracy increases.
 Notice that the plots do not show the full stability regions of higher orders, for example for orders 6, 7, and 8 with equispaced nodes, but they are anyway bounded regions. \\
 For the IMEX sDeC, see Figure~\ref{fig: HundsdorferD1_IMEX} (center), we observe some remarkable differences. In the case of equispaced nodes, even orders just show the small bounded stability regions in the negative half-plane nearby the origin, odd orders smaller than 6 show large stability regions, while they are unstable starting from order 7. 
@@ -394,4 +398,3 @@ Therefore, it seems like we can not guarantee this almost A-stability for the IM
 %Remark that for the $\mathcal{D}_0$ case, an order of magnitude of the explicit Euler stability region can be considered as good as it gets controlled by the non-stiff term, while for the $\mathcal{D}_1$ case A-stability would be desired due to stiffness. 
 Therefore, we can conclude, that some of the IMEX ADER stability regions cover the areas in the complex plane, that we assumed for a stable method in the context of $\mathcal{D}_0$ and $\mathcal{D}_1$, while the DeC and sDeC methods have their limitations with $\mathcal{D}_0= \emptyset$ in every case and bounded stability regions for most of the cases in the scope of $\mathcal{D}_1$. Nevertheless, we need to keep in mind that the set conditions are very strict, so,  the methods might still be applicable to some stiff equations. % \\
 These results reflect what we have seen for the respective implicit methods.
-\PO{These findings mirror our observations regarding the corresponding implicit methods.} \todo{we may think about deleting equidistant discussion and put the pictures inside the appendix. or shorten this a little bit? Lets discuss}

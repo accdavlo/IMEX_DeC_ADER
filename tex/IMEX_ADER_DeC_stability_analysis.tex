@@ -15,6 +15,11 @@
 \usepackage{xparse}
 \usepackage{bigints}
 
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
+\pgfplotsset{compat=1.18}
+
 
 
 \usepackage{url}
@@ -182,12 +187,12 @@
 
 %Authors: full names plus addresses.
 \author{
-	\PO{Philipp \"Offner}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, (\email{poeffner@uni-mainz.de}, \orcid{0000-0002-1367-1917})
+	Philipp \"Offner\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, (\email{poeffner@uni-mainz.de}, \orcid{0000-0002-1367-1917})
 	} 
 	\and 
-	\LP{Louis Petri}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, (\email{lopetri@students.uni-mainz.de}), } 
+	Louis Petri\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, (\email{lpetri01@uni-mainz.de}), } 
 	\and 
-	\DTT{Davide Torlo}\thanks{SISSA Mathlab, SISSA, Trieste, Italy, (\email{davide.torlo@sissa.it})} 
+	Davide Torlo\thanks{Dipartimento di Matematica Guido Castelnuovo, Università di Roma La Sapienza,  Roma, Italy, (\email{davide.torlo@uniroma1.it})} 
 }
 
 
@@ -196,11 +201,11 @@
 
 
 \begin{document}
-	\title{Analysis for Implicit and Implicit-Explicit ADER and DeC Methods for Ordinary Differential Equations, Advection-Diffusion and Advection-Dispersion Equations}
+	\title{Analysis for Implicit and Implicit-Explicit ADER and DeC Methods for Ordinary Differential Equations, Advection-Diffusion and Advection-Dispersion Equations:\\ Extra material}
 	
-	\author{\PO{Philipp \"Offner}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, mail@philippoeffner.de},
-	\LP{Louis Petri}\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, lopetri@students.uni-mainz.de },  
-	Davide Torlo\thanks{SISSA Mathlab, SISSA, Trieste, Italy, davide.torlo@sissa.it}
+	\author{Philipp \"Offner\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, and Institute of Numerical Analysis, TU Clausthal, Clausthal-Zellerfeld, Germany, mail@philippoeffner.de},
+	Louis Petri\thanks{Institute of Mathematics, Johannes Gutenberg University, Mainz, Germany, lpetri01@uni-mainz.de },  
+	Davide Torlo\thanks{Dipartimento di Matematica Guido Castelnuovo, Università di Roma La Sapienza,  Roma, Italy, davide.torlo@uniroma1.it}
 	}
 	\date{}
 	\maketitle
@@ -234,7 +239,6 @@
 	
 	\section{Conclusions}
 	\label{sec:conclusion}
-	\PO{Has to be written}
 	\input{conclusion} 
 	
 	\appendix
@@ -247,8 +251,10 @@
 	
 	
 	\section*{Acknowledgements}
-	\PO{P.Ö. is supported by the DFG within SPP 2410, project  525866748 (OE 661/5-1) and under the personal grant 520756621 (OE 661/4-1).  P.Ö. gratefully acknowledges the 		 	support of the Gutenberg Research College, JGU Mainz.}
-	D. T. is funded by a SISSA Mathematical Fellowship. L. P. is supported by the DFG within SPP 2410, project number 526031774 and the Daimler und Benz Stiftung (Daimler and Benz foundation), project number 32-10/22.
+	P.Ö. is supported by the DFG within SPP 2410, project  525866748 (OE 661/5-1) and under the personal grant 520756621 (OE 661/4-1).  P.Ö. gratefully acknowledges the 		 	support of the Gutenberg Research College, JGU Mainz.
+	D. T. is funded by a SISSA Mathematical Fellowship.
+	L. P. is supported by the DFG within SPP 2410, project number 526031774 and the Daimler und Benz Stiftung (Daimler and Benz foundation), project number 32-10/22.\\
+	D. T. and P. Ö. wish to express their gratitude to prof. Giovanni Russo, who brought to their attention various seminal works on the stability of IMEX schemes. Engaging in discussions with him has deepened our comprehension in this domain.
 	\bibliographystyle{abbrv}
 	\bibliography{literature}
 \end{document}
